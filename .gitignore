@@ -30,7 +30,11 @@ build/
 ### VS Code ###
 .vscode/
 
-###DS##
+### DS ###
 *.DS_store
 **/.DS_Store
 .DS_store
+
+### API ###
+*.properties
+.properties

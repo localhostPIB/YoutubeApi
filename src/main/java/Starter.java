@@ -8,7 +8,7 @@ import util.validator.StringValidator;
 public class Starter {
 
     /**
-     * 
+     *
      * @param args
      * @throws Exception
      */
