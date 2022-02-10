@@ -1,0 +1,28 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!--SQLite settings-->
+        <property name="connection.driver_class">org.sqlite.JDBC</property>
+        <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
+        <property name="connection.url">jdbc:sqlite:YoutubeAPI.sqlite</property>
+        <property name="connection.username"></property>
+        <property name="connection.password"></property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <!--
+        https://www.journaldev.com/2903/org-hibernate-hibernateexception-no-currentsessioncontext-configured-->
+        <property name="hibernate.current_session_context_class">
+            org.hibernate.context.internal.ThreadLocalSessionContext
+        </property>
+
+        <mapping class="model.classes.YoutubeUser"/>
+        <mapping class="model.classes.VideoInfo"/>
+        <mapping class="model.classes.Commentary"/>
+        <mapping class="model.classes.Reply"/>
+    </session-factory>
+
+</hibernate-configuration>

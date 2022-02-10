@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>YoutubeApi</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.target>14</maven.compiler.target>
+        <project.youtube.version>v3-rev182-1.22.0</project.youtube.version>
+        <project.youtube.analytics.version>v1-rev63-1.22.0</project.youtube.analytics.version>
+        <project.youtube.reporting.version>v1-rev10-1.22.0</project.youtube.reporting.version>
+        <project.http.version>1.20.0</project.http.version>
+        <project.oauth.version>1.20.0</project.oauth.version>
+        <project.Lombok.version>1.18.22</project.Lombok.version>
+        <project.Hibernate.version>5.6.5.Final</project.Hibernate.version>
+        <project.SQLiteDialect.version>0.1.0</project.SQLiteDialect.version>
+        <project.JDBC.version>3.36.0.3</project.JDBC.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${project.Lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>${project.JDBC.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.github.gwenn/sqlite-dialect -->
+        <dependency>
+            <groupId>com.github.gwenn</groupId>
+            <artifactId>sqlite-dialect</artifactId>
+            <version>${project.SQLiteDialect.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${project.Hibernate.version}</version>
+        </dependency>
+
+        <!-- YouTube Data V3 support -->
+    <dependency>
+        <groupId>com.google.apis</groupId>
+        <artifactId>google-api-services-youtube</artifactId>
+        <version>${project.youtube.version}</version>
+    </dependency>
+
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson2</artifactId>
+            <version>${project.http.version}</version>
+        </dependency>
+
+    <!-- Required for any code that makes calls to the YouTube Analytics API -->
+    <dependency>
+        <groupId>com.google.apis</groupId>
+        <artifactId>google-api-services-youtubeAnalytics</artifactId>
+        <version>${project.youtube.analytics.version}</version>
+    </dependency>
+
+    <!-- Required for any code that makes calls to the YouTube Reporting API -->
+    <dependency>
+        <groupId>com.google.apis</groupId>
+        <artifactId>google-api-services-youtubereporting</artifactId>
+        <version>${project.youtube.reporting.version}</version>
+    </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client -->
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client</artifactId>
+            <version>1.33.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>1.33.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client-jetty</artifactId>
+            <version>1.33.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.http-client/google-http-client -->
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client</artifactId>
+            <version>1.41.2</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+    <!-- This dependency is only used for the Topics API sample, which requires the Jackson JSON parser -->
+    <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-mapper-asl</artifactId>
+        <version>1.9.4</version>
+    </dependency>
+    </dependencies>
+</project>
