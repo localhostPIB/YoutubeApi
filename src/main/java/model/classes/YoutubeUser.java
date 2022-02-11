@@ -21,6 +21,8 @@ public class YoutubeUser implements IYoutubeUser {
 
     public String channelId;
 
+    public String imageUrl;
+
     public YoutubeUser(String userName, String channelUrl){
         this.channelUrl = channelUrl;
         this.userName = userName;

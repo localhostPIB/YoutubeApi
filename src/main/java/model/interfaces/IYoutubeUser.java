@@ -13,4 +13,8 @@ public interface IYoutubeUser {
      void setChannelId(String channelId);
 
      String getChannelId();
+
+     String getImageUrl();
+
+     void setImageUrl(String imageUrl);
 }

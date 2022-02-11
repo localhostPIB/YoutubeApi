@@ -1,8 +1,5 @@
 import api.PrintYTCommentaries;
-import dao.CommentaryDaoHibernateImp;
-import dao.VideoDaoHibernateImp;
-import dao.YTUserDaoHibernateImp;
-import util.PropertiesUtils;
+import dao.*;
 import util.validator.StringValidator;
 
 public class Starter {
@@ -13,11 +10,13 @@ public class Starter {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        PropertiesUtils.readPropertyFile();
-        PrintYTCommentaries printYTCommentaries = new PrintYTCommentaries(new VideoDaoHibernateImp(),
-                new YTUserDaoHibernateImp(), new CommentaryDaoHibernateImp());
-        if(StringValidator.validateVideoId(args[0])) {
+        if (args.length >= 1 && StringValidator.validateVideoId(args[0])) {
+            PrintYTCommentaries printYTCommentaries = new PrintYTCommentaries(new VideoDaoHibernateImp(),
+                    new YTUserDaoHibernateImp(), new CommentaryDaoHibernateImp(),
+                    new ReplyDaoHibernateImp());
             printYTCommentaries.getAllMessages(args[0]);
+        } else {
+            System.err.println("Please specify videoId e.g. FVFGFY5YmBI !");
         }
     }
 }

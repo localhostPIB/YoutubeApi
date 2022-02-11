@@ -4,8 +4,9 @@ import com.google.api.client.util.Lists;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
 import dao.*;
+import model.classes.Reply;
 import model.interfaces.*;
-import util.PropertiesUtils;
+import util.PropertyUtils;
 import util.StaticModelFactory;
 import util.validator.APIValidator;
 
@@ -21,15 +22,18 @@ public class PrintYTCommentaries {
 
     private VideoDaoHibernateImp videoDaoHibernateImp;
 
+    private ReplyDaoHibernateImp replyDaoHibernateImp;
+
     public PrintYTCommentaries(VideoDaoHibernateImp videoDaoHibernateImp,
                                YTUserDaoHibernateImp ytUserDaoHibernateImp,
-                               CommentaryDaoHibernateImp commentaryDaoHibernateImp) {
+                               CommentaryDaoHibernateImp commentaryDaoHibernateImp,
+                                ReplyDaoHibernateImp replyDaoHibernateImp) {
         this.ytUserDaoHibernateImp = ytUserDaoHibernateImp;
         this.commentaryDaoHibernateImp = commentaryDaoHibernateImp;
         this.videoDaoHibernateImp = videoDaoHibernateImp;
-
+        this.replyDaoHibernateImp = replyDaoHibernateImp;
         try {
-            CLIENT_SECRET = PropertiesUtils.readPropertyFile();
+            CLIENT_SECRET = PropertyUtils.readPropertyFile();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -73,15 +77,32 @@ public class PrintYTCommentaries {
             CommentThreadReplies replies = commentThread.getReplies();
             if (replies != null) {
                 comments.addAll(replies.getComments());
+
+                for (Comment repl : replies.getComments()){
+                    IReply iReply = new Reply();
+                    iReply.setComment(repl.getSnippet().getTextDisplay());
+                    IYoutubeUser youtubeUser = StaticModelFactory
+                            .getYoutubeUserObject(repl.getSnippet().getAuthorDisplayName(),
+                                    repl.getSnippet().getAuthorChannelUrl());
+                    iReply.setIYoutubeUser(youtubeUser);
+                    replyDaoHibernateImp.saveCommentary(iReply);
+                }
             }
-            IYoutubeUser youtubeUser = StaticModelFactory.getYoutubeUser(comments.get(0).getSnippet().getAuthorDisplayName(), comments.get(0).getSnippet().getAuthorChannelUrl());
-            youtubeUser.setChannelId(comments.get(0).getSnippet().getChannelId());
-            ICommentary iCommentary = StaticModelFactory.getCommentary();
+
+
+            IYoutubeUser youtubeUser = StaticModelFactory
+                    .getYoutubeUserObject(comments.get(0).getSnippet().getAuthorDisplayName(),
+                    comments.get(0).getSnippet().getAuthorChannelUrl());
+
+            youtubeUser.setChannelId(comments.get(0).getSnippet().getAuthorChannelId().toString());
+            youtubeUser.setImageUrl(comments.get(0).getSnippet().getAuthorProfileImageUrl());
+            ICommentary iCommentary = StaticModelFactory.getCommentaryObject();
             iCommentary.setComment(comments.get(0).getSnippet().getTextOriginal());
             iCommentary.setIYoutubeUser(youtubeUser);
             ytUserDaoHibernateImp.saveUser(youtubeUser);
             commentaryDaoHibernateImp.saveCommentary(iCommentary);
-            System.out.println("Kommentar von: " + comments.get(0).getSnippet().getAuthorDisplayName() + " Kommentar: " + comments.get(0).getSnippet().getTextOriginal());
+            System.out.println("Kommentar von: " + comments.get(0).getSnippet().getAuthorDisplayName() + " Kommentar: "
+                    + comments.get(0).getSnippet().getTextOriginal());
         }
     }
 }

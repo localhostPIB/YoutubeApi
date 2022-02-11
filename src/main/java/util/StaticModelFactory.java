@@ -21,13 +21,13 @@ public class StaticModelFactory {
         return iVideoInfo;
     }
 
-    public static IYoutubeUser getYoutubeUser(String userName, String channelUrl){
+    public static IYoutubeUser getYoutubeUserObject(String userName, String channelUrl){
         IYoutubeUser iYoutubeUser = new YoutubeUser(userName, channelUrl);
 
         return iYoutubeUser;
     }
 
-    public static ICommentary getCommentary(){
+    public static ICommentary getCommentaryObject(){
         ICommentary iCommentary = new Commentary();
 
         return iCommentary;

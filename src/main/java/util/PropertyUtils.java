@@ -3,7 +3,7 @@ package util;
 import java.io.*;
 import java.util.Properties;
 
-public class PropertiesUtils {
+public class PropertyUtils {
 
     public static String readPropertyFile() throws IOException {
         try (InputStream input = new FileInputStream("src/main/resources/config.properties")) {

@@ -38,3 +38,10 @@ build/
 ### API ###
 *.properties
 .properties
+
+
+### Database ###
+.sqlite-journal
+*.sqlite-journal
+*.sqlite
+.sqlite
