@@ -1,10 +1,10 @@
 package model.classes;
 
 import lombok.*;
-import model.interfaces.ICommentary;
-import model.interfaces.IYoutubeUser;
+import model.interfaces.*;
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,9 +16,15 @@ public class Commentary implements ICommentary {
 
     public String comment;
 
-    @OneToMany
-    private List<Reply> reply = new ArrayList<>();
-
-    @OneToOne(targetEntity = YoutubeUser.class, cascade=CascadeType.ALL,  orphanRemoval = true)
+    @OneToOne(targetEntity = YoutubeUser.class, cascade=CascadeType.ALL, orphanRemoval = true)
     private IYoutubeUser iYoutubeUser;
+
+    @OneToMany(targetEntity = Reply.class, cascade=CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "reply_id")
+    private List<IReply> iReplyList = new ArrayList<>();
+
+    @Override
+    public void addIReply(IReply iReply){
+        iReplyList.add(iReply);
+    }
 }

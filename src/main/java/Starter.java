@@ -10,7 +10,7 @@ public class Starter {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        if (args.length >= 1 && StringValidator.validateVideoId(args[0])) {
+        if (StringValidator.validateArgument(args[0])) {
             PrintYTCommentaries printYTCommentaries = new PrintYTCommentaries(new VideoDaoHibernateImp(),
                     new YTUserDaoHibernateImp(), new CommentaryDaoHibernateImp(),
                     new ReplyDaoHibernateImp());

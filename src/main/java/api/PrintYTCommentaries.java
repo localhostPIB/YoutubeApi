@@ -14,7 +14,7 @@ import java.io.*;
 import java.util.List;
 
 public class PrintYTCommentaries {
-    private static String CLIENT_SECRET = null;
+    private static String CLIENT_SECRET = new String();
 
     private YTUserDaoHibernateImp ytUserDaoHibernateImp;
 
@@ -74,6 +74,11 @@ public class PrintYTCommentaries {
             List<Comment> comments = Lists.newArrayList();
             comments.add(commentThread.getSnippet().getTopLevelComment());
 
+            IYoutubeUser iYoutubeUser = StaticModelFactory
+                    .getYoutubeUserObject(comments.get(0).getSnippet().getAuthorDisplayName(),
+                            comments.get(0).getSnippet().getAuthorChannelUrl());
+            ICommentary iCommentary = StaticModelFactory.getCommentaryObject();
+
             CommentThreadReplies replies = commentThread.getReplies();
             if (replies != null) {
                 comments.addAll(replies.getComments());
@@ -86,20 +91,16 @@ public class PrintYTCommentaries {
                                     repl.getSnippet().getAuthorChannelUrl());
                     iReply.setIYoutubeUser(youtubeUser);
                     replyDaoHibernateImp.saveCommentary(iReply);
+                    iCommentary.addIReply(iReply);
                 }
             }
 
+            iYoutubeUser.setChannelId(comments.get(0).getSnippet().getAuthorChannelId().toString());
+            iYoutubeUser.setImageUrl(comments.get(0).getSnippet().getAuthorProfileImageUrl());
 
-            IYoutubeUser youtubeUser = StaticModelFactory
-                    .getYoutubeUserObject(comments.get(0).getSnippet().getAuthorDisplayName(),
-                    comments.get(0).getSnippet().getAuthorChannelUrl());
-
-            youtubeUser.setChannelId(comments.get(0).getSnippet().getAuthorChannelId().toString());
-            youtubeUser.setImageUrl(comments.get(0).getSnippet().getAuthorProfileImageUrl());
-            ICommentary iCommentary = StaticModelFactory.getCommentaryObject();
             iCommentary.setComment(comments.get(0).getSnippet().getTextOriginal());
-            iCommentary.setIYoutubeUser(youtubeUser);
-            ytUserDaoHibernateImp.saveUser(youtubeUser);
+            iCommentary.setIYoutubeUser(iYoutubeUser);
+            ytUserDaoHibernateImp.saveUser(iYoutubeUser);
             commentaryDaoHibernateImp.saveCommentary(iCommentary);
             System.out.println("Kommentar von: " + comments.get(0).getSnippet().getAuthorDisplayName() + " Kommentar: "
                     + comments.get(0).getSnippet().getTextOriginal());

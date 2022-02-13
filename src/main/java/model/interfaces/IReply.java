@@ -1,10 +1,6 @@
 package model.interfaces;
 
 
-import model.classes.Commentary;
-
-import java.util.List;
-
 public interface IReply {
 
     String getComment();
@@ -14,4 +10,5 @@ public interface IReply {
     IYoutubeUser getIYoutubeUser();
 
     void setIYoutubeUser(IYoutubeUser iYoutubeUser);
+
 }

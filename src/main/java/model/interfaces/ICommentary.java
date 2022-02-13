@@ -8,4 +8,6 @@ public interface ICommentary {
     IYoutubeUser getIYoutubeUser();
 
     void setIYoutubeUser(IYoutubeUser youtubeUser);
+
+    void addIReply(IReply iReply);
 }

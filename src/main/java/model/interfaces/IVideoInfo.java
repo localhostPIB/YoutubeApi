@@ -1,7 +1,5 @@
 package model.interfaces;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 public interface IVideoInfo {
     String getVideoId();

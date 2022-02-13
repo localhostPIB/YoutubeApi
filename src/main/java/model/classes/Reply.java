@@ -1,10 +1,8 @@
 package model.classes;
 
-import com.google.api.services.youtube.model.Comment;
 import lombok.*;
 import model.interfaces.*;
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
