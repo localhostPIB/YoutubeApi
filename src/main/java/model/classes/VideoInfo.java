@@ -18,8 +18,10 @@ public class VideoInfo implements IVideoInfo {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
+    @Column(nullable = false)
     private String VideoId;
 
+    @Column(nullable = false)
     private String timestamp;
 
     //private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy.HH.mm.ss", Locale.GERMANY);

@@ -6,7 +6,7 @@ import util.HibernateUtils;
 
 public class ReplyDaoHibernateImp {
 
-    public void saveCommentary(IReply iReply) {
+    public void saveReply(IReply iReply) {
         Session session = null;
 
         try {

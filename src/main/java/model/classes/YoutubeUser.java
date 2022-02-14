@@ -10,25 +10,17 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class YoutubeUser implements IYoutubeUser {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    public String channelId;
 
     public String userName;
 
     public String channelUrl;
 
-    public String channelId;
-
     public String imageUrl;
 
-    public YoutubeUser(String userName, String channelUrl){
-        this.channelUrl = channelUrl;
-        this.userName = userName;
-    }
-
-    public YoutubeUser() {
-
-    }
 }

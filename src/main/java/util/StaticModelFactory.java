@@ -21,8 +21,8 @@ public class StaticModelFactory {
         return iVideoInfo;
     }
 
-    public static IYoutubeUser getYoutubeUserObject(String userName, String channelUrl){
-        IYoutubeUser iYoutubeUser = new YoutubeUser(userName, channelUrl);
+    public static IYoutubeUser getYoutubeUserObject(String userName, String channelUrl, String channelId,String imageUrl){
+        IYoutubeUser iYoutubeUser = new YoutubeUser(channelId, userName, channelUrl, imageUrl );
 
         return iYoutubeUser;
     }
@@ -31,5 +31,11 @@ public class StaticModelFactory {
         ICommentary iCommentary = new Commentary();
 
         return iCommentary;
+    }
+
+    public static IReply getReplyObject(String comment, IYoutubeUser iYoutubeUser){
+        IReply iReply = new Reply(comment,iYoutubeUser);
+
+        return iReply;
     }
 }
