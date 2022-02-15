@@ -2,6 +2,8 @@ package util;
 
 import model.classes.*;
 import model.interfaces.*;
+
+import java.math.BigInteger;
 import java.text.*;
 import java.util.*;
 
@@ -15,8 +17,9 @@ public class StaticModelFactory {
         return strDate;
     }
 
-    public static IVideoInfo getVideoInfoObject(){
-        IVideoInfo iVideoInfo = new VideoInfo();
+    public static IVideoInfo getVideoInfoObject(String videoId, String timestamp, BigInteger viewCount, BigInteger likes,
+                                                BigInteger commentCount, BigInteger favorite){
+        IVideoInfo iVideoInfo = new VideoInfo(videoId, timestamp, viewCount, likes,commentCount, favorite);
 
         return iVideoInfo;
     }

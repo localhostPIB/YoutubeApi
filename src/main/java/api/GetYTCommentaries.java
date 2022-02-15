@@ -2,7 +2,6 @@ package api;
 
 import dao.*;
 import util.*;
-import model.classes.Reply;
 import model.interfaces.*;
 import util.validator.APIValidator;
 import com.google.api.client.util.Lists;
@@ -12,25 +11,23 @@ import com.google.api.services.youtube.model.*;
 import java.io.*;
 import java.util.List;
 
-public class PrintYTCommentaries {
+public class GetYTCommentaries {
     private static String CLIENT_SECRET;
 
     private final YTUserDaoHibernateImp ytUserDaoHibernateImp;
 
     private final CommentaryDaoHibernateImp commentaryDaoHibernateImp;
 
-    private final VideoDaoHibernateImp videoDaoHibernateImp;
-
     private final ReplyDaoHibernateImp replyDaoHibernateImp;
 
-    public PrintYTCommentaries(VideoDaoHibernateImp videoDaoHibernateImp,
-                               YTUserDaoHibernateImp ytUserDaoHibernateImp,
-                               CommentaryDaoHibernateImp commentaryDaoHibernateImp,
-                                ReplyDaoHibernateImp replyDaoHibernateImp) {
+
+    public GetYTCommentaries(YTUserDaoHibernateImp ytUserDaoHibernateImp,
+                             CommentaryDaoHibernateImp commentaryDaoHibernateImp,
+                             ReplyDaoHibernateImp replyDaoHibernateImp) {
         this.ytUserDaoHibernateImp = ytUserDaoHibernateImp;
         this.commentaryDaoHibernateImp = commentaryDaoHibernateImp;
-        this.videoDaoHibernateImp = videoDaoHibernateImp;
         this.replyDaoHibernateImp = replyDaoHibernateImp;
+
         try {
             CLIENT_SECRET = PropertyUtils.readPropertyFile();
         } catch (IOException ioException) {
@@ -49,10 +46,6 @@ public class PrintYTCommentaries {
     }
 
     public void getAllMessages(String videoId) throws Exception {
-        IVideoInfo iVideoInfo = StaticModelFactory.getVideoInfoObject();
-        iVideoInfo.setVideoId(videoId);
-        iVideoInfo.setTimestamp(StaticModelFactory.getActualDate());
-        videoDaoHibernateImp.saveVideo(iVideoInfo);
 
         CommentThreadListResponse commentsPage = prepareListRequest(videoId).execute();
 
@@ -81,7 +74,7 @@ public class PrintYTCommentaries {
                             comments.get(0).getSnippet().getAuthorProfileImageUrl());
 
             iYoutubeUser.setImageUrl(comments.get(0).getSnippet().getAuthorProfileImageUrl());
-            ytUserDaoHibernateImp.saveUser(iYoutubeUser);
+            saveYTUser(iYoutubeUser);
 
             ICommentary iCommentary = StaticModelFactory.getCommentaryObject();
             iCommentary.setComment(comments.get(0).getSnippet().getTextOriginal());
@@ -98,14 +91,26 @@ public class PrintYTCommentaries {
                                     repl.getSnippet().getAuthorChannelId().toString(),
                                     repl.getSnippet().getAuthorProfileImageUrl());
                     IReply iReply = StaticModelFactory.getReplyObject(repl.getSnippet().getTextDisplay(),youtubeUser);
-                    replyDaoHibernateImp.saveReply(iReply);
+                    saveReply(iReply);
                     iCommentary.addIReply(iReply);
                 }
             }
 
-            commentaryDaoHibernateImp.saveCommentary(iCommentary);
+            saveCommentary(iCommentary);
             //System.out.println("Kommentar von: " + comments.get(0).getSnippet().getAuthorDisplayName() + " Kommentar: "
               //      + comments.get(0).getSnippet().getTextOriginal());
         }
+    }
+
+    private void saveCommentary(ICommentary iCommentary){
+        commentaryDaoHibernateImp.saveCommentary(iCommentary);
+    }
+
+    private void saveYTUser(IYoutubeUser iYoutubeUser){
+        ytUserDaoHibernateImp.saveUser(iYoutubeUser);
+    }
+
+    private void saveReply(IReply iReply){
+        replyDaoHibernateImp.saveReply(iReply);
     }
 }

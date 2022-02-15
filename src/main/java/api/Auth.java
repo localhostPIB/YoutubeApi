@@ -18,11 +18,12 @@ public class Auth {
      * Build and return an authorized API client service.
      *
      * @return an authorized API client service
-     * @throws GeneralSecurityException,
+     * @throws GeneralSecurityException
      * @throws IOException
      */
     public static YouTube getService() throws GeneralSecurityException, IOException {
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+
         return new YouTube.Builder(httpTransport, JSON_FACTORY, null)
                 .setApplicationName(APPLICATION_NAME)
                 .build();

@@ -6,7 +6,7 @@ import util.HibernateUtils;
 
 public class VideoDaoHibernateImp {
 
-    public void saveVideo(IVideoInfo iVideo) {
+    public void saveVideoInfo(IVideoInfo iVideo) {
         Session session = null;
 
         try {
