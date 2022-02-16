@@ -70,7 +70,7 @@ public class GetYTCommentaries {
             IYoutubeUser iYoutubeUser = StaticModelFactory
                     .getYoutubeUserObject(comments.get(0).getSnippet().getAuthorDisplayName(),
                             comments.get(0).getSnippet().getAuthorChannelUrl(),
-                            comments.get(0).getSnippet().getAuthorChannelId().toString(),
+                            StringUtils.cutStringBeforeChar(comments.get(0).getSnippet().getAuthorChannelId().toString()),
                             comments.get(0).getSnippet().getAuthorProfileImageUrl());
 
             iYoutubeUser.setImageUrl(comments.get(0).getSnippet().getAuthorProfileImageUrl());
@@ -79,20 +79,26 @@ public class GetYTCommentaries {
             ICommentary iCommentary = StaticModelFactory.getCommentaryObject();
             iCommentary.setComment(comments.get(0).getSnippet().getTextOriginal());
             iCommentary.setIYoutubeUser(iYoutubeUser);
-
+            iCommentary.setLikes(comments.get(0).getSnippet().getLikeCount());
+            iCommentary.setPublishAt(comments.get(0).getSnippet().getPublishedAt().toString());
+            saveCommentary(iCommentary);
             CommentThreadReplies replies = commentThread.getReplies();
+
             if (replies != null) {
                 comments.addAll(replies.getComments());
 
-                for (Comment repl : replies.getComments()){
+                for (Comment reply : replies.getComments()){
                     IYoutubeUser youtubeUser = StaticModelFactory
-                            .getYoutubeUserObject(repl.getSnippet().getAuthorDisplayName(),
-                                    repl.getSnippet().getAuthorChannelUrl(),
-                                    repl.getSnippet().getAuthorChannelId().toString(),
-                                    repl.getSnippet().getAuthorProfileImageUrl());
-                    IReply iReply = StaticModelFactory.getReplyObject(repl.getSnippet().getTextDisplay(),youtubeUser);
-                    saveReply(iReply);
+                            .getYoutubeUserObject(reply.getSnippet().getAuthorDisplayName(),
+                                    reply.getSnippet().getAuthorChannelUrl(),
+                                    StringUtils.cutStringBeforeChar(reply.getSnippet().getAuthorChannelId().toString()),
+                                    reply.getSnippet().getAuthorProfileImageUrl());
+                    IReply iReply = StaticModelFactory.getReplyObject(reply.getSnippet().getTextDisplay(),
+                                                                      youtubeUser, reply.getSnippet().getLikeCount(),
+                                                                      reply.getSnippet().getPublishedAt().toString());
+
                     iCommentary.addIReply(iReply);
+                    saveReply(iReply);
                 }
             }
 

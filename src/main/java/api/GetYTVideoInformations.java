@@ -30,7 +30,7 @@ public class GetYTVideoInformations {
         YouTube.Videos.List listVideosRequest = Auth.getService().videos().list("statistics");
         listVideosRequest.setId(videoId);
         listVideosRequest.setKey(CLIENT_SECRET);
-       // VideoListResponse listResponse = listVideosRequest.execute();
+
         return listVideosRequest;
     }
 
@@ -46,7 +46,6 @@ public class GetYTVideoInformations {
         IVideoInfo iVideoInfo = StaticModelFactory.getVideoInfoObject(videoId,StaticModelFactory.getActualDate(),
                                                                       viewCount,likes,comments,favorite);
         saveVideoInfos(iVideoInfo);
-
     }
 
     private void saveVideoInfos(IVideoInfo iVideoInfo){

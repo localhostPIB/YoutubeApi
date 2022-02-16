@@ -9,6 +9,14 @@ public interface IReply {
     
     IYoutubeUser getIYoutubeUser();
 
+    void setLikes(long count);
+
+    long getLikes();
+
     void setIYoutubeUser(IYoutubeUser iYoutubeUser);
+
+    String getPublishAt();
+
+    void setPublishAt(String time);
 
 }

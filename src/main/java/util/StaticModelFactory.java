@@ -36,8 +36,8 @@ public class StaticModelFactory {
         return iCommentary;
     }
 
-    public static IReply getReplyObject(String comment, IYoutubeUser iYoutubeUser){
-        IReply iReply = new Reply(comment,iYoutubeUser);
+    public static IReply getReplyObject(String comment, IYoutubeUser iYoutubeUser, long likes, String publishAt){
+        IReply iReply = new Reply(comment,iYoutubeUser, likes, publishAt);
 
         return iReply;
     }

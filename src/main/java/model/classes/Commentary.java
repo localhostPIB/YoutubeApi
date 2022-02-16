@@ -1,5 +1,6 @@
 package model.classes;
 
+import com.google.api.client.util.DateTime;
 import lombok.*;
 import model.interfaces.*;
 import javax.persistence.*;
@@ -13,6 +14,10 @@ public class Commentary implements ICommentary {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+
+    public long likes;
+
+    public String publishAt;
 
     public String comment;
 
