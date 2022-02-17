@@ -76,12 +76,11 @@ public class GetYTCommentaries {
             iYoutubeUser.setImageUrl(comments.get(0).getSnippet().getAuthorProfileImageUrl());
             saveYTUser(iYoutubeUser);
 
-            ICommentary iCommentary = StaticModelFactory.getCommentaryObject();
-            iCommentary.setComment(comments.get(0).getSnippet().getTextOriginal());
-            iCommentary.setIYoutubeUser(iYoutubeUser);
-            iCommentary.setLikes(comments.get(0).getSnippet().getLikeCount());
-            iCommentary.setPublishAt(comments.get(0).getSnippet().getPublishedAt().toString());
+            ICommentary iCommentary = StaticModelFactory.getCommentaryObject(comments.get(0).getSnippet().getLikeCount(),
+                    comments.get(0).getSnippet().getPublishedAt().toString(),comments.get(0).getSnippet().getTextOriginal(),
+                    iYoutubeUser);
             saveCommentary(iCommentary);
+
             CommentThreadReplies replies = commentThread.getReplies();
 
             if (replies != null) {
@@ -96,9 +95,8 @@ public class GetYTCommentaries {
                     IReply iReply = StaticModelFactory.getReplyObject(reply.getSnippet().getTextDisplay(),
                                                                       youtubeUser, reply.getSnippet().getLikeCount(),
                                                                       reply.getSnippet().getPublishedAt().toString());
-
-                    iCommentary.addIReply(iReply);
                     saveReply(iReply);
+                    iCommentary.addIReply(iReply);
                 }
             }
 

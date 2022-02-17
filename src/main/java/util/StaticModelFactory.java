@@ -30,8 +30,8 @@ public class StaticModelFactory {
         return iYoutubeUser;
     }
 
-    public static ICommentary getCommentaryObject(){
-        ICommentary iCommentary = new Commentary();
+    public static ICommentary getCommentaryObject(long likes, String publishAt, String comment, IYoutubeUser iYoutubeUser){
+        ICommentary iCommentary = new Commentary(likes, publishAt, comment, iYoutubeUser);
 
         return iCommentary;
     }

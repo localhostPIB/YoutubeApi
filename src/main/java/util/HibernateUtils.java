@@ -36,6 +36,7 @@ public class HibernateUtils {
             }
         }
         catch (HibernateException he) {
+            he.printStackTrace();
         }
     }
 
