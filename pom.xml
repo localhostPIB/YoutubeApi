@@ -21,6 +21,10 @@
         <project.SQLiteDialect.version>0.1.0</project.SQLiteDialect.version>
         <project.JDBC.version>3.36.0.3</project.JDBC.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.google.oauth.client.jetty>1.33.0</project.google.oauth.client.jetty>
+        <project.google.http.client>1.41.2</project.google.http.client>
+        <project.google.collections>1.0</project.google.collections>
+        <project.org.codehaus.jackson>1.9.4</project.org.codehaus.jackson>
     </properties>
 
     <dependencies>
@@ -98,28 +102,28 @@
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client-jetty</artifactId>
-            <version>1.33.0</version>
+            <version>${project.google.oauth.client.jetty}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.http-client/google-http-client -->
         <dependency>
             <groupId>com.google.http-client</groupId>
             <artifactId>google-http-client</artifactId>
-            <version>1.41.2</version>
+            <version>${project.google.http.client}</version>
         </dependency>
 
 
         <dependency>
             <groupId>com.google.collections</groupId>
             <artifactId>google-collections</artifactId>
-            <version>1.0</version>
+            <version>${project.google.collections}</version>
         </dependency>
 
     <!-- This dependency is only used for the Topics API sample, which requires the Jackson JSON parser -->
     <dependency>
         <groupId>org.codehaus.jackson</groupId>
         <artifactId>jackson-mapper-asl</artifactId>
-        <version>1.9.4</version>
+        <version>${project.org.codehaus.jackson}</version>
     </dependency>
     </dependencies>
 </project>

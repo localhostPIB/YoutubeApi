@@ -98,9 +98,9 @@ public class GetYTCommentaries {
                     saveReply(iReply);
                     iCommentary.addIReply(iReply);
                 }
+                saveCommentary(iCommentary);
             }
 
-            saveCommentary(iCommentary);
             //System.out.println("Kommentar von: " + comments.get(0).getSnippet().getAuthorDisplayName() + " Kommentar: "
               //      + comments.get(0).getSnippet().getTextOriginal());
         }
