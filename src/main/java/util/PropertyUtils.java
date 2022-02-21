@@ -6,7 +6,8 @@ import java.util.Properties;
 public class PropertyUtils {
 
     public static String readPropertyFile() throws IOException {
-        try (InputStream input = new FileInputStream("src/main/resources/config.properties")) {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        try (InputStream input = loader.getResourceAsStream("config.properties")) {
 
             Properties prop = new Properties();
 

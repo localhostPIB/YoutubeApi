@@ -7,6 +7,10 @@
     <groupId>org.example</groupId>
     <artifactId>YoutubeApi</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <inceptionYear>2022</inceptionYear>
+    <description>Saves the comments of a Youtube video including information
+        about the authors into a SQLite database.</description>
+    <url>https://github.com/localhostPIB</url>
 
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
@@ -25,7 +29,82 @@
         <project.google.http.client>1.41.2</project.google.http.client>
         <project.google.collections>1.0</project.google.collections>
         <project.org.codehaus.jackson>1.9.4</project.org.codehaus.jackson>
+        <project.maven_deploy>2.8.2</project.maven_deploy>
+        <project.maven_site>3.11.0</project.maven_site>
+        <project.maven_report>3.2.1</project.maven_report>
+        <project.maven_surfire>2.22.2</project.maven_surfire>
+        <project.maven_compiler_plugins>3.10.0</project.maven_compiler_plugins>
     </properties>
+
+    <build>
+    <plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>${project.maven_deploy}</version>
+        <configuration>
+            <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
+        </configuration>
+    </plugin>
+
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${project.maven_compiler_plugins}</version>
+        <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+        </configuration>
+    </plugin>
+
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${project.maven_surfire}</version>
+    </plugin>
+
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+            <locales>de</locales>
+        </configuration>
+        <version>${project.maven_site}</version>
+    </plugin>
+
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>${project.maven_report}</version>
+    </plugin>
+
+        <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>jar-with-dependencies</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                    <configuration>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                        <archive>
+                            <manifest>
+                                <mainClass>Starter</mainClass>
+                            </manifest>
+                            <manifestEntries>
+                                <Class-Path>./</Class-Path>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+    </build>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
