@@ -77,44 +77,45 @@ public class GetYTCommentaries {
             saveYTUser(iYoutubeUser);
 
             ICommentary iCommentary = StaticModelFactory.getCommentaryObject(comments.get(0).getSnippet().getLikeCount(),
-                    comments.get(0).getSnippet().getPublishedAt().toString(),comments.get(0).getSnippet().getTextOriginal(),
+                    comments.get(0).getSnippet().getPublishedAt().toString(), comments.get(0).getSnippet().getTextOriginal(),
                     iYoutubeUser);
             saveCommentary(iCommentary);
 
             CommentThreadReplies replies = commentThread.getReplies();
 
             if (replies != null) {
-                comments.addAll(replies.getComments());
-
-                for (Comment reply : replies.getComments()){
-                    IYoutubeUser youtubeUser = StaticModelFactory
-                            .getYoutubeUserObject(reply.getSnippet().getAuthorDisplayName(),
-                                    reply.getSnippet().getAuthorChannelUrl(),
-                                    StringUtils.cutStringBeforeChar(reply.getSnippet().getAuthorChannelId().toString()),
-                                    reply.getSnippet().getAuthorProfileImageUrl());
-                    IReply iReply = StaticModelFactory.getReplyObject(reply.getSnippet().getTextDisplay(),
-                                                                      youtubeUser, reply.getSnippet().getLikeCount(),
-                                                                      reply.getSnippet().getPublishedAt().toString());
-                    saveReply(iReply);
-                    iCommentary.addIReply(iReply);
-                }
-                saveCommentary(iCommentary);
+                handleReplyThreads(replies, iCommentary);
             }
-
-            //System.out.println("Kommentar von: " + comments.get(0).getSnippet().getAuthorDisplayName() + " Kommentar: "
-              //      + comments.get(0).getSnippet().getTextOriginal());
         }
     }
 
-    private void saveCommentary(ICommentary iCommentary){
+    private void handleReplyThreads(CommentThreadReplies replies, ICommentary iCommentary) {
+
+        for (Comment reply : replies.getComments()) {
+            IYoutubeUser youtubeUser = StaticModelFactory
+                    .getYoutubeUserObject(reply.getSnippet().getAuthorDisplayName(),
+                            reply.getSnippet().getAuthorChannelUrl(),
+                            StringUtils.cutStringBeforeChar(reply.getSnippet().getAuthorChannelId().toString()),
+                            reply.getSnippet().getAuthorProfileImageUrl());
+            IReply iReply = StaticModelFactory.getReplyObject(reply.getSnippet().getTextDisplay(),
+                    youtubeUser, reply.getSnippet().getLikeCount(),
+                    reply.getSnippet().getPublishedAt().toString());
+            saveReply(iReply);
+            iCommentary.addIReply(iReply);
+        }
+
+        saveCommentary(iCommentary);
+    }
+
+    private void saveCommentary(ICommentary iCommentary) {
         commentaryDaoHibernateImp.saveCommentary(iCommentary);
     }
 
-    private void saveYTUser(IYoutubeUser iYoutubeUser){
+    private void saveYTUser(IYoutubeUser iYoutubeUser) {
         ytUserDaoHibernateImp.saveUser(iYoutubeUser);
     }
 
-    private void saveReply(IReply iReply){
+    private void saveReply(IReply iReply) {
         replyDaoHibernateImp.saveReply(iReply);
     }
 }

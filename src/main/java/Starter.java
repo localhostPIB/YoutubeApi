@@ -11,7 +11,7 @@ public class Starter {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        if (StringValidator.validateArgument(args[0])) {
+        if (args.length == 1 && StringValidator.validateArgument(args[0])) {
             GetYTVideoInformations getYTVideoInformations = new GetYTVideoInformations(new VideoDaoHibernateImp());
             getYTVideoInformations.getYTVideoStatistics(args[0]);
 

@@ -10,7 +10,7 @@
     <inceptionYear>2022</inceptionYear>
     <description>Saves the comments of a Youtube video including information
         about the authors into a SQLite database.</description>
-    <url>https://github.com/localhostPIB</url>
+    <url>https://github.com/localhostPIB/YoutubeApi</url>
 
     <properties>
         <maven.compiler.source>14</maven.compiler.source>

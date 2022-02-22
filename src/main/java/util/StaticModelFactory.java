@@ -12,9 +12,9 @@ public class StaticModelFactory {
     public static String getActualDate() {
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-        String strDate = dateFormat.format(date);
+        String stringDate = dateFormat.format(date);
 
-        return strDate;
+        return stringDate;
     }
 
     public static IVideoInfo getVideoInfoObject(String videoId, String timestamp, BigInteger viewCount, BigInteger likes,

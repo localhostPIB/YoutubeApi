@@ -10,7 +10,7 @@ public class StringValidator {
     }
 
     public static boolean validateArgument(String arg){
-        if(arg.length() >= 1 && StringValidator.validateVideoId(arg)){
+        if(arg != null && arg.length() >= 1 && StringValidator.validateVideoId(arg)){
             return true;
         }
         return false;
