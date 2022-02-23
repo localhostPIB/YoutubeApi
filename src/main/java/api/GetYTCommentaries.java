@@ -74,6 +74,7 @@ public class GetYTCommentaries {
                             comments.get(0).getSnippet().getAuthorProfileImageUrl());
 
             iYoutubeUser.setImageUrl(comments.get(0).getSnippet().getAuthorProfileImageUrl());
+
             saveYTUser(iYoutubeUser);
 
             ICommentary iCommentary = StaticModelFactory.getCommentaryObject(comments.get(0).getSnippet().getLikeCount(),
@@ -92,14 +93,18 @@ public class GetYTCommentaries {
     private void handleReplyThreads(CommentThreadReplies replies, ICommentary iCommentary) {
 
         for (Comment reply : replies.getComments()) {
-            IYoutubeUser youtubeUser = StaticModelFactory
+            IYoutubeUser iYoutubeUser = StaticModelFactory
                     .getYoutubeUserObject(reply.getSnippet().getAuthorDisplayName(),
                             reply.getSnippet().getAuthorChannelUrl(),
                             StringUtils.cutStringBeforeChar(reply.getSnippet().getAuthorChannelId().toString()),
                             reply.getSnippet().getAuthorProfileImageUrl());
+
+            saveYTUser(iYoutubeUser);
+
             IReply iReply = StaticModelFactory.getReplyObject(reply.getSnippet().getTextDisplay(),
-                    youtubeUser, reply.getSnippet().getLikeCount(),
+                    iYoutubeUser, reply.getSnippet().getLikeCount(),
                     reply.getSnippet().getPublishedAt().toString());
+
             saveReply(iReply);
             iCommentary.addIReply(iReply);
         }

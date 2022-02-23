@@ -15,12 +15,12 @@ import javax.persistence.Id;
 public class YoutubeUser implements IYoutubeUser {
 
     @Id
-    public String channelId;
+    private String channelId;
 
-    public String userName;
+    private String userName;
 
-    public String channelUrl;
+    private String channelUrl;
 
-    public String imageUrl;
+    private String imageUrl;
 
 }

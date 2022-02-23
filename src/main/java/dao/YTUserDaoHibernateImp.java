@@ -4,11 +4,8 @@ import model.interfaces.IYoutubeUser;
 import org.hibernate.Session;
 import util.HibernateUtils;
 
-import java.util.List;
-
 public class YTUserDaoHibernateImp {
 
-    private List<IYoutubeUser> ytUserList;
 
     public YTUserDaoHibernateImp() {
 

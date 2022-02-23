@@ -13,11 +13,11 @@ public class Reply implements IReply {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    public String comment;
+    private String comment;
 
-    public long likes;
+    private long likes;
 
-    public String publishAt;
+    private String publishAt;
 
     @OneToOne(targetEntity = YoutubeUser.class, cascade=CascadeType.ALL, orphanRemoval = true)
     private IYoutubeUser iYoutubeUser;

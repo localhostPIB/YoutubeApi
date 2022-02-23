@@ -16,16 +16,16 @@ public class Commentary implements ICommentary {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    public long likes;
+    private long likes;
 
-    public String publishAt;
+    private String publishAt;
 
-    public String comment;
+    private String comment;
 
-    @OneToOne(targetEntity = YoutubeUser.class, cascade=CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(targetEntity = YoutubeUser.class, orphanRemoval = true, cascade=CascadeType.ALL)
     private IYoutubeUser iYoutubeUser;
 
-    @OneToMany(targetEntity = Reply.class, cascade=CascadeType.ALL)
+    @OneToMany(targetEntity = Reply.class)
     @JoinColumn(name = "reply_id")
     private List<IReply> iReplyList = new ArrayList<>();
 
