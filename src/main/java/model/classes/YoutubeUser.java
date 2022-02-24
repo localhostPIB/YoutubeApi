@@ -10,6 +10,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class YoutubeUser implements IYoutubeUser {

@@ -1,8 +1,13 @@
 package dao;
 
+import model.interfaces.IVideoInfo;
 import model.interfaces.IYoutubeUser;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import util.HibernateUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class YTUserDaoHibernateImp {
 
@@ -25,5 +30,27 @@ public class YTUserDaoHibernateImp {
         } finally {
             HibernateUtils.closeSession(session);
         }
+    }
+
+
+    public List<IYoutubeUser> findAllYTUsers(){
+        Session session = null;
+        List<IYoutubeUser> userList  = new ArrayList<>();
+
+        try{
+            session = HibernateUtils.getSession();
+            session.beginTransaction();
+            String queryString ="SELECT user FROM YoutubeUser user";
+            Query query = session.createQuery(queryString);
+            userList = (List<IYoutubeUser>) query.getResultList();
+            session.flush();
+            session.getTransaction().commit();
+        }catch (Exception ex){
+            ex.fillInStackTrace();
+        }finally{
+            HibernateUtils.closeSession(session);
+        }
+
+        return userList;
     }
 }

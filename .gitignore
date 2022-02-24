@@ -39,6 +39,9 @@ build/
 *.properties
 .properties
 
+### CSV ###
+*.csv
+.csv
 
 ### Database ###
 .sqlite-journal

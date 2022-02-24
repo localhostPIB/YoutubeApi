@@ -18,6 +18,10 @@ public interface IVideoInfo {
 
     void setFavorite(BigInteger count);
 
+    void setTitle(String title);
+
+    String getTitle();
+
     BigInteger getFavorite();
 
     BigInteger getViewCount();

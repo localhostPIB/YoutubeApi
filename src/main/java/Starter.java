@@ -1,7 +1,11 @@
-import api.GetYTCommentaries;
-import api.GetYTVideoInformations;
+import model.interfaces.IYoutubeUser;
+import service.api.GetYTCommentaries;
+import service.api.GetYTVideoInformations;
 import dao.*;
+import service.csv.CreateCSVFile;
 import util.validator.StringValidator;
+
+import java.util.List;
 
 public class Starter {
 
@@ -16,8 +20,12 @@ public class Starter {
             getYTVideoInformations.getYTVideoStatistics(args[0]);
 
             GetYTCommentaries getYTCommentaries = new GetYTCommentaries(new YTUserDaoHibernateImp(),
-             new CommentaryDaoHibernateImp(), new ReplyDaoHibernateImp());
+             new CommentaryDaoHibernateImp(), new ReplyDaoHibernateImp(), getYTVideoInformations.getIVideoInfo());
             getYTCommentaries.getAllMessages(args[0]);
+
+            CreateCSVFile createCSVFile = new CreateCSVFile();
+            createCSVFile.createCSVYTUserFile(getYTVideoInformations.getIVideoInfo().getTitle());
+
         } else {
             System.err.println("Please specify videoId e.g. FVFGFY5YmBI !");
         }

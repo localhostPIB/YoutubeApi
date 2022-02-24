@@ -2,7 +2,11 @@ package dao;
 
 import model.interfaces.IVideoInfo;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import util.HibernateUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class VideoDaoHibernateImp {
 

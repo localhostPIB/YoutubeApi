@@ -1,4 +1,4 @@
-package api;
+package service.api;
 
 import dao.*;
 import util.*;
@@ -9,6 +9,7 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
 
 import java.io.*;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class GetYTCommentaries {
@@ -20,13 +21,16 @@ public class GetYTCommentaries {
 
     private final ReplyDaoHibernateImp replyDaoHibernateImp;
 
+    private final IVideoInfo iVideoInfo;
+
 
     public GetYTCommentaries(YTUserDaoHibernateImp ytUserDaoHibernateImp,
                              CommentaryDaoHibernateImp commentaryDaoHibernateImp,
-                             ReplyDaoHibernateImp replyDaoHibernateImp) {
+                             ReplyDaoHibernateImp replyDaoHibernateImp,IVideoInfo iVideoInfo) {
         this.ytUserDaoHibernateImp = ytUserDaoHibernateImp;
         this.commentaryDaoHibernateImp = commentaryDaoHibernateImp;
         this.replyDaoHibernateImp = replyDaoHibernateImp;
+        this.iVideoInfo = iVideoInfo;
 
         try {
             CLIENT_SECRET = PropertyUtils.readPropertyFile();
@@ -79,7 +83,7 @@ public class GetYTCommentaries {
 
             ICommentary iCommentary = StaticModelFactory.getCommentaryObject(comments.get(0).getSnippet().getLikeCount(),
                     comments.get(0).getSnippet().getPublishedAt().toString(), comments.get(0).getSnippet().getTextOriginal(),
-                    iYoutubeUser);
+                    iYoutubeUser,iVideoInfo);
             saveCommentary(iCommentary);
 
             CommentThreadReplies replies = commentThread.getReplies();

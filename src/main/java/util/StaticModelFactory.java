@@ -18,8 +18,11 @@ public class StaticModelFactory {
     }
 
     public static IVideoInfo getVideoInfoObject(String videoId, String timestamp, BigInteger viewCount, BigInteger likes,
-                                                BigInteger commentCount, BigInteger favorite){
-        IVideoInfo iVideoInfo = new VideoInfo(videoId, timestamp, viewCount, likes,commentCount, favorite);
+                                                BigInteger commentCount, BigInteger favorite, String title,
+                                                String channelTitle, String videoDescription){
+
+        IVideoInfo iVideoInfo = new VideoInfo(videoId, timestamp, viewCount, likes,commentCount, favorite,
+                                              title, channelTitle, videoDescription);
 
         return iVideoInfo;
     }
@@ -30,8 +33,9 @@ public class StaticModelFactory {
         return iYoutubeUser;
     }
 
-    public static ICommentary getCommentaryObject(long likes, String publishAt, String comment, IYoutubeUser iYoutubeUser){
-        ICommentary iCommentary = new Commentary(likes, publishAt, comment, iYoutubeUser);
+    public static ICommentary getCommentaryObject(long likes, String publishAt, String comment,
+                                                  IYoutubeUser iYoutubeUser, IVideoInfo iVideoInfo){
+        ICommentary iCommentary = new Commentary(likes, publishAt, comment, iYoutubeUser, iVideoInfo);
 
         return iCommentary;
     }
