@@ -1,13 +1,11 @@
 package dao;
 
-import model.interfaces.IVideoInfo;
 import model.interfaces.IYoutubeUser;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class YTUserDaoHibernateImp {
 

@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@ToString
 @NoArgsConstructor
 public class Reply implements IReply {
     @Id

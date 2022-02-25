@@ -22,13 +22,13 @@ public class Commentary implements ICommentary {
 
     private String comment;
 
-    @OneToOne(targetEntity = VideoInfo.class)
+    @OneToOne(targetEntity = VideoInfo.class, fetch = FetchType.EAGER)
     private IVideoInfo iVideoInfo;
 
-    @OneToOne(targetEntity = YoutubeUser.class, orphanRemoval = true, cascade=CascadeType.ALL)
+    @OneToOne(targetEntity = YoutubeUser.class, orphanRemoval = true, cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private IYoutubeUser iYoutubeUser;
 
-    @OneToMany(targetEntity = Reply.class)
+    @OneToMany(targetEntity = Reply.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "reply_id")
     private List<IReply> iReplyList = new ArrayList<>();
 

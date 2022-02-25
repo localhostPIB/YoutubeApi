@@ -12,8 +12,8 @@ public class CreateCSVFile {
 
     private static final String NEW_LINE_SEPARATOR = "\n";
 
-    public void createCSVYTUserFile(String fileName) throws IOException {
-        FileWriter out = new FileWriter(fileName+".csv");
+    public void createCSVCommentaryFile(String fileName) throws IOException {
+        FileWriter out = new FileWriter(fileName+"_Commentaries"+".csv");
 
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
 
@@ -23,7 +23,7 @@ public class CreateCSVFile {
             CommentaryDaoHibernateImp commentaryDaoHibernateImp = new CommentaryDaoHibernateImp();
             commentaryDaoHibernateImp.findAllYTCommentaries().forEach((iCommentary) -> {
                 try {
-                    printer.printRecord(iCommentary.toString()+"Commentaries");
+                    printer.printRecord(iCommentary.getComment());
 
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
@@ -32,8 +32,8 @@ public class CreateCSVFile {
         }
     }
 
-    public void createCSVYTCommentary(String fileName) throws IOException {
-        FileWriter out = new FileWriter(fileName+".csv");
+    public void createCSVYTUserFile(String fileName) throws IOException {
+        FileWriter out = new FileWriter(fileName+"_User"+".csv");
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
 
         try (CSVPrinter printer = new CSVPrinter(out, csvFileFormat)) {
@@ -42,7 +42,7 @@ public class CreateCSVFile {
             YTUserDaoHibernateImp ytUserDaoHibernateImp = new YTUserDaoHibernateImp();
             ytUserDaoHibernateImp.findAllYTUsers().forEach((iYoutubeUser) -> {
                 try {
-                    printer.printRecord(iYoutubeUser.toString()+"Commentaries");
+                    printer.printRecord(iYoutubeUser.toString());
 
                 } catch (IOException ioException) {
                     ioException.printStackTrace();

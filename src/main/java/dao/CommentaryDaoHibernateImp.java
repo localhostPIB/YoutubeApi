@@ -34,7 +34,7 @@ public class CommentaryDaoHibernateImp {
         try{
             session = HibernateUtils.getSession();
             session.beginTransaction();
-            String queryString ="SELECT Commentary FROM Commentary c JOIN FETCH c.iYoutubeUser";
+            String queryString ="SELECT c FROM Commentary c";
             Query query = session.createQuery(queryString);
             commentaryList = (List<ICommentary>) query.getResultList();
             session.flush();

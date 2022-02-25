@@ -14,6 +14,7 @@ import java.util.Locale;
 @Getter
 @Setter
 @Entity
+@ToString
 @NoArgsConstructor
 public class VideoInfo implements IVideoInfo {
     @Id

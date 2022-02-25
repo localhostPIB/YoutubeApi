@@ -13,7 +13,6 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
-        <property name="hibernate.generate_statistics">true</property>
 
         <!-- https://www.journaldev.com/2903/org-hibernate-hibernateexception-no-currentsessioncontext-configured -->
         <property name="hibernate.current_session_context_class">

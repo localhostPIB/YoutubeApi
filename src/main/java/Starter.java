@@ -25,6 +25,7 @@ public class Starter {
 
             CreateCSVFile createCSVFile = new CreateCSVFile();
             createCSVFile.createCSVYTUserFile(getYTVideoInformations.getIVideoInfo().getTitle());
+            createCSVFile.createCSVCommentaryFile(getYTVideoInformations.getIVideoInfo().getTitle());
 
         } else {
             System.err.println("Please specify videoId e.g. FVFGFY5YmBI !");
