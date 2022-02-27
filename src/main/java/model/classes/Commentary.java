@@ -9,7 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@ToString
 @NoArgsConstructor
 public class Commentary implements ICommentary {
     @Id
@@ -43,5 +42,10 @@ public class Commentary implements ICommentary {
     @Override
     public void addIReply(IReply iReply){
         iReplyList.add(iReply);
+    }
+
+    @Override
+    public String toString(){
+        return getLikes() +"\t"+ getPublishAt() +"\t"+ getComment() +"\t"+  iYoutubeUser.getUserName();
     }
 }

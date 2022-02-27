@@ -10,7 +10,6 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class YoutubeUser implements IYoutubeUser {
@@ -23,5 +22,10 @@ public class YoutubeUser implements IYoutubeUser {
     private String channelUrl;
 
     private String imageUrl;
+
+    @Override
+    public String toString(){
+       return getChannelId() +"\t"+ getUserName() +"\t"+ getChannelUrl() +"\t"+ getImageUrl();
+    }
 
 }

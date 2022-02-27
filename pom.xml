@@ -26,6 +26,7 @@
         <project.JDBC.version>3.36.0.3</project.JDBC.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.google.oauth.client.jetty>1.33.0</project.google.oauth.client.jetty>
+        <project.googleOAuthClient>1.33.0</project.googleOAuthClient>
         <project.google.http.client>1.41.2</project.google.http.client>
         <project.google.collections>1.0</project.google.collections>
         <project.org.codehaus.jackson>1.9.4</project.org.codehaus.jackson>
@@ -35,6 +36,7 @@
         <project.maven_surfire>2.22.2</project.maven_surfire>
         <project.maven_compiler_plugins>3.10.0</project.maven_compiler_plugins>
         <project.csv>1.9.0</project.csv>
+        <project.googleAPI.Client>1.33.1</project.googleAPI.Client>
     </properties>
 
     <build>
@@ -175,14 +177,14 @@
         <dependency>
             <groupId>com.google.oauth-client</groupId>
             <artifactId>google-oauth-client</artifactId>
-            <version>1.33.0</version>
+            <version>${project.googleOAuthClient}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
-            <version>1.33.1</version>
+            <version>${project.googleAPI.Client}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty -->
