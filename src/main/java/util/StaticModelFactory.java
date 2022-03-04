@@ -27,8 +27,9 @@ public class StaticModelFactory {
         return iVideoInfo;
     }
 
-    public static IYoutubeUser getYoutubeUserObject(String userName, String channelUrl, String channelId,String imageUrl){
-        IYoutubeUser iYoutubeUser = new YoutubeUser(channelId, userName, channelUrl, imageUrl );
+    public static IYoutubeUser getYoutubeUserObject(String userName, String channelUrl, String channelId,
+                                                    String imageUrl){
+        IYoutubeUser iYoutubeUser = new YoutubeUser(channelId, userName, channelUrl, imageUrl);
 
         return iYoutubeUser;
     }

@@ -27,14 +27,18 @@ public class CommentaryDaoHibernateImp {
         }
     }
 
-    public List<ICommentary> findAllYTCommentaries(){
+    public List<ICommentary> findAllYTCommentariesByVideoId(String videoId){
         Session session = null;
         List<ICommentary> commentaryList  = new ArrayList<>();
 
         try{
             session = HibernateUtils.getSession();
             session.beginTransaction();
-            String queryString ="SELECT c FROM Commentary c";
+
+            String queryString ="SELECT c " +
+                                "FROM Commentary c " +
+                                "WHERE c.iVideoInfo.videoId=" +"'"+videoId+"'";
+
             Query query = session.createQuery(queryString);
             commentaryList = (List<ICommentary>) query.getResultList();
             session.flush();

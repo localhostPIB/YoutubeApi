@@ -78,7 +78,7 @@ public class GetYTCommentaries {
                             comments.get(0).getSnippet().getAuthorProfileImageUrl());
 
             iYoutubeUser.setImageUrl(comments.get(0).getSnippet().getAuthorProfileImageUrl());
-
+            iYoutubeUser.addVideoInfo(iVideoInfo);
             saveYTUser(iYoutubeUser);
 
             ICommentary iCommentary = StaticModelFactory.getCommentaryObject(comments.get(0).getSnippet().getLikeCount(),

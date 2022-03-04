@@ -24,8 +24,8 @@ public class Starter {
             getYTCommentaries.getAllMessages(args[0]);
 
             CreateCSVFile createCSVFile = new CreateCSVFile();
-            createCSVFile.createCSVYTUserFile(getYTVideoInformations.getIVideoInfo().getTitle());
-            createCSVFile.createCSVCommentaryFile(getYTVideoInformations.getIVideoInfo().getTitle());
+            createCSVFile.createCSVYTUserFile(getYTVideoInformations.getIVideoInfo().getTitle(),getYTVideoInformations.getIVideoInfo().getVideoId() );
+            createCSVFile.createCSVCommentaryFile(getYTVideoInformations.getIVideoInfo().getTitle(),getYTVideoInformations.getIVideoInfo().getVideoId());
 
         } else {
             System.err.println("Please specify videoId e.g. FVFGFY5YmBI !");

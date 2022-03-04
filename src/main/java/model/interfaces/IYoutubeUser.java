@@ -17,4 +17,6 @@ public interface IYoutubeUser {
      String getImageUrl();
 
      void setImageUrl(String imageUrl);
+
+     void addVideoInfo(IVideoInfo iVideoInfo);
 }

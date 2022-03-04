@@ -29,4 +29,6 @@ public interface IVideoInfo {
     BigInteger getLikes();
 
     BigInteger getCommentCount();
+
+    void addYoutubeUser(IYoutubeUser iYoutubeUser);
 }

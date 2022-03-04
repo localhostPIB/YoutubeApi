@@ -31,14 +31,19 @@ public class YTUserDaoHibernateImp {
     }
 
 
-    public List<IYoutubeUser> findAllYTUsers(){
+    public List<IYoutubeUser> findAllYTUsersByVideoId(String videoId){
         Session session = null;
         List<IYoutubeUser> userList  = new ArrayList<>();
 
         try{
             session = HibernateUtils.getSession();
             session.beginTransaction();
-            String queryString ="SELECT user FROM YoutubeUser user";
+
+            String queryString ="SELECT yU " +
+                                "FROM YoutubeUser_VideoInfo yV, YoutubeUser yU " +
+                                "WHERE yU.channelId = yV.YoutubeUser_channelId " +
+                                "and yV.iVideoInfoList_id ="+"'"+videoId+"'";
+
             Query query = session.createQuery(queryString);
             userList = (List<IYoutubeUser>) query.getResultList();
             session.flush();
