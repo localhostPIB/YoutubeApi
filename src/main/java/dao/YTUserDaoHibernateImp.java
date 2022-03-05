@@ -40,9 +40,9 @@ public class YTUserDaoHibernateImp {
             session.beginTransaction();
 
             String queryString ="SELECT yU " +
-                                "FROM YoutubeUser_VideoInfo yV, YoutubeUser yU " +
+                                "FROM YoutubeUser_VideoInfo yV, YoutubeUser yU, VideoInfo vi " +
                                 "WHERE yU.channelId = yV.YoutubeUser_channelId " +
-                                "and yV.iVideoInfoList_id ="+"'"+videoId+"'";
+                                "AND vi.videoId = "+"'"+videoId+"'";
 
             Query query = session.createQuery(queryString);
             userList = (List<IYoutubeUser>) query.getResultList();
