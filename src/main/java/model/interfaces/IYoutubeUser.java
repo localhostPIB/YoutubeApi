@@ -1,5 +1,7 @@
 package model.interfaces;
 
+import java.util.List;
+
 public interface IYoutubeUser {
 
      String getUserName();
@@ -7,6 +9,8 @@ public interface IYoutubeUser {
      void setUserName(String userName);
 
      String getChannelUrl();
+
+     List<IVideoInfo> getIVideoInfoList();
 
      void setChannelUrl(String channelUrl);
 

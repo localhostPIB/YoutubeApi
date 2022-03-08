@@ -30,8 +30,20 @@ public class YTUserDaoHibernateImp {
         }
     }
 
-
     public List<IYoutubeUser> findAllYTUsersByVideoId(String videoId){
+        List<IYoutubeUser> userList = new ArrayList<>();
+
+        for(IYoutubeUser iYoutubeUser : findAllYTUsers()){
+            for(int i = 0; i < iYoutubeUser.getIVideoInfoList().size(); i++) {
+                if (videoId.equals(iYoutubeUser.getIVideoInfoList().get(i).getVideoId())) {
+                    userList.add(iYoutubeUser);
+                }
+            }
+        }
+        return userList;
+    }
+
+    private List<IYoutubeUser> findAllYTUsers(){
         Session session = null;
         List<IYoutubeUser> userList  = new ArrayList<>();
 
@@ -40,9 +52,7 @@ public class YTUserDaoHibernateImp {
             session.beginTransaction();
 
             String queryString ="SELECT yU " +
-                                "FROM YoutubeUser_VideoInfo yV, YoutubeUser yU, VideoInfo vi " +
-                                "WHERE yU.channelId = yV.YoutubeUser_channelId " +
-                                "AND vi.videoId = "+"'"+videoId+"'";
+                                "FROM YoutubeUser yU";
 
             Query query = session.createQuery(queryString);
             userList = (List<IYoutubeUser>) query.getResultList();
