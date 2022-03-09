@@ -102,7 +102,7 @@ public class GetYTCommentaries {
                             reply.getSnippet().getAuthorChannelUrl(),
                             StringUtils.cutStringBeforeChar(reply.getSnippet().getAuthorChannelId().toString()),
                             reply.getSnippet().getAuthorProfileImageUrl());
-
+            iYoutubeUser.addVideoInfo(iVideoInfo);
             saveYTUser(iYoutubeUser);
 
             IReply iReply = StaticModelFactory.getReplyObject(reply.getSnippet().getTextDisplay(),
