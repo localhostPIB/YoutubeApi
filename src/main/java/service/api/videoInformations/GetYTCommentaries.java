@@ -1,6 +1,7 @@
-package service.api;
+package service.api.videoInformations;
 
 import dao.*;
+import service.api.Auth;
 import util.*;
 import model.interfaces.*;
 import util.validator.APIValidator;
@@ -9,7 +10,6 @@ import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
 
 import java.io.*;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class GetYTCommentaries {
@@ -49,7 +49,7 @@ public class GetYTCommentaries {
                 .setModerationStatus("published");
     }
 
-    public void getAllMessages(String videoId) throws Exception {
+    public void getAllMessages(final String videoId) throws Exception {
 
         CommentThreadListResponse commentsPage = prepareListRequest(videoId).execute();
 

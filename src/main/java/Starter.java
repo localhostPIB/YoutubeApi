@@ -1,11 +1,8 @@
-import model.interfaces.IYoutubeUser;
-import service.api.GetYTCommentaries;
-import service.api.GetYTVideoInformations;
+import service.api.videoInformations.GetYTCommentaries;
+import service.api.videoInformations.GetYTVideoInformations;
 import dao.*;
 import service.csv.CreateCSVFile;
 import util.validator.StringValidator;
-
-import java.util.List;
 
 public class Starter {
 

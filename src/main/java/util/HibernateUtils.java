@@ -29,7 +29,7 @@ public class HibernateUtils {
         return sessionFactory;
     }
 
-    public static void closeSession(Session session) {
+    public static void closeSession(final Session session) {
         try {
             if ((session != null) && (session.isOpen())) {
                 session.close();

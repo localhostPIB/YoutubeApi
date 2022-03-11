@@ -1,10 +1,11 @@
-package service.api;
+package service.api.videoInformations;
 
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
 import dao.VideoDaoHibernateImp;
 import lombok.Getter;
 import model.interfaces.IVideoInfo;
+import service.api.Auth;
 import util.*;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class GetYTVideoInformations {
         return listVideosRequest;
     }
 
-    public void getYTVideoStatistics(String videoId) throws GeneralSecurityException, IOException {
+    public void getYTVideoStatistics(final String videoId) throws GeneralSecurityException, IOException {
         VideoListResponse videoListResponse = prepareStatistic(videoId).execute();
         Video video = videoListResponse.getItems().get(0);
 

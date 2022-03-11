@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ReplyDaoHibernateImp {
 
-    public void saveReply(IReply iReply) {
+    public void saveReply(final IReply iReply) {
         Session session = null;
 
         try {

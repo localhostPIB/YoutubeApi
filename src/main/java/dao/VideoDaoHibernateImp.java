@@ -9,7 +9,7 @@ import java.util.*;
 
 public class VideoDaoHibernateImp {
 
-    public void saveVideoInfo(IVideoInfo iVideo) {
+    public void saveVideoInfo(final IVideoInfo iVideo) {
         Session session = null;
 
         try {

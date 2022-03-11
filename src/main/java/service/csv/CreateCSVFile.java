@@ -3,15 +3,21 @@ package service.csv;
 import dao.*;
 import java.io.*;
 import org.apache.commons.csv.*;
+import util.FileUtils;
 
 public class CreateCSVFile {
 
     private static final String FILE_HEADER_COMMENTARY[]  = {"Likes:","Publish at:","Comment:","Username:"};
     private static final String FILE_HEADER_USER[]        = {"Channel-Id:","Username:","ChannelUrl:","ImageUrl:"};
     private static final String NEW_LINE_SEPARATOR        = "\n";
+    private static File dir;
 
-    public void createCSVCommentaryFile(String fileName, String videoId) throws IOException {
-        FileWriter fileWriter = new FileWriter(fileName+"_Commentaries"+".csv");
+    static {
+       dir = FileUtils.createDirectory();
+    }
+
+    public void createCSVCommentaryFile(final String fileName, final String videoId) throws IOException {
+        FileWriter fileWriter = new FileWriter(new File(dir,fileName+"_Commentaries"+".csv"));
 
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
 
@@ -27,11 +33,13 @@ public class CreateCSVFile {
                     ioException.printStackTrace();
                 }
             });
+        }catch (IOException ioException){
+            ioException.printStackTrace();
         }
     }
 
-    public void createCSVYTUserFile(String fileName, String videoId) throws IOException {
-        FileWriter fileWriter = new FileWriter(fileName+"_User"+".csv");
+    public void createCSVYTUserFile(final String fileName,final String videoId) throws IOException {
+        FileWriter fileWriter = new FileWriter(new File(dir,fileName+"_User"+".csv"));
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
 
         try (CSVPrinter printer = new CSVPrinter(fileWriter, csvFileFormat)) {

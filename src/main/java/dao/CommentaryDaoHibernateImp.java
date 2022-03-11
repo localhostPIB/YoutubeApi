@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CommentaryDaoHibernateImp {
 
-    public void saveCommentary(ICommentary iCommentary) {
+    public void saveCommentary(final ICommentary iCommentary) {
         Session session = null;
 
         try {
@@ -27,7 +27,7 @@ public class CommentaryDaoHibernateImp {
         }
     }
 
-    public List<ICommentary> findAllYTCommentariesByVideoId(String videoId){
+    public List<ICommentary> findAllYTCommentariesByVideoId(final String videoId){
         Session session = null;
         List<ICommentary> commentaryList  = new ArrayList<>();
 
