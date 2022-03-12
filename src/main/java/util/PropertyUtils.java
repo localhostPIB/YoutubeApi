@@ -5,22 +5,24 @@ import java.util.Properties;
 
 public class PropertyUtils {
 
-    public static String readPropertyFile() throws IOException {
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        try (InputStream input = loader.getResourceAsStream("config.properties")) {
+    public static void writeInPropertyFile(final String value) {
+        try (OutputStream output = new FileOutputStream("config.properties")) {
 
-            Properties prop = new Properties();
+            Properties properties = new Properties();
 
-            prop.load(input);
+            properties.setProperty("CLIENT.SECRET", value);
+            properties.store(output, null);
 
-            return prop.getProperty("CLIENT.SECRET");
-
-        } catch (FileNotFoundException fileNotFoundException) {
-            fileNotFoundException.printStackTrace();
-        }catch (IOException ioException){
-            ioException.printStackTrace();
+        } catch (IOException io) {
+            io.printStackTrace();
         }
-        return "";
     }
+
+    public static String readPropertyFile() throws IOException {
+            Properties properties = new Properties();
+            properties.load(new FileReader("config.properties"));
+
+            return properties.getProperty("CLIENT.SECRET");
+        }
 }
 

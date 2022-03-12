@@ -35,13 +35,6 @@ public class YTUserDaoHibernateImp {
         findAllYTUsers().forEach(iYoutubeUser -> iYoutubeUser.getIVideoInfoList()
                         .forEach(i -> {if(videoId.equals(i.getVideoId())){ userList.add(iYoutubeUser);}}));
 
-        //for(IYoutubeUser iYoutubeUser : findAllYTUsers()){
-          //  for(int i = 0; i < iYoutubeUser.getIVideoInfoList().size(); i++) {
-            //    if (videoId.equals(iYoutubeUser.getIVideoInfoList().get(i).getVideoId())) {
-              //      userList.add(iYoutubeUser);
-               // }
-           // }
-        //}
         return userList;
     }
 

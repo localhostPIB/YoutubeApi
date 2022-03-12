@@ -15,4 +15,14 @@ public class FileUtils {
 
         return dir;
     }
+
+    public static boolean isFileExists(String path){
+        File file = new File(path);
+
+        if(file.exists() && !file.isDirectory()) {
+            return true;
+        }
+
+        return false;
+    }
 }

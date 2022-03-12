@@ -2,6 +2,8 @@ import service.api.videoInformations.GetYTCommentaries;
 import service.api.videoInformations.GetYTVideoInformations;
 import dao.*;
 import service.csv.CreateCSVFile;
+import util.FileUtils;
+import util.PropertyUtils;
 import util.validator.StringValidator;
 
 public class Starter {
@@ -12,7 +14,13 @@ public class Starter {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        if (args.length == 1 && StringValidator.validateArgument(args[0])) {
+        if (args.length >= 1 && StringValidator.validateArgument(args[0])) {
+
+            if (args.length == 2 && StringValidator.validateArgument(args[1])
+                                 && !FileUtils.isFileExists("config.properties")) {
+                PropertyUtils.writeInPropertyFile(args[1]);
+            }
+
             GetYTVideoInformations getYTVideoInformations = new GetYTVideoInformations(new VideoDaoHibernateImp());
             getYTVideoInformations.getYTVideoStatistics(args[0]);
 

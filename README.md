@@ -2,10 +2,8 @@
 
 ## Getting Started
 To use this program, you need a client secret. For more information, visit [Google Docs](https://developers.google.com/adwords/api/docs/guides/authentication).
-The client secret is stored in the [config.properties](https://github.com/localhostPIB/YoutubeApi/blob/master/src/main/resources/config.properties) file.
-The Main method class Starter.java starts the application as argument the video id is needed.
-e.g. https://www.youtube.com/watch?v={video-id}
-
+The Main method class Starter.java starts the application, as arguments the client secret and video-id (e.g. https://www.youtube.com/watch?v={video-id}) are needed.
+Command: `java -jar YoutubeApi-1.0-SNAPSHOT-jar-with-dependencies.jar videoId Client-Secret`
 ## Built With
 For this we use the build management tool Maven(v. 3.8.4) from the Apache Software Foundation.
 * [Maven](https://maven.apache.org/)
