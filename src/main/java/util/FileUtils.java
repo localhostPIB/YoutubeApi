@@ -6,8 +6,8 @@ import java.nio.file.Paths;
 public class FileUtils {
     private static final String CURRENTPROGRAMPATH = Paths.get("").toAbsolutePath().toString();
 
-    public static File createDirectory(){
-        File dir = new File(CURRENTPROGRAMPATH,"CSVFiles");
+    public static File createDirectory(String dirName){
+        File dir = new File(CURRENTPROGRAMPATH,dirName);
 
         if(!dir.exists()) {
             dir.mkdir();

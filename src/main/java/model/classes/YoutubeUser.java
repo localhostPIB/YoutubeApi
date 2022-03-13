@@ -22,7 +22,7 @@ public class YoutubeUser implements IYoutubeUser {
     private String imageUrl;
 
     @OneToMany(targetEntity = VideoInfo.class, fetch = FetchType.EAGER)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE}) //https://mkyong.com/hibernate/cascade-jpa-hibernate-annotation-common-mistake/
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @Column(name = "ytVideoList")
     private List<IVideoInfo> iVideoInfoList = new ArrayList<>();
 

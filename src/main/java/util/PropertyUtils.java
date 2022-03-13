@@ -6,7 +6,9 @@ import java.util.Properties;
 public class PropertyUtils {
 
     public static void writeInPropertyFile(final String value) {
-        try (OutputStream output = new FileOutputStream("config.properties")) {
+        FileUtils.createDirectory("res");
+
+        try (OutputStream output = new FileOutputStream("res/config.properties")) {
 
             Properties properties = new Properties();
 
@@ -20,7 +22,7 @@ public class PropertyUtils {
 
     public static String readPropertyFile() throws IOException {
             Properties properties = new Properties();
-            properties.load(new FileReader("config.properties"));
+            properties.load(new FileReader("res/config.properties"));
 
             return properties.getProperty("CLIENT.SECRET");
         }

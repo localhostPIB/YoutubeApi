@@ -17,7 +17,7 @@ public class Starter {
         if (args.length >= 1 && StringValidator.validateArgument(args[0])) {
 
             if (args.length == 2 && StringValidator.validateArgument(args[1])
-                                 && !FileUtils.isFileExists("config.properties")) {
+                                 && !FileUtils.isFileExists("res/config.properties")) {
                 PropertyUtils.writeInPropertyFile(args[1]);
             }
 

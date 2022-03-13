@@ -13,7 +13,7 @@ public class CreateCSVFile {
     private static File dir;
 
     static {
-       dir = FileUtils.createDirectory();
+       dir = FileUtils.createDirectory("CSVFiles");
     }
 
     public void createCSVCommentaryFile(final String fileName, final String videoId) throws IOException {
