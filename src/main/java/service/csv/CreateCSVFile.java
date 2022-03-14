@@ -4,6 +4,7 @@ import dao.*;
 import java.io.*;
 import org.apache.commons.csv.*;
 import util.FileUtils;
+import util.StringUtils;
 
 public class CreateCSVFile {
 
@@ -16,8 +17,14 @@ public class CreateCSVFile {
        dir = FileUtils.createDirectory("CSVFiles");
     }
 
+    private String cutAllInvalidSymbols(String fileName){
+        return StringUtils.deleteInvalidSymbols(fileName);
+    }
+
     public void createCSVCommentaryFile(final String fileName, final String videoId) throws IOException {
-        FileWriter fileWriter = new FileWriter(new File(dir,fileName+"_Commentaries"+".csv"));
+        String fileNameWithoutInvalidSymbols = cutAllInvalidSymbols(fileName);
+
+        FileWriter fileWriter = new FileWriter(new File(dir,fileNameWithoutInvalidSymbols+"_Commentaries"+".csv"));
 
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
 
@@ -39,7 +46,9 @@ public class CreateCSVFile {
     }
 
     public void createCSVYTUserFile(final String fileName,final String videoId) throws IOException {
-        FileWriter fileWriter = new FileWriter(new File(dir,fileName+"_User"+".csv"));
+        String fileNameWithoutInvalidSymbols = cutAllInvalidSymbols(fileName);
+
+        FileWriter fileWriter = new FileWriter(new File(dir,fileNameWithoutInvalidSymbols+"_User"+".csv"));
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
 
         try (CSVPrinter printer = new CSVPrinter(fileWriter, csvFileFormat)) {
