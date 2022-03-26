@@ -1,10 +1,8 @@
-import service.api.videoInformations.GetYTCommentaries;
-import service.api.videoInformations.GetYTVideoInformations;
-import dao.*;
-import service.csv.CreateCSVFile;
-import util.FileUtils;
-import util.PropertyUtils;
+import service.api.videoInformations.*;
 import util.validator.StringValidator;
+import service.csv.CreateCSVFile;
+import dao.*;
+import util.*;
 
 public class Starter {
 

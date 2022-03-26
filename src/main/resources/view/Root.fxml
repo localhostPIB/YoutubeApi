@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="532.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RootController">
+   <children>
+      <TextField fx:id="clientSecretField" layoutX="215.0" layoutY="36.0" prefHeight="25.0" prefWidth="221.0" />
+      <TextField fx:id="videoIdField" layoutX="215.0" layoutY="73.0" prefHeight="25.0" prefWidth="221.0" />
+      <Text layoutX="89.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Youtube Client-Secret:" />
+      <Text layoutX="157.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Video-Id:" wrappingWidth="50.791015625" />
+      <Button layoutX="475.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="75.0" text="Start" textFill="#17eb0c" />
+      <TableView layoutX="24.0" layoutY="179.0" prefHeight="339.0" prefWidth="663.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="Video-Id" />
+          <TableColumn prefWidth="75.0" text="Uhrzeit" />
+            <TableColumn prefWidth="75.0" text="Titel" />
+            <TableColumn prefWidth="88.0" text="Kanal-Name" />
+            <TableColumn prefWidth="122.0" text="Videobeschreibung" />
+            <TableColumn prefWidth="109.0" text="Aufrufe" />
+            <TableColumn prefWidth="118.0" text="Favorit" />
+        </columns>
+      </TableView>
+      <Button layoutX="589.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="75.0" text="Beenden" textFill="#eb4f4f" />
+   </children>
+</AnchorPane>
