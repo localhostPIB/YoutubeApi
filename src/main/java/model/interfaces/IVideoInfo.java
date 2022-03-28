@@ -10,6 +10,8 @@ public interface IVideoInfo {
 
     void setTimestamp(String timestamp);
 
+    void setChannelTitle(String ChannelTitle);
+
     void setViewCount(BigInteger count);
 
     void setLikes(BigInteger count);
@@ -21,6 +23,12 @@ public interface IVideoInfo {
     void setTitle(String title);
 
     String getTitle();
+
+    String getChannelTitle();
+
+    String getTimestamp();
+
+    String getVideoDescription();
 
     BigInteger getFavorite();
 

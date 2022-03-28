@@ -4,7 +4,7 @@ import service.csv.CreateCSVFile;
 import dao.*;
 import util.*;
 
-public class Starter {
+public class StarterCLI {
 
     /**
      *

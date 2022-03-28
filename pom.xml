@@ -105,7 +105,7 @@
                         </descriptorRefs>
                         <archive>
                             <manifest>
-                                <mainClass>Starter</mainClass>
+                                <mainClass>StarterCLI</mainClass>
                             </manifest>
                             <manifestEntries>
                                 <Class-Path>./</Class-Path>

@@ -25,7 +25,7 @@ public class VideoDaoHibernateImp {
         }
     }
 
-    public List<IVideoInfo> findAllReplies(){
+    public List<IVideoInfo> findAllVideoInfos(){
         Session session = null;
         List<IVideoInfo> videoInfoList  = new ArrayList<>();
 
