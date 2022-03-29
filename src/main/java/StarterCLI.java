@@ -20,6 +20,7 @@ public class StarterCLI {
             }
 
             GetYTVideoInformations getYTVideoInformations = new GetYTVideoInformations(new VideoDaoHibernateImp());
+            getYTVideoInformations.initClientSecret();
             getYTVideoInformations.getYTVideoStatistics(args[0]);
 
             GetYTCommentaries getYTCommentaries = new GetYTCommentaries(new YTUserDaoHibernateImp(),

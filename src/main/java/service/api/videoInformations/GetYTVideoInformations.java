@@ -8,6 +8,7 @@ import model.interfaces.IVideoInfo;
 import service.api.Auth;
 import util.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.GeneralSecurityException;
@@ -23,9 +24,14 @@ public class GetYTVideoInformations {
 
     public GetYTVideoInformations(VideoDaoHibernateImp videoDaoHibernateImp){
         this.videoDaoHibernateImp = videoDaoHibernateImp;
+    }
 
+    public void initClientSecret() throws FileNotFoundException {
         try {
             CLIENT_SECRET = PropertyUtils.readPropertyFile();
+
+        } catch (FileNotFoundException fileNotFoundException){
+            PropertyUtils.writeEmptyFile();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -57,6 +63,10 @@ public class GetYTVideoInformations {
 
         setIVideoInfo(iVideoInfo);
         saveVideoInfos(iVideoInfo);
+    }
+
+    public String getClientSecret(){
+        return this.CLIENT_SECRET;
     }
 
     private void setIVideoInfo(IVideoInfo iVideoInfo){

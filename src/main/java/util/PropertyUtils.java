@@ -26,5 +26,9 @@ public class PropertyUtils {
 
             return properties.getProperty("CLIENT.SECRET");
         }
+
+    public static void writeEmptyFile() throws FileNotFoundException {
+        new FileOutputStream("res/config.properties");
+    }
 }
 

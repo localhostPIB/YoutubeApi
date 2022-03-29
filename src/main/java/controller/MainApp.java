@@ -1,10 +1,11 @@
-package Controller;
+package controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import util.FileUtils;
 
 import java.io.IOException;
 
@@ -19,6 +20,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        FileUtils.createDirectory("res");
         this.primaryStage = stage;
         this.primaryStage.setTitle("Youtube Comment Picker Alpha");
         this.primaryStage.setResizable(false);
@@ -29,7 +31,7 @@ public class MainApp extends Application {
     public void initRootLayout() throws IOException {
         try {
               FXMLLoader loader = new FXMLLoader();
-              loader.setLocation(getClass().getResource("/view/Root.fxml"));
+              loader.setLocation(getClass().getResource("/view/root.fxml"));
               this.rootLayout = loader.load();
               loader.setRoot(new AnchorPane());
               Scene scene = new Scene(rootLayout);
