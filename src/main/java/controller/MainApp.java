@@ -4,7 +4,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.interfaces.IVideoInfo;
 import util.FileUtils;
 
 import java.io.IOException;
@@ -39,6 +41,29 @@ public class MainApp extends Application {
               RootController rootController = loader.getController();
               rootController.setMainApp(this);
               primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showVideoInfosLayout(IVideoInfo iVideoInfo) throws IOException{
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/videoInfos.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Video");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            VideoInfoController videoInfoController = loader.getController();
+            videoInfoController.setDialogStage(dialogStage);
+            videoInfoController.setVideoInfo(iVideoInfo);
+            dialogStage.showAndWait();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

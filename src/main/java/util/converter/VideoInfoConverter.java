@@ -1,7 +1,7 @@
 package util.converter;
 
 import javafx.beans.property.SimpleStringProperty;
-import model.classes.VideoInfoFx;
+import model.classes.*;
 import model.interfaces.IVideoInfo;
 
 import java.util.*;
@@ -27,5 +27,22 @@ public class VideoInfoConverter {
         }
 
         return videoInfoFxList;
+    }
+
+    public static IVideoInfo convertVideoInfoFXtoVideoInfo(VideoInfoFx videoInfoFx){
+        IVideoInfo iVideoInfo = new VideoInfo();
+
+        iVideoInfo.setVideoId(videoInfoFx.getVideoId().toString());
+        iVideoInfo.setChannelTitle(videoInfoFx.getChannelTitle().toString());
+        iVideoInfo.setTitle(videoInfoFx.getTitle().toString());
+        iVideoInfo.setTimestamp(videoInfoFx.getTimestamp().toString());
+        iVideoInfo.setVideoDescription(videoInfoFx.getVideoDescription().toString());
+        //TODO
+        //iVideoInfo.setViewCount(new BigInteger(String.valueOf(videoInfoFx.getViewCount())));
+        //iVideoInfo.setFavorite(new BigInteger(String.valueOf(videoInfoFx.getFavorite())));
+        //iVideoInfo.setLikes(new BigInteger(String.valueOf(videoInfoFx.getLikes())));
+        //iVideoInfo.setCommentCount(new BigInteger(String.valueOf(videoInfoFx.getCommentCount())));
+
+        return iVideoInfo;
     }
 }

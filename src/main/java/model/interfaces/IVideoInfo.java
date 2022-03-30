@@ -16,6 +16,8 @@ public interface IVideoInfo {
 
     void setLikes(BigInteger count);
 
+    void setVideoDescription(String videoDescription);
+
     void setCommentCount(BigInteger count);
 
     void setFavorite(BigInteger count);

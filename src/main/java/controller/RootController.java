@@ -4,6 +4,7 @@ import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.classes.VideoInfoFx;
+import model.interfaces.IVideoInfo;
 import service.VideoInfoService;
 import util.*;
 import util.converter.VideoInfoConverter;
@@ -22,6 +23,8 @@ public class RootController {
     private MainApp mainApp;
 
     private ObservableList<VideoInfoFx> iVideoInfoData = FXCollections.observableArrayList();
+
+    private IVideoInfo iVideoInfo;
 
     @FXML
     private TextField clientSecretField;
@@ -80,6 +83,13 @@ public class RootController {
 
         iVideoInfoData.addAll(videoInfoFxList);
         videoInfoTable.setItems(iVideoInfoData);
+    }
+
+    @FXML
+    private void handleRowSelect() throws IOException {
+        VideoInfoFx videoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
+        IVideoInfo iVideoInfo   = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(videoInfoFx);
+        mainApp.showVideoInfosLayout(iVideoInfo);
     }
 
     @FXML

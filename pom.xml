@@ -37,6 +37,12 @@
         <project.maven_compiler_plugins>3.10.0</project.maven_compiler_plugins>
         <project.csv>1.9.0</project.csv>
         <project.googleAPI.Client>1.33.1</project.googleAPI.Client>
+        <project.openjfx>0.0.8</project.openjfx>
+        <project.openjfx.controls>18</project.openjfx.controls>
+        <project.openjfx.fxml>18</project.openjfx.fxml>
+        <project.openjfx.web>18</project.openjfx.web>
+        <project.target>1.8</project.target>
+        <project.source>1.8</project.source>
     </properties>
 
     <build>
@@ -55,8 +61,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${project.maven_compiler_plugins}</version>
         <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
+            <source>${project.source}</source>
+            <target>${project.target}</target>
         </configuration>
     </plugin>
 
@@ -84,7 +90,7 @@
         <plugin>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-maven-plugin</artifactId>
-            <version>0.0.8</version>
+            <version>${project.openjfx}</version>
             <configuration>
                 <mainClass>controller.MainApp</mainClass>
             </configuration>
@@ -144,13 +150,20 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>12.0.2</version>
+            <version>${project.openjfx.controls}</version>
         </dependency>
 
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>12.0.2</version>
+            <version>${project.openjfx.fxml}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-web -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${project.openjfx.web}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.github.gwenn/sqlite-dialect -->

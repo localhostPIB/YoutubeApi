@@ -14,7 +14,7 @@
       <Text layoutX="89.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Youtube Client-Secret:" />
       <Text layoutX="157.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Video-Id:" wrappingWidth="50.791015625" />
       <Button layoutX="475.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="25.0" prefWidth="75.0" text="Start" textFill="#17eb0c" />
-      <TableView fx:id="videoInfoTable" layoutX="7.0" layoutY="129.0" prefHeight="380.0" prefWidth="998.0">
+      <TableView fx:id="videoInfoTable" layoutX="7.0" layoutY="129.0" onMousePressed="#handleRowSelect" prefHeight="380.0" prefWidth="998.0">
         <columns>
           <TableColumn fx:id="videoIdColumn" prefWidth="75.0" text="Video-Id" />
           <TableColumn fx:id="timeColumn" prefWidth="92.0" text="Uhrzeit" />
