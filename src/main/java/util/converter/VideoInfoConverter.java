@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import model.classes.*;
 import model.interfaces.IVideoInfo;
 
+import java.math.BigInteger;
 import java.util.*;
 
 public class VideoInfoConverter {
@@ -32,16 +33,15 @@ public class VideoInfoConverter {
     public static IVideoInfo convertVideoInfoFXtoVideoInfo(VideoInfoFx videoInfoFx){
         IVideoInfo iVideoInfo = new VideoInfo();
 
-        iVideoInfo.setVideoId(videoInfoFx.getVideoId().toString());
-        iVideoInfo.setChannelTitle(videoInfoFx.getChannelTitle().toString());
-        iVideoInfo.setTitle(videoInfoFx.getTitle().toString());
-        iVideoInfo.setTimestamp(videoInfoFx.getTimestamp().toString());
-        iVideoInfo.setVideoDescription(videoInfoFx.getVideoDescription().toString());
-        //TODO
-        //iVideoInfo.setViewCount(new BigInteger(String.valueOf(videoInfoFx.getViewCount())));
-        //iVideoInfo.setFavorite(new BigInteger(String.valueOf(videoInfoFx.getFavorite())));
-        //iVideoInfo.setLikes(new BigInteger(String.valueOf(videoInfoFx.getLikes())));
-        //iVideoInfo.setCommentCount(new BigInteger(String.valueOf(videoInfoFx.getCommentCount())));
+        iVideoInfo.setVideoId(videoInfoFx.getVideoId().get());
+        iVideoInfo.setChannelTitle(videoInfoFx.getChannelTitle().get());
+        iVideoInfo.setTitle(videoInfoFx.getTitle().get());
+        iVideoInfo.setTimestamp(videoInfoFx.getTimestamp().get());
+        iVideoInfo.setVideoDescription(videoInfoFx.getVideoDescription().get());
+        iVideoInfo.setViewCount(new BigInteger(String.valueOf(videoInfoFx.getViewCount().get())));
+        iVideoInfo.setFavorite(new BigInteger(String.valueOf(videoInfoFx.getFavorite().get())));
+        iVideoInfo.setLikes(new BigInteger(String.valueOf(videoInfoFx.getLikes().get())));
+        iVideoInfo.setCommentCount(new BigInteger(String.valueOf(videoInfoFx.getCommentCount().get())));
 
         return iVideoInfo;
     }

@@ -4,8 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.interfaces.IVideoInfo;
 import util.FileUtils;
 
@@ -38,6 +40,7 @@ public class MainApp extends Application {
               loader.setRoot(new AnchorPane());
               Scene scene = new Scene(rootLayout);
               primaryStage.setScene(scene);
+              primaryStage.initStyle(StageStyle.TRANSPARENT);
               RootController rootController = loader.getController();
               rootController.setMainApp(this);
               primaryStage.show();
@@ -51,15 +54,15 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/videoInfos.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
+            Pane page = loader.load();
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Video");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
+            dialogStage.setTitle("Video");
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initOwner(primaryStage);
             dialogStage.setScene(scene);
-
             VideoInfoController videoInfoController = loader.getController();
+            videoInfoController.setMainApp(this);
             videoInfoController.setDialogStage(dialogStage);
             videoInfoController.setVideoInfo(iVideoInfo);
             dialogStage.showAndWait();

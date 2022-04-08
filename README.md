@@ -7,7 +7,7 @@ The Main method class Starter.java starts the application, as arguments the clie
 Command: `java -jar YoutubeApi-1.0-SNAPSHOT-jar-with-dependencies.jar videoId Client-Secret`
 
 ### JavaFX GUI
-In the IDE you have to pass the following arguments '--module-path "{/path/toDownloaded/javafx-sdk-17.0.1/lib}" --add-modules javafx.controls, javafx.web, javafx.fxml'.
+In the IDE you have to pass the following arguments `--module-path "{/path/toDownloaded/javafx-sdk-17.0.1/lib}" --add-modules javafx.controls, javafx.web, javafx.fxml`.
 
 ## Built With
 For this we use the build management tool Maven(v. 3.8.4) from the Apache Software Foundation.

@@ -11,18 +11,19 @@ public class VideoInfoController {
 
     private Stage dialogStage;
 
-    @FXML
-    private WebView webView;
+    private MainApp mainApp;
 
     @FXML
-    private void initialize(){
+    private WebView idWebView;
+
+    public VideoInfoController(){
 
     }
 
     @FXML
     private void handlePlay(){
-        String url = "https://www.youtube.com/watch?v="+iVideoInfo.getVideoId();
-        this.webView.getEngine().load(url);
+        String url = "https://www.youtube.com/watch?v="+ iVideoInfo.getVideoId();
+        this.idWebView.getEngine().load(url);
     }
 
     @FXML
@@ -36,6 +37,10 @@ public class VideoInfoController {
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
+    }
+
+    public void setMainApp(MainApp mainApp){
+        this.mainApp = mainApp;
     }
 
     }
