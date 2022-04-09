@@ -57,10 +57,12 @@ public class MainApp extends Application {
             Pane page = loader.load();
             Stage dialogStage = new Stage();
             Scene scene = new Scene(page);
+
             dialogStage.setTitle("Video");
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             dialogStage.initOwner(primaryStage);
             dialogStage.setScene(scene);
+
             VideoInfoController videoInfoController = loader.getController();
             videoInfoController.setMainApp(this);
             videoInfoController.setDialogStage(dialogStage);

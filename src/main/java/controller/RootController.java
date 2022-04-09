@@ -8,9 +8,9 @@ import model.interfaces.IVideoInfo;
 import service.VideoInfoService;
 import util.*;
 import util.converter.VideoInfoConverter;
+import util.gui.FXUtils;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -74,7 +74,7 @@ public class RootController {
     private void initialize() throws FileNotFoundException {
         initColumn();
         videoInfoService.initClientId();
-        if(videoInfoService.getClientId() != null){
+        if (videoInfoService.getClientId() != null) {
             clientSecretField.setText(videoInfoService.getClientId());
         }
 
@@ -88,27 +88,36 @@ public class RootController {
     @FXML
     private void handleRowSelect() throws IOException {
         VideoInfoFx videoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
-        IVideoInfo iVideoInfo   = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(videoInfoFx);
+        IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(videoInfoFx);
         mainApp.showVideoInfosLayout(iVideoInfo);
     }
 
     @FXML
     private void handleStart() throws Exception {
-        if (isInputValid()) {
-            String clientSecret = clientSecretField.getText();
-            String videoId = videoIdField.getText();
+        if (FXUtils.isInputValid(clientSecretField)) {
+            if (FXUtils.isInputValid(videoIdField)) {
+                String clientSecret = clientSecretField.getText();
+                String videoId = videoIdField.getText();
 
-            PropertyUtils.writeInPropertyFile(clientSecret);
-            videoInfoService.initClientId();
-            videoInfoService.getVideoInformations(videoId);
-            videoInfoTable.getItems().clear();
-            List<VideoInfoFx> videoInfoFxList = VideoInfoConverter.
-                    convertVideoInfotoVideoInfoFx(videoInfoService.getAllVideoInfos());
+                PropertyUtils.writeInPropertyFile(clientSecret);
+                videoInfoService.initClientId();
+                videoInfoService.getVideoInformations(videoId);
+                videoInfoTable.getItems().clear();
+                List<VideoInfoFx> videoInfoFxList = VideoInfoConverter.
+                        convertVideoInfotoVideoInfoFx(videoInfoService.getAllVideoInfos());
 
-            iVideoInfoData.addAll(videoInfoFxList);
-            videoInfoTable.setItems(iVideoInfoData);
+                iVideoInfoData.addAll(videoInfoFxList);
+                videoInfoTable.setItems(iVideoInfoData);
 
-            okClicked = true;
+                okClicked = true;
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte geben Sie die VideoId ein", ButtonType.OK);
+                alert.showAndWait();
+            }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte geben Sie ClientSecret Informationen ein", ButtonType.OK);
+            alert.showAndWait();
         }
     }
 
@@ -117,16 +126,11 @@ public class RootController {
         System.exit(0);
     }
 
-    private boolean isInputValid() {
-        return clientSecretField.getText() != null || clientSecretField.getText().trim().isEmpty() ||
-                videoIdField.getText() != null || videoIdField.getText().trim().isEmpty();
-    }
-
     public boolean isOkClicked() {
         return okClicked;
     }
 
-    private void initColumn(){
+    private void initColumn() {
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().getChannelTitle());
         favoritColumn.setCellValueFactory(cellData -> cellData.getValue().getFavorite());
         descritpionColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoDescription());

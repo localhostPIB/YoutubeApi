@@ -22,7 +22,7 @@ public class VideoInfoController {
 
     @FXML
     private void handlePlay(){
-        String url = "https://www.youtube.com/watch?v="+ iVideoInfo.getVideoId();
+        String url = "https://www.youtube.com/embed/"+ iVideoInfo.getVideoId();
         this.idWebView.getEngine().load(url);
     }
 
