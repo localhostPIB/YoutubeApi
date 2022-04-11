@@ -3,25 +3,27 @@ package service;
 import dao.VideoDaoHibernateImp;
 import model.interfaces.IVideoInfo;
 import service.api.videoInformations.GetYTVideoInformations;
+import service.threading.ServiceThread;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.security.GeneralSecurityException;
+import java.io.*;
 import java.util.List;
 
-public class VideoInfoService {
+public class VideoInfoService{
 
-    private GetYTVideoInformations getYTVideoInformations;
+    private final GetYTVideoInformations getYTVideoInformations;
 
-    private VideoDaoHibernateImp videoDaoHibernateImp;
+    private final VideoDaoHibernateImp videoDaoHibernateImp;
 
     public VideoInfoService() {
         this.videoDaoHibernateImp = new VideoDaoHibernateImp();
         this.getYTVideoInformations = new GetYTVideoInformations(this.videoDaoHibernateImp);
     }
 
-    public void getVideoInformations(String videoId) throws GeneralSecurityException, IOException {
-        this.getYTVideoInformations.getYTVideoStatistics(videoId);
+    public void getVideoInformations(String videoId) {
+        Runnable runnable = new ServiceThread(videoId, this.getYTVideoInformations);
+        new Thread(runnable).start();
+        //this.getYTVideoInformations.getYTVideoStatistics(videoId);
+        System.out.println("Anzahl Threads: Serviceklasse: "+java.lang.Thread.activeCount());
     }
 
     public List<IVideoInfo> getAllVideoInfos(){
@@ -35,5 +37,4 @@ public class VideoInfoService {
     public String getClientId(){
         return this.getYTVideoInformations.getClientSecret();
     }
-
 }

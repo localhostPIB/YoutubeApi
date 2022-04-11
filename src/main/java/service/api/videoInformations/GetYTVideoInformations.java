@@ -46,6 +46,7 @@ public class GetYTVideoInformations {
     }
 
     public void getYTVideoStatistics(final String videoId) throws GeneralSecurityException, IOException {
+        System.out.println("Anzahl Threads fachkl: "+java.lang.Thread.activeCount());
         VideoListResponse videoListResponse = prepareStatistic(videoId).execute();
         Video video = videoListResponse.getItems().get(0);
 

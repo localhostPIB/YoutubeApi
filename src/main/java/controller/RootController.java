@@ -17,12 +17,9 @@ import java.util.List;
  * mvn clean javafx:run
  */
 public class RootController {
-
-    private boolean okClicked = false;
-
     private MainApp mainApp;
 
-    private ObservableList<VideoInfoFx> iVideoInfoData = FXCollections.observableArrayList();
+    private final ObservableList<VideoInfoFx> iVideoInfoData = FXCollections.observableArrayList();
 
     private IVideoInfo iVideoInfo;
 
@@ -62,11 +59,12 @@ public class RootController {
     private final VideoInfoService videoInfoService;
 
 
+
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
-    public RootController() throws FileNotFoundException {
+    public RootController() {
         videoInfoService = new VideoInfoService();
     }
 
@@ -79,7 +77,7 @@ public class RootController {
         }
 
         List<VideoInfoFx> videoInfoFxList = VideoInfoConverter.
-                convertVideoInfotoVideoInfoFx(videoInfoService.getAllVideoInfos());
+                convertVideoInfoToVideoInfoFx(videoInfoService.getAllVideoInfos());
 
         iVideoInfoData.addAll(videoInfoFxList);
         videoInfoTable.setItems(iVideoInfoData);
@@ -104,14 +102,11 @@ public class RootController {
                 videoInfoService.getVideoInformations(videoId);
                 videoInfoTable.getItems().clear();
                 List<VideoInfoFx> videoInfoFxList = VideoInfoConverter.
-                        convertVideoInfotoVideoInfoFx(videoInfoService.getAllVideoInfos());
-
+                        convertVideoInfoToVideoInfoFx(videoInfoService.getAllVideoInfos());
                 iVideoInfoData.addAll(videoInfoFxList);
                 videoInfoTable.setItems(iVideoInfoData);
-
-                okClicked = true;
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte geben Sie die VideoId ein", ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte geben Sie die VideoId ein wie z.B: FVFGFY5YmBI", ButtonType.OK);
                 alert.showAndWait();
             }
 
@@ -124,10 +119,6 @@ public class RootController {
     @FXML
     private void handleExit() {
         System.exit(0);
-    }
-
-    public boolean isOkClicked() {
-        return okClicked;
     }
 
     private void initColumn() {

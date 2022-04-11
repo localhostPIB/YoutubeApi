@@ -8,8 +8,7 @@ import java.math.BigInteger;
 import java.util.*;
 
 public class VideoInfoConverter {
-
-    public static List<VideoInfoFx> convertVideoInfotoVideoInfoFx(List<IVideoInfo> iVideoInfoList){
+    public static List<VideoInfoFx> convertVideoInfoToVideoInfoFx(List<IVideoInfo> iVideoInfoList){
         List<VideoInfoFx> videoInfoFxList = new ArrayList<>();
 
         for(IVideoInfo iVideoInfo :  iVideoInfoList){
