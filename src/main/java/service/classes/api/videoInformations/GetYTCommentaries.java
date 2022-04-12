@@ -1,7 +1,7 @@
-package service.api.videoInformations;
+package service.classes.api.videoInformations;
 
 import dao.*;
-import service.api.Auth;
+import service.classes.api.Auth;
 import util.*;
 import model.interfaces.*;
 import util.validator.APIValidator;

@@ -1,11 +1,11 @@
-package service.api.videoInformations;
+package service.classes.api.videoInformations;
 
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
 import dao.VideoDaoHibernateImp;
 import lombok.Getter;
 import model.interfaces.IVideoInfo;
-import service.api.Auth;
+import service.classes.api.Auth;
 import util.*;
 
 import java.io.FileNotFoundException;

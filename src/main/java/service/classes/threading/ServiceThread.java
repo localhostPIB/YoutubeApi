@@ -1,6 +1,6 @@
-package service.threading;
+package service.classes.threading;
 
-import service.api.videoInformations.GetYTVideoInformations;
+import service.classes.api.videoInformations.GetYTVideoInformations;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

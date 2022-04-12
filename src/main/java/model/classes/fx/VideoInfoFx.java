@@ -1,7 +1,8 @@
-package model.classes;
+package model.classes.fx;
 
 import javafx.beans.property.StringProperty;
 import lombok.*;
+import model.interfaces.fx.IVideoInfoFx;
 
 import javax.persistence.Column;
 import java.math.BigInteger;
@@ -10,7 +11,7 @@ import java.math.BigInteger;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VideoInfoFx {
+public class VideoInfoFx implements IVideoInfoFx {
 
     private StringProperty videoId;
 

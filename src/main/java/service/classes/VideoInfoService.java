@@ -1,14 +1,15 @@
-package service;
+package service.classes;
 
 import dao.VideoDaoHibernateImp;
 import model.interfaces.IVideoInfo;
-import service.api.videoInformations.GetYTVideoInformations;
-import service.threading.ServiceThread;
+import service.classes.api.videoInformations.GetYTVideoInformations;
+import service.classes.threading.ServiceThread;
+import service.inferfaces.IVideoInfoService;
 
 import java.io.*;
 import java.util.List;
 
-public class VideoInfoService{
+public class VideoInfoService implements IVideoInfoService {
 
     private final GetYTVideoInformations getYTVideoInformations;
 

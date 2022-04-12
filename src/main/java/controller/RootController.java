@@ -3,9 +3,11 @@ package controller;
 import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.classes.VideoInfoFx;
+import model.classes.fx.VideoInfoFx;
 import model.interfaces.IVideoInfo;
-import service.VideoInfoService;
+import model.interfaces.fx.IVideoInfoFx;
+import service.classes.VideoInfoService;
+import service.inferfaces.IVideoInfoService;
 import util.*;
 import util.converter.VideoInfoConverter;
 import util.gui.FXUtils;
@@ -15,13 +17,12 @@ import java.util.List;
 
 /**
  * mvn clean javafx:run
+ * --module-path "C:\bla\lib" --add-modules javafx.controls,javafx.web,javafx.fxml
  */
 public class RootController {
     private MainApp mainApp;
 
-    private final ObservableList<VideoInfoFx> iVideoInfoData = FXCollections.observableArrayList();
-
-    private IVideoInfo iVideoInfo;
+    private final ObservableList<IVideoInfoFx> iVideoInfoData = FXCollections.observableArrayList();
 
     @FXML
     private TextField clientSecretField;
@@ -30,7 +31,7 @@ public class RootController {
     private TextField videoIdField;
 
     @FXML
-    private TableView<VideoInfoFx> videoInfoTable;
+    private TableView<IVideoInfoFx> videoInfoTable;
 
     @FXML
     private TableColumn<VideoInfoFx, String> videoIdColumn;
@@ -56,8 +57,7 @@ public class RootController {
     @FXML
     private TableColumn<VideoInfoFx, String> commentCountColumn;
 
-    private final VideoInfoService videoInfoService;
-
+    private final IVideoInfoService iVideoInfoService;
 
 
     public void setMainApp(MainApp mainApp) {
@@ -65,19 +65,19 @@ public class RootController {
     }
 
     public RootController() {
-        videoInfoService = new VideoInfoService();
+        iVideoInfoService = new VideoInfoService();
     }
 
     @FXML
     private void initialize() throws FileNotFoundException {
         initColumn();
-        videoInfoService.initClientId();
-        if (videoInfoService.getClientId() != null) {
-            clientSecretField.setText(videoInfoService.getClientId());
+        iVideoInfoService.initClientId();
+        if (iVideoInfoService.getClientId() != null) {
+            clientSecretField.setText(iVideoInfoService.getClientId());
         }
 
-        List<VideoInfoFx> videoInfoFxList = VideoInfoConverter.
-                convertVideoInfoToVideoInfoFx(videoInfoService.getAllVideoInfos());
+        List<IVideoInfoFx> videoInfoFxList = VideoInfoConverter.
+                convertVideoInfoToVideoInfoFx(iVideoInfoService.getAllVideoInfos());
 
         iVideoInfoData.addAll(videoInfoFxList);
         videoInfoTable.setItems(iVideoInfoData);
@@ -85,8 +85,8 @@ public class RootController {
 
     @FXML
     private void handleRowSelect() throws IOException {
-        VideoInfoFx videoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
-        IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(videoInfoFx);
+        IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
+        IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(iVideoInfoFx);
         mainApp.showVideoInfosLayout(iVideoInfo);
     }
 
@@ -98,21 +98,19 @@ public class RootController {
                 String videoId = videoIdField.getText();
 
                 PropertyUtils.writeInPropertyFile(clientSecret);
-                videoInfoService.initClientId();
-                videoInfoService.getVideoInformations(videoId);
-                videoInfoTable.getItems().clear();
-                List<VideoInfoFx> videoInfoFxList = VideoInfoConverter.
-                        convertVideoInfoToVideoInfoFx(videoInfoService.getAllVideoInfos());
-                iVideoInfoData.addAll(videoInfoFxList);
-                videoInfoTable.setItems(iVideoInfoData);
+                iVideoInfoService.initClientId();
+                iVideoInfoService.getVideoInformations(videoId);
+                //videoInfoTable.getItems().clear();
+                //List<IVideoInfoFx> iVideoInfoFxList = VideoInfoConverter.
+                  //      convertVideoInfoToVideoInfoFx(iVideoInfoService.getAllVideoInfos());
+                //iVideoInfoData.addAll(iVideoInfoFxList);
+                //videoInfoTable.setItems(iVideoInfoData);
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte geben Sie die VideoId ein wie z.B: FVFGFY5YmBI", ButtonType.OK);
-                alert.showAndWait();
+                FXUtils.showAlert(Alert.AlertType.ERROR, "Bitte geben Sie die VideoId ein wie z.B: FVFGFY5YmBI", ButtonType.OK);
             }
 
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte geben Sie ClientSecret Informationen ein", ButtonType.OK);
-            alert.showAndWait();
+            FXUtils.showAlert(Alert.AlertType.ERROR, "Bitte geben Sie ClientSecret Informationen ein", ButtonType.OK);
         }
     }
 

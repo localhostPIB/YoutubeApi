@@ -2,45 +2,47 @@ package util.converter;
 
 import javafx.beans.property.SimpleStringProperty;
 import model.classes.*;
+import model.classes.fx.VideoInfoFx;
 import model.interfaces.IVideoInfo;
+import model.interfaces.fx.IVideoInfoFx;
 
 import java.math.BigInteger;
 import java.util.*;
 
 public class VideoInfoConverter {
-    public static List<VideoInfoFx> convertVideoInfoToVideoInfoFx(List<IVideoInfo> iVideoInfoList){
-        List<VideoInfoFx> videoInfoFxList = new ArrayList<>();
+    public static List<IVideoInfoFx> convertVideoInfoToVideoInfoFx(List<IVideoInfo> iVideoInfoList){
+        List<IVideoInfoFx> videoInfoFxList = new ArrayList<>();
 
         for(IVideoInfo iVideoInfo :  iVideoInfoList){
-            VideoInfoFx videoInfoFx = new VideoInfoFx();
-            videoInfoFx.setVideoId(new SimpleStringProperty(iVideoInfo.getVideoId()));
-            videoInfoFx.setVideoDescription(new SimpleStringProperty(iVideoInfo.getVideoDescription()));
-            videoInfoFx.setChannelTitle(new SimpleStringProperty(iVideoInfo.getChannelTitle()));
-            videoInfoFx.setFavorite(new SimpleStringProperty(iVideoInfo.getFavorite().toString()));
-            videoInfoFx.setLikes(new SimpleStringProperty(iVideoInfo.getLikes().toString()));
-            videoInfoFx.setTimestamp(new SimpleStringProperty(iVideoInfo.getTimestamp()));
-            videoInfoFx.setTitle(new SimpleStringProperty(iVideoInfo.getTitle()));
-            videoInfoFx.setCommentCount(new SimpleStringProperty(iVideoInfo.getCommentCount().toString()));
-            videoInfoFx.setViewCount(new SimpleStringProperty(iVideoInfo.getViewCount().toString()));
+            IVideoInfoFx iVideoInfoFx = new VideoInfoFx();
+            iVideoInfoFx.setVideoId(new SimpleStringProperty(iVideoInfo.getVideoId()));
+            iVideoInfoFx.setVideoDescription(new SimpleStringProperty(iVideoInfo.getVideoDescription()));
+            iVideoInfoFx.setChannelTitle(new SimpleStringProperty(iVideoInfo.getChannelTitle()));
+            iVideoInfoFx.setFavorite(new SimpleStringProperty(iVideoInfo.getFavorite().toString()));
+            iVideoInfoFx.setLikes(new SimpleStringProperty(iVideoInfo.getLikes().toString()));
+            iVideoInfoFx.setTimestamp(new SimpleStringProperty(iVideoInfo.getTimestamp()));
+            iVideoInfoFx.setTitle(new SimpleStringProperty(iVideoInfo.getTitle()));
+            iVideoInfoFx.setCommentCount(new SimpleStringProperty(iVideoInfo.getCommentCount().toString()));
+            iVideoInfoFx.setViewCount(new SimpleStringProperty(iVideoInfo.getViewCount().toString()));
 
-            videoInfoFxList.add(videoInfoFx);
+            videoInfoFxList.add(iVideoInfoFx);
         }
 
         return videoInfoFxList;
     }
 
-    public static IVideoInfo convertVideoInfoFXtoVideoInfo(VideoInfoFx videoInfoFx){
+    public static IVideoInfo convertVideoInfoFXtoVideoInfo(IVideoInfoFx iVideoInfoFx){
         IVideoInfo iVideoInfo = new VideoInfo();
 
-        iVideoInfo.setVideoId(videoInfoFx.getVideoId().get());
-        iVideoInfo.setChannelTitle(videoInfoFx.getChannelTitle().get());
-        iVideoInfo.setTitle(videoInfoFx.getTitle().get());
-        iVideoInfo.setTimestamp(videoInfoFx.getTimestamp().get());
-        iVideoInfo.setVideoDescription(videoInfoFx.getVideoDescription().get());
-        iVideoInfo.setViewCount(new BigInteger(String.valueOf(videoInfoFx.getViewCount().get())));
-        iVideoInfo.setFavorite(new BigInteger(String.valueOf(videoInfoFx.getFavorite().get())));
-        iVideoInfo.setLikes(new BigInteger(String.valueOf(videoInfoFx.getLikes().get())));
-        iVideoInfo.setCommentCount(new BigInteger(String.valueOf(videoInfoFx.getCommentCount().get())));
+        iVideoInfo.setVideoId(iVideoInfoFx.getVideoId().get());
+        iVideoInfo.setChannelTitle(iVideoInfoFx.getChannelTitle().get());
+        iVideoInfo.setTitle(iVideoInfoFx.getTitle().get());
+        iVideoInfo.setTimestamp(iVideoInfoFx.getTimestamp().get());
+        iVideoInfo.setVideoDescription(iVideoInfoFx.getVideoDescription().get());
+        iVideoInfo.setViewCount(new BigInteger(String.valueOf(iVideoInfoFx.getViewCount().get())));
+        iVideoInfo.setFavorite(new BigInteger(String.valueOf(iVideoInfoFx.getFavorite().get())));
+        iVideoInfo.setLikes(new BigInteger(String.valueOf(iVideoInfoFx.getLikes().get())));
+        iVideoInfo.setCommentCount(new BigInteger(String.valueOf(iVideoInfoFx.getCommentCount().get())));
 
         return iVideoInfo;
     }

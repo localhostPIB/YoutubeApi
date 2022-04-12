@@ -1,9 +1,11 @@
-import service.api.videoInformations.*;
+import service.classes.api.videoInformations.GetYTCommentaries;
+import service.classes.api.videoInformations.GetYTVideoInformations;
 import util.validator.StringValidator;
-import service.csv.CreateCSVFile;
+import service.classes.csv.CreateCSVFile;
 import dao.*;
 import util.*;
 
+@Deprecated
 public class StarterCLI {
 
     /**
