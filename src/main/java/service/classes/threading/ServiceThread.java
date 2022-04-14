@@ -1,5 +1,6 @@
 package service.classes.threading;
 
+import model.interfaces.IVideoInfo;
 import service.classes.api.videoInformations.GetYTVideoInformations;
 
 import java.io.IOException;
@@ -9,18 +10,17 @@ public class ServiceThread implements Runnable {
 
     private final GetYTVideoInformations getYTVideoInformations;
 
-    private final String videoId;
+    private final IVideoInfo iVideoInfo;
 
-    public ServiceThread(String videoId, GetYTVideoInformations getYTVideoInformations)  {
+    public ServiceThread(IVideoInfo iVideoInfo, GetYTVideoInformations getYTVideoInformations)  {
         this.getYTVideoInformations = getYTVideoInformations;
-        this.videoId = videoId;
+        this.iVideoInfo = iVideoInfo;
     }
 
     @Override
     public void run() {
         try {
-            System.out.println("Anzahl Threads: "+java.lang.Thread.activeCount());
-            this.getYTVideoInformations.getYTVideoStatistics(this.videoId);
+            this.getYTVideoInformations.getYTVideoStatistics(this.iVideoInfo);
 
         } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();

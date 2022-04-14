@@ -10,6 +10,22 @@ import java.math.BigInteger;
 import java.util.*;
 
 public class VideoInfoConverter {
+
+    public static IVideoInfoFx convertVideoInfoToVideoInfoFx(IVideoInfo iVideoInfo){
+            IVideoInfoFx iVideoInfoFx = new VideoInfoFx();
+            iVideoInfoFx.setVideoId(new SimpleStringProperty(iVideoInfo.getVideoId()));
+            iVideoInfoFx.setVideoDescription(new SimpleStringProperty(iVideoInfo.getVideoDescription()));
+            iVideoInfoFx.setChannelTitle(new SimpleStringProperty(iVideoInfo.getChannelTitle()));
+            iVideoInfoFx.setFavorite(new SimpleStringProperty(iVideoInfo.getFavorite().toString()));
+            iVideoInfoFx.setLikes(new SimpleStringProperty(iVideoInfo.getLikes().toString()));
+            iVideoInfoFx.setTimestamp(new SimpleStringProperty(iVideoInfo.getTimestamp()));
+            iVideoInfoFx.setTitle(new SimpleStringProperty(iVideoInfo.getTitle()));
+            iVideoInfoFx.setCommentCount(new SimpleStringProperty(iVideoInfo.getCommentCount().toString()));
+            iVideoInfoFx.setViewCount(new SimpleStringProperty(iVideoInfo.getViewCount().toString()));
+
+        return iVideoInfoFx;
+    }
+
     public static List<IVideoInfoFx> convertVideoInfoToVideoInfoFx(List<IVideoInfo> iVideoInfoList){
         List<IVideoInfoFx> videoInfoFxList = new ArrayList<>();
 

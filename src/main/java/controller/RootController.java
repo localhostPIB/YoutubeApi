@@ -99,12 +99,15 @@ public class RootController {
 
                 PropertyUtils.writeInPropertyFile(clientSecret);
                 iVideoInfoService.initClientId();
-                iVideoInfoService.getVideoInformations(videoId);
+                IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
+                iVideoInfoService.getVideoInformations(iVideoInfo);
                 //videoInfoTable.getItems().clear();
                 //List<IVideoInfoFx> iVideoInfoFxList = VideoInfoConverter.
                   //      convertVideoInfoToVideoInfoFx(iVideoInfoService.getAllVideoInfos());
                 //iVideoInfoData.addAll(iVideoInfoFxList);
-                //videoInfoTable.setItems(iVideoInfoData);
+                IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
+                iVideoInfoData.add(iVideoInfoFx);
+                videoInfoTable.setItems(iVideoInfoData);
             } else {
                 FXUtils.showAlert(Alert.AlertType.ERROR, "Bitte geben Sie die VideoId ein wie z.B: FVFGFY5YmBI", ButtonType.OK);
             }

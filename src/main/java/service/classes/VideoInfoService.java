@@ -7,6 +7,7 @@ import service.classes.threading.ServiceThread;
 import service.inferfaces.IVideoInfoService;
 
 import java.io.*;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 public class VideoInfoService implements IVideoInfoService {
@@ -20,11 +21,15 @@ public class VideoInfoService implements IVideoInfoService {
         this.getYTVideoInformations = new GetYTVideoInformations(this.videoDaoHibernateImp);
     }
 
-    public void getVideoInformations(String videoId) {
-        Runnable runnable = new ServiceThread(videoId, this.getYTVideoInformations);
+    public void getVideoInformations(IVideoInfo iVideoInfo) {
+        Runnable runnable = new ServiceThread(iVideoInfo, this.getYTVideoInformations);
         new Thread(runnable).start();
         //this.getYTVideoInformations.getYTVideoStatistics(videoId);
-        System.out.println("Anzahl Threads: Serviceklasse: "+java.lang.Thread.activeCount());
+        //System.out.println("Anzahl Threads: Serviceklasse: "+java.lang.Thread.activeCount());
+    }
+
+    public IVideoInfo callVideoInformations(String videoId) throws GeneralSecurityException, IOException {
+       return this.getYTVideoInformations.callYTVideoStatistics(videoId);
     }
 
     public List<IVideoInfo> getAllVideoInfos(){

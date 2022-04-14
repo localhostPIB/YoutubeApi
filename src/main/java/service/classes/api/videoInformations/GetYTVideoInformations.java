@@ -45,8 +45,11 @@ public class GetYTVideoInformations {
         return listVideosRequest;
     }
 
-    public void getYTVideoStatistics(final String videoId) throws GeneralSecurityException, IOException {
-        System.out.println("Anzahl Threads fachkl: "+java.lang.Thread.activeCount());
+    public void getYTVideoStatistics(final IVideoInfo iVideoInfo) throws GeneralSecurityException, IOException {
+        saveVideoInfos(iVideoInfo);
+    }
+
+    public IVideoInfo callYTVideoStatistics(final String videoId) throws GeneralSecurityException, IOException {
         VideoListResponse videoListResponse = prepareStatistic(videoId).execute();
         Video video = videoListResponse.getItems().get(0);
 
@@ -63,7 +66,9 @@ public class GetYTVideoInformations {
                                                                       title, channelTitle, videoDescription);
 
         setIVideoInfo(iVideoInfo);
-        saveVideoInfos(iVideoInfo);
+        //saveVideoInfos(iVideoInfo);
+
+        return iVideoInfo;
     }
 
     public String getClientSecret(){

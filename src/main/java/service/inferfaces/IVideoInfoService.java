@@ -2,12 +2,15 @@ package service.inferfaces;
 
 import model.interfaces.IVideoInfo;
 
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.security.GeneralSecurityException;
 import java.util.List;
 
 public interface IVideoInfoService {
 
-    void getVideoInformations(String videoId);
+    void getVideoInformations(IVideoInfo iVideoInfo);
+
+    IVideoInfo callVideoInformations(String videoId) throws GeneralSecurityException, IOException;
 
     List<IVideoInfo> getAllVideoInfos();
 
