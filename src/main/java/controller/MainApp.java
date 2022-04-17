@@ -10,8 +10,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.interfaces.IVideoInfo;
 import util.FileUtils;
+import util.gui.i18n.I18nUtil;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class MainApp extends Application {
     private AnchorPane rootLayout;
@@ -34,16 +36,18 @@ public class MainApp extends Application {
 
     public void initRootLayout() throws IOException {
         try {
-              FXMLLoader loader = new FXMLLoader();
-              loader.setLocation(getClass().getResource("/view/root.fxml"));
-              this.rootLayout = loader.load();
-              loader.setRoot(new AnchorPane());
-              Scene scene = new Scene(rootLayout);
-              primaryStage.setScene(scene);
-              primaryStage.initStyle(StageStyle.TRANSPARENT);
-              RootController rootController = loader.getController();
-              rootController.setMainApp(this);
-              primaryStage.show();
+            FXMLLoader loader = new FXMLLoader();
+            ResourceBundle bundle = I18nUtil.getComponentsResourceBundle();
+            loader.setLocation(getClass().getResource("/view/root.fxml"));
+            loader.setResources(bundle);
+            this.rootLayout = loader.load();
+            loader.setRoot(new AnchorPane());
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.initStyle(StageStyle.TRANSPARENT);
+            RootController rootController = loader.getController();
+            rootController.setMainApp(this);
+            primaryStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();

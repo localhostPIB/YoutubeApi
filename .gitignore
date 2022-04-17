@@ -36,8 +36,8 @@ build/
 .DS_store
 
 ### API ###
-*.properties
-.properties
+
+config.properties
 
 ### CSV ###
 *.csv

@@ -46,7 +46,7 @@ public class RootController {
     private TableColumn<VideoInfoFx, String> nameColumn;
 
     @FXML
-    private TableColumn<VideoInfoFx, String> descritpionColumn;
+    private TableColumn<VideoInfoFx, String> descriptionColumn;
 
     @FXML
     private TableColumn<VideoInfoFx, String> countColumn;
@@ -125,7 +125,7 @@ public class RootController {
     private void initColumn() {
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().getChannelTitle());
         favoritColumn.setCellValueFactory(cellData -> cellData.getValue().getFavorite());
-        descritpionColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoDescription());
+        descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoDescription());
         countColumn.setCellValueFactory(cellData -> cellData.getValue().getViewCount());
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle());
         timeColumn.setCellValueFactory(cellData -> cellData.getValue().getTimestamp());
