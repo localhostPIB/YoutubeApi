@@ -24,6 +24,8 @@ public class VideoInfoService implements IVideoInfoService {
     public void getVideoInformations(IVideoInfo iVideoInfo) {
         Runnable runnable = new ServiceThread(iVideoInfo, this.getYTVideoInformations);
         new Thread(runnable).start();
+        //this.getYTVideoInformations.getYTVideoStatistics(videoId);
+        //System.out.println("Anzahl Threads: Serviceklasse: "+java.lang.Thread.activeCount());
     }
 
     public IVideoInfo callVideoInformations(String videoId) throws GeneralSecurityException, IOException {

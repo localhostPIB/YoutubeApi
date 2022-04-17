@@ -11,21 +11,21 @@
    <children>
       <TextField fx:id="clientSecretField" layoutX="215.0" layoutY="36.0" prefHeight="25.0" prefWidth="221.0" />
       <TextField fx:id="videoIdField" layoutX="215.0" layoutY="73.0" prefHeight="25.0" prefWidth="221.0" />
-      <Text fx:id="labelYTCS" layoutX="103.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%labelYTClient" />
-      <Text fx:id="labelVideoId" layoutX="157.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%labelVideoid" wrappingWidth="50.791015625" />
-      <Button fx:id="buttonStart" layoutX="475.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="25.0" prefWidth="75.0" text="%button-start" textFill="#17eb0c" />
+      <Text layoutX="89.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Youtube Client-Secret:" />
+      <Text layoutX="157.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Video-Id:" wrappingWidth="50.791015625" />
+      <Button layoutX="475.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="25.0" prefWidth="75.0" text="Start" textFill="#17eb0c" />
       <TableView fx:id="videoInfoTable" layoutX="7.0" layoutY="129.0" onMousePressed="#handleRowSelect" prefHeight="380.0" prefWidth="998.0">
         <columns>
-          <TableColumn fx:id="videoIdColumn" prefWidth="75.0" text="%col-video-Id" />
-          <TableColumn fx:id="timeColumn" prefWidth="92.0" text="%col-time" />
-            <TableColumn fx:id="titleColumn" prefWidth="105.0" text="%col-title" />
-            <TableColumn fx:id="nameColumn" prefWidth="183.0" text="%col-channelName" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="285.0" text="%col-description" />
-            <TableColumn fx:id="countColumn" prefWidth="70.0" text="%col-count" />
-            <TableColumn fx:id="favoritColumn" prefWidth="63.0" text="%col-favorit" />
-            <TableColumn fx:id="commentCountColumn" prefWidth="124.0" text="%col-commentCount" />
+          <TableColumn fx:id="videoIdColumn" prefWidth="75.0" text="Video-Id" />
+          <TableColumn fx:id="timeColumn" prefWidth="92.0" text="Uhrzeit" />
+            <TableColumn fx:id="titleColumn" prefWidth="105.0" text="Titel" />
+            <TableColumn fx:id="nameColumn" prefWidth="183.0" text="Kanal-Name" />
+            <TableColumn fx:id="descritpionColumn" prefWidth="285.0" text="Videobeschreibung" />
+            <TableColumn fx:id="countColumn" prefWidth="70.0" text="Aufrufe" />
+            <TableColumn fx:id="favoritColumn" prefWidth="63.0" text="Favorit" />
+            <TableColumn fx:id="commentCountColumn" prefWidth="124.0" text="Anzahl Kommentare" />
         </columns>
       </TableView>
-      <Button fx:id="buttonExit" layoutX="589.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="75.0" text="%button-exit" textFill="#eb4f4f" />
+      <Button layoutX="589.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="75.0" text="Beenden" textFill="#eb4f4f" />
    </children>
 </AnchorPane>

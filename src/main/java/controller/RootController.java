@@ -46,7 +46,7 @@ public class RootController {
     private TableColumn<VideoInfoFx, String> nameColumn;
 
     @FXML
-    private TableColumn<VideoInfoFx, String> descriptionColumn;
+    private TableColumn<VideoInfoFx, String> descritpionColumn;
 
     @FXML
     private TableColumn<VideoInfoFx, String> countColumn;
@@ -100,8 +100,12 @@ public class RootController {
                 PropertyUtils.writeInPropertyFile(clientSecret);
                 iVideoInfoService.initClientId();
                 IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
-                IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
                 iVideoInfoService.getVideoInformations(iVideoInfo);
+                //videoInfoTable.getItems().clear();
+                //List<IVideoInfoFx> iVideoInfoFxList = VideoInfoConverter.
+                  //      convertVideoInfoToVideoInfoFx(iVideoInfoService.getAllVideoInfos());
+                //iVideoInfoData.addAll(iVideoInfoFxList);
+                IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
                 iVideoInfoData.add(iVideoInfoFx);
                 videoInfoTable.setItems(iVideoInfoData);
             } else {
@@ -121,7 +125,7 @@ public class RootController {
     private void initColumn() {
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().getChannelTitle());
         favoritColumn.setCellValueFactory(cellData -> cellData.getValue().getFavorite());
-        descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoDescription());
+        descritpionColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoDescription());
         countColumn.setCellValueFactory(cellData -> cellData.getValue().getViewCount());
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle());
         timeColumn.setCellValueFactory(cellData -> cellData.getValue().getTimestamp());
