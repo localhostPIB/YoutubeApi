@@ -100,12 +100,8 @@ public class RootController {
                 PropertyUtils.writeInPropertyFile(clientSecret);
                 iVideoInfoService.initClientId();
                 IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
-                iVideoInfoService.getVideoInformations(iVideoInfo);
-                //videoInfoTable.getItems().clear();
-                //List<IVideoInfoFx> iVideoInfoFxList = VideoInfoConverter.
-                  //      convertVideoInfoToVideoInfoFx(iVideoInfoService.getAllVideoInfos());
-                //iVideoInfoData.addAll(iVideoInfoFxList);
                 IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
+                iVideoInfoService.getVideoInformations(iVideoInfo);
                 iVideoInfoData.add(iVideoInfoFx);
                 videoInfoTable.setItems(iVideoInfoData);
             } else {
