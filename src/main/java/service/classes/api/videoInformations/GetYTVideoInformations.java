@@ -66,7 +66,6 @@ public class GetYTVideoInformations {
                                                                       title, channelTitle, videoDescription);
 
         setIVideoInfo(iVideoInfo);
-        //saveVideoInfos(iVideoInfo);
 
         return iVideoInfo;
     }

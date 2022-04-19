@@ -21,6 +21,8 @@ public class I18nComponentsUtil {
 
     private static final String COLUMN_FAVORITE           ="favoritColumn";
 
+    private static final String COLUMN_LIKES              ="likeColumn";
+
     private static final String COLUMN_COMMENTCOUNT       ="commentCountColumn";
 
     private static final String COLUMN_VIDEOID            = "videoIdColumn";
@@ -29,6 +31,8 @@ public class I18nComponentsUtil {
 
     private static final String LABEL_VIDEOID             ="labelVideoId";
 
+    private static final String LABEL_NA                  ="label-nA";
+
     private static ResourceBundle resourceBundle;
 
 
@@ -36,9 +40,16 @@ public class I18nComponentsUtil {
         resourceBundle = I18nUtil.getComponentsResourceBundle();
     }
 
+    public static String getLabelNa(){
+        return resourceBundle.getString(LABEL_NA);
+    }
 
     public static String getButtonExitString() {
         return resourceBundle.getString(BUTTON_EXIT);
+    }
+
+    public static String getColumnLikes(){
+        return resourceBundle.getString(COLUMN_LIKES);
     }
 
     public static String getButtonStartString() {

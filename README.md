@@ -26,6 +26,7 @@ can be downloaded (from Maven) before starting the program.
 * [YouTube Data V3 support](https://developers.google.com/resources/api-libraries/documentation/youtube/v3/java/latest/com/google/api/services/youtube/YouTube.html)
 * [Apache Commons CSV](https://commons.apache.org/proper/commons-csv/)
 * [OpenjFX](https://openjfx.io/)
+* [MaterialFX](https://github.com/palexdev/MaterialFX/)
 
 ## System-Requirements
 * ![Java 8](https://img.shields.io/badge/Java-8-green.svg) / ![](https://img.shields.io/badge/Java%20JDK-1.8-green)/ ![](https://img.shields.io/badge/Maven-3.8.4-green.svg)

@@ -39,7 +39,6 @@ public class VideoInfo implements IVideoInfo {
     @Column(nullable = false)
     private BigInteger viewCount;
 
-    @Column(nullable = false)
     private BigInteger likes;
 
     private String videoDescription;

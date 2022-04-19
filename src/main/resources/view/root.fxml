@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="RootLayout" prefHeight="560.0" prefWidth="1012.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RootController">
    <children>
-      <TextField fx:id="clientSecretField" layoutX="215.0" layoutY="36.0" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="videoIdField" layoutX="215.0" layoutY="73.0" prefHeight="25.0" prefWidth="221.0" />
       <Text fx:id="labelYTCS" layoutX="103.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%labelYTClient" />
-      <Text fx:id="labelVideoId" layoutX="157.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%labelVideoid" wrappingWidth="50.791015625" />
-      <Button fx:id="buttonStart" layoutX="475.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleStart" prefHeight="25.0" prefWidth="75.0" text="%button-start" textFill="#17eb0c" />
+      <Text fx:id="labelVideoId" layoutX="130.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%labelVideoid" wrappingWidth="50.791015625" />
       <TableView fx:id="videoInfoTable" layoutX="7.0" layoutY="129.0" onMousePressed="#handleRowSelect" prefHeight="380.0" prefWidth="998.0">
         <columns>
           <TableColumn fx:id="videoIdColumn" prefWidth="75.0" text="%col-video-Id" />
@@ -24,8 +21,12 @@
             <TableColumn fx:id="countColumn" prefWidth="70.0" text="%col-count" />
             <TableColumn fx:id="favoritColumn" prefWidth="63.0" text="%col-favorit" />
             <TableColumn fx:id="commentCountColumn" prefWidth="124.0" text="%col-commentCount" />
+            <TableColumn fx:id="likeColumn" prefWidth="70.0" text="%col-likes" />
         </columns>
       </TableView>
-      <Button fx:id="buttonExit" layoutX="589.0" layoutY="73.0" mnemonicParsing="false" onAction="#handleExit" prefHeight="25.0" prefWidth="75.0" text="%button-exit" textFill="#eb4f4f" />
+      <MFXButton fx:id="buttonStart" layoutX="512.0" layoutY="62.0" onAction="#handleStart" text="%button-start" textFill="#4dff07" />
+      <MFXButton fx:id="buttonExit" layoutX="632.0" layoutY="62.0" onAction="#handleExit" text="%button-exit" textFill="#ff0d08" />
+      <MFXTextField fx:id="clientSecretField" layoutX="215.0" layoutY="16.0" prefHeight="49.0" prefWidth="270.0" promptText="Youtube Client Id" />
+      <MFXTextField fx:id="videoIdField" layoutX="215.0" layoutY="74.0" prefHeight="16.0" prefWidth="270.0" promptText=" FVFGFY5YmBI" />
    </children>
 </AnchorPane>

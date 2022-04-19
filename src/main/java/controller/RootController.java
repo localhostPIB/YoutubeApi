@@ -11,6 +11,7 @@ import service.inferfaces.IVideoInfoService;
 import util.*;
 import util.converter.VideoInfoConverter;
 import util.gui.FXUtils;
+import util.gui.i18n.I18nMessagesUtil;
 
 import java.io.*;
 import java.util.List;
@@ -50,6 +51,9 @@ public class RootController {
 
     @FXML
     private TableColumn<VideoInfoFx, String> countColumn;
+
+    @FXML
+    private TableColumn<VideoInfoFx, String> likeColumn;
 
     @FXML
     private TableColumn<VideoInfoFx, String> favoritColumn;
@@ -105,11 +109,11 @@ public class RootController {
                 iVideoInfoData.add(iVideoInfoFx);
                 videoInfoTable.setItems(iVideoInfoData);
             } else {
-                FXUtils.showAlert(Alert.AlertType.ERROR, "Bitte geben Sie die VideoId ein wie z.B: FVFGFY5YmBI", ButtonType.OK);
+                FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutVideoid(), ButtonType.OK);
             }
 
         } else {
-            FXUtils.showAlert(Alert.AlertType.ERROR, "Bitte geben Sie ClientSecret Informationen ein", ButtonType.OK);
+            FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutClientid(), ButtonType.OK);
         }
     }
 
@@ -120,6 +124,7 @@ public class RootController {
 
     private void initColumn() {
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().getChannelTitle());
+        likeColumn.setCellValueFactory(cellData -> cellData.getValue().getLikes());
         favoritColumn.setCellValueFactory(cellData -> cellData.getValue().getFavorite());
         descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoDescription());
         countColumn.setCellValueFactory(cellData -> cellData.getValue().getViewCount());

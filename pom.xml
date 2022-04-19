@@ -41,6 +41,7 @@
         <project.openjfx.controls>18</project.openjfx.controls>
         <project.openjfx.fxml>18</project.openjfx.fxml>
         <project.openjfx.web>18</project.openjfx.web>
+        <project.materialFX.version>11.13.5</project.materialFX.version>
         <project.target>1.8</project.target>
         <project.source>1.8</project.source>
     </properties>
@@ -178,6 +179,12 @@
             <groupId>com.jfoenix</groupId>
             <artifactId>jfoenix</artifactId>
             <version>9.0.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>${project.materialFX.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
