@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IVideoInfoService {
 
-    void getVideoInformations(IVideoInfo iVideoInfo);
+    void getVideoInformations(IVideoInfo iVideoInfo) throws GeneralSecurityException, IOException;
 
     IVideoInfo callVideoInformations(String videoId) throws GeneralSecurityException, IOException;
 

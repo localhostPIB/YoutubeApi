@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.collections.*;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.classes.fx.VideoInfoFx;
@@ -101,13 +102,32 @@ public class RootController {
                 String clientSecret = clientSecretField.getText();
                 String videoId = videoIdField.getText();
 
-                PropertyUtils.writeInPropertyFile(clientSecret);
-                iVideoInfoService.initClientId();
-                IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
-                IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
-                iVideoInfoService.getVideoInformations(iVideoInfo);
-                iVideoInfoData.add(iVideoInfoFx);
-                videoInfoTable.setItems(iVideoInfoData);
+                Task<Void> task = new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        try {
+                            PropertyUtils.writeInPropertyFile(clientSecret);
+                            iVideoInfoService.initClientId();
+                            IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
+                            IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
+                            iVideoInfoService.getVideoInformations(iVideoInfo);
+                            iVideoInfoData.add(iVideoInfoFx);
+                            videoInfoTable.setItems(iVideoInfoData);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                };
+                Thread thread = new Thread(task);
+                thread.start();
+                //PropertyUtils.writeInPropertyFile(clientSecret);
+                //iVideoInfoService.initClientId();
+                //IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
+                //IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
+                //iVideoInfoService.getVideoInformations(iVideoInfo);
+                //iVideoInfoData.add(iVideoInfoFx);
+                //videoInfoTable.setItems(iVideoInfoData);
             } else {
                 FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutVideoid(), ButtonType.OK);
             }

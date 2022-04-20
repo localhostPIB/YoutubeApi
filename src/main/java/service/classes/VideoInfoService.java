@@ -21,9 +21,10 @@ public class VideoInfoService implements IVideoInfoService {
         this.getYTVideoInformations = new GetYTVideoInformations(this.videoDaoHibernateImp);
     }
 
-    public void getVideoInformations(IVideoInfo iVideoInfo) {
-        Runnable runnable = new ServiceThread(iVideoInfo, this.getYTVideoInformations);
-        new Thread(runnable).start();
+    public void getVideoInformations(IVideoInfo iVideoInfo) throws GeneralSecurityException, IOException {
+       // Runnable runnable = new ServiceThread(iVideoInfo, this.getYTVideoInformations);
+       // new Thread(runnable).start();
+        this.getYTVideoInformations.getYTVideoStatistics(iVideoInfo);
     }
 
     public IVideoInfo callVideoInformations(String videoId) throws GeneralSecurityException, IOException {

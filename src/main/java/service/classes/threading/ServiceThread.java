@@ -6,6 +6,7 @@ import service.classes.api.videoInformations.GetYTVideoInformations;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+@Deprecated
 public class ServiceThread implements Runnable {
 
     private final GetYTVideoInformations getYTVideoInformations;

@@ -17,7 +17,7 @@ import java.security.GeneralSecurityException;
 public class GetYTVideoInformations {
     private static String CLIENT_SECRET;
 
-    private VideoDaoHibernateImp videoDaoHibernateImp;
+    private final VideoDaoHibernateImp videoDaoHibernateImp;
 
     private IVideoInfo iVideoInfo;
 
