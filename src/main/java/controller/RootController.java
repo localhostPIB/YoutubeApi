@@ -4,6 +4,7 @@ import javafx.collections.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import model.classes.fx.VideoInfoFx;
 import model.interfaces.IVideoInfo;
 import model.interfaces.fx.IVideoInfoFx;
@@ -93,6 +94,11 @@ public class RootController {
         IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
         IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(iVideoInfoFx);
         mainApp.showVideoInfosLayout(iVideoInfo);
+    }
+
+    @FXML
+    private void handleCSV() throws IOException {
+        mainApp.showSaveFiles();
     }
 
     @FXML

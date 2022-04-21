@@ -1,10 +1,9 @@
 package service.classes.csv;
 
 import dao.*;
+import util.*;
 import java.io.*;
 import org.apache.commons.csv.*;
-import util.FileUtils;
-import util.StringUtils;
 
 public class CreateCSVFile {
 
@@ -19,6 +18,28 @@ public class CreateCSVFile {
 
     private String cutAllInvalidSymbols(String fileName){
         return StringUtils.deleteInvalidSymbols(fileName);
+    }
+
+    public void createCSVVideoInfos(final File file) throws IOException {
+        FileWriter fileWriter = new FileWriter(file);
+
+        CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
+
+        try (CSVPrinter printer = new CSVPrinter(fileWriter, csvFileFormat)) {
+
+            printer.printRecord(FILE_HEADER_COMMENTARY);
+            VideoDaoHibernateImp videoDaoHibernateImp = new VideoDaoHibernateImp();
+            videoDaoHibernateImp.findAllVideoInfos().forEach((iVideoInfo) -> {
+                try {
+                    printer.printRecord(iVideoInfo.toString());
+
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            });
+        }catch (IOException ioException){
+            ioException.printStackTrace();
+        }
     }
 
     public void createCSVCommentaryFile(final String fileName, final String videoId) throws IOException {

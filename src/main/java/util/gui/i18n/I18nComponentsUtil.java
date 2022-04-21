@@ -9,6 +9,8 @@ public class I18nComponentsUtil {
 
     private static final String BUTTON_START              ="button-start";
 
+    private static final String BUTTON_CSV                ="button-csv";
+
     private static final String COLUMN_TIME               ="timeColumn";
 
     private static final String COLUMN_TITLE              ="titleColumn";
@@ -29,6 +31,10 @@ public class I18nComponentsUtil {
 
     private static final String LABEL_CLIENTSECRET        ="labelYTCS";
 
+    private static final String LABEL_CSV                 ="labelCSV";
+
+    private static final String LABEL_CSVFile             ="labelCSVFile";
+
     private static final String LABEL_VIDEOID             ="labelVideoId";
 
     private static final String LABEL_NA                  ="label-nA";
@@ -42,6 +48,18 @@ public class I18nComponentsUtil {
 
     public static String getLabelNa(){
         return resourceBundle.getString(LABEL_NA);
+    }
+
+    public static String getButtonCsv(){
+        return resourceBundle.getString(BUTTON_CSV);
+    }
+
+    public static String getLabelCsv(){
+        return resourceBundle.getString(LABEL_CSV);
+    }
+
+    public static String getLABELCSVFile(){
+        return resourceBundle.getString(LABEL_CSVFile);
     }
 
     public static String getButtonExitString() {

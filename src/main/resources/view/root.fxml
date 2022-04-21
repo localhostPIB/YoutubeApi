@@ -28,5 +28,6 @@
       <MFXButton fx:id="buttonExit" layoutX="632.0" layoutY="62.0" onAction="#handleExit" text="%button-exit" textFill="#ff0d08" />
       <MFXTextField fx:id="clientSecretField" layoutX="215.0" layoutY="16.0" prefHeight="49.0" prefWidth="270.0" promptText="Youtube Client Id" />
       <MFXTextField fx:id="videoIdField" layoutX="215.0" layoutY="74.0" prefHeight="16.0" prefWidth="270.0" promptText=" FVFGFY5YmBI" />
+      <MFXButton fx:id="buttonCSV" layoutX="22.0" layoutY="521.0" onAction="#handleCSV" text="%button-csv" />
    </children>
 </AnchorPane>

@@ -3,16 +3,15 @@ package controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.scene.layout.*;
+import javafx.stage.*;
 import model.interfaces.IVideoInfo;
+import service.classes.csv.CreateCSVFile;
 import util.FileUtils;
+import util.gui.i18n.I18nComponentsUtil;
 import util.gui.i18n.I18nUtil;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ResourceBundle;
 
 public class MainApp extends Application {
@@ -51,6 +50,18 @@ public class MainApp extends Application {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void showSaveFiles() throws IOException {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle(I18nComponentsUtil.getLabelCsv());
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(I18nComponentsUtil.getLABELCSVFile(), "*.csv"));
+        File file = fileChooser.showSaveDialog(primaryStage);
+
+        if(file != null){
+            CreateCSVFile createCSVFile = new CreateCSVFile();
+            createCSVFile.createCSVVideoInfos(file);
         }
     }
 
