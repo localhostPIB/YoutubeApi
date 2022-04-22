@@ -13,6 +13,7 @@ import service.inferfaces.IVideoInfoService;
 import util.*;
 import util.converter.VideoInfoConverter;
 import util.gui.FXUtils;
+import util.gui.i18n.I18nComponentsUtil;
 import util.gui.i18n.I18nMessagesUtil;
 
 import java.io.*;
@@ -98,7 +99,12 @@ public class RootController {
 
     @FXML
     private void handleCSV() throws IOException {
-        mainApp.showSaveFiles();
+        mainApp.showSaveFiles(FileEnum.CSV, I18nComponentsUtil.getLabelCsv(),I18nComponentsUtil.getLABELCSVFile());
+    }
+
+    @FXML
+    private void handleHTML() throws IOException {
+        mainApp.showSaveFiles(FileEnum.HTML, I18nComponentsUtil.getLABELHTML(),I18nComponentsUtil.getLABELHTMLFile());
     }
 
     @FXML

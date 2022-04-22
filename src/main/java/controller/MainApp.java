@@ -1,14 +1,17 @@
 package controller;
 
+import dao.VideoDaoHibernateImp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import model.interfaces.IVideoInfo;
 import service.classes.csv.CreateCSVFile;
+import service.classes.html.CreateHTMLFile;
+import util.FileEnum;
 import util.FileUtils;
-import util.gui.i18n.I18nComponentsUtil;
 import util.gui.i18n.I18nUtil;
 
 import java.io.*;
@@ -28,6 +31,7 @@ public class MainApp extends Application {
         FileUtils.createDirectory("res");
         this.primaryStage = stage;
         this.primaryStage.setTitle("Youtube Comment Picker Alpha");
+        this.primaryStage.getIcons().add(new Image("images/youtube.png"));
         this.primaryStage.setResizable(false);
 
         initRootLayout();
@@ -53,15 +57,21 @@ public class MainApp extends Application {
         }
     }
 
-    public void showSaveFiles() throws IOException {
+    public void showSaveFiles(final FileEnum fileEnum, final String i18n0,final String i18n1) throws IOException {
         final FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(I18nComponentsUtil.getLabelCsv());
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(I18nComponentsUtil.getLABELCSVFile(), "*.csv"));
+        fileChooser.setTitle(i18n0);
+        fileChooser.getExtensionFilters()
+                   .add(new FileChooser.ExtensionFilter(i18n1, "*."+fileEnum.toString().toLowerCase()));
         File file = fileChooser.showSaveDialog(primaryStage);
 
         if(file != null){
-            CreateCSVFile createCSVFile = new CreateCSVFile();
-            createCSVFile.createCSVVideoInfos(file);
+            if(fileEnum.equals(FileEnum.CSV)) {
+                CreateCSVFile createCSVFile = new CreateCSVFile();
+                createCSVFile.createCSVVideoInfos(file);
+            }else if(fileEnum.equals(FileEnum.HTML)){
+                CreateHTMLFile createHTMLFile = new CreateHTMLFile();
+                createHTMLFile.writeHTMLFile(file);
+            }
         }
     }
 

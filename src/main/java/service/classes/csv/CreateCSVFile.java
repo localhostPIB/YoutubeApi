@@ -9,6 +9,7 @@ public class CreateCSVFile {
 
     private static final String FILE_HEADER_COMMENTARY[]  = {"Likes:","Publish at:","Comment:","Username:"};
     private static final String FILE_HEADER_USER[]        = {"Channel-Id:","Username:","ChannelUrl:","ImageUrl:"};
+    private static final String FILE_HEADER_VIDEOINFO[]   = {"Video-Id:","Time:","Channel-Name:","Description:","Favorite:", "Count:"};
     private static final String NEW_LINE_SEPARATOR        = "\n";
     private static File dir;
 
@@ -27,7 +28,7 @@ public class CreateCSVFile {
 
         try (CSVPrinter printer = new CSVPrinter(fileWriter, csvFileFormat)) {
 
-            printer.printRecord(FILE_HEADER_COMMENTARY);
+            printer.printRecord(FILE_HEADER_VIDEOINFO);
             VideoDaoHibernateImp videoDaoHibernateImp = new VideoDaoHibernateImp();
             videoDaoHibernateImp.findAllVideoInfos().forEach((iVideoInfo) -> {
                 try {
