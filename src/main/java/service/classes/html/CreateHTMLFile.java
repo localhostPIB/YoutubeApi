@@ -17,7 +17,7 @@ public class CreateHTMLFile {
         this.videoDaoHibernateImp = new VideoDaoHibernateImp();
     }
 
-    private String arrayListToXHTMLFile(final List<IVideoInfo> iVideoInfoList) {
+    private String arrayListToXHTMLFile(final List<IVideoInfo> iVideoInfoList, final String docName) {
         Date date = new Date();
         StringBuilder xhtmlFile = new StringBuilder("<!DOCTYPE html>");
         xhtmlFile.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"de\" xml:lang=\"de\">");
@@ -31,9 +31,12 @@ public class CreateHTMLFile {
         xhtmlFile.append("<title>");
         xhtmlFile.append("Youtube Comment Picker Alpha");
         xhtmlFile.append("</title>");
+        xhtmlFile.append("<h1>");
+        xhtmlFile.append(docName);
+        xhtmlFile.append("</h1>");
         xhtmlFile.append("</head>");
         xhtmlFile.append("<body>");
-        xhtmlFile.append("<table border=\"1\">");
+        xhtmlFile.append("<table border=\"2\">");
         xhtmlFile.append("<thead>");
         xhtmlFile.append("<tr>");
 
@@ -56,6 +59,19 @@ public class CreateHTMLFile {
         xhtmlFile.append("<th>");
         xhtmlFile.append("Count:");
         xhtmlFile.append("</th>");
+
+        xhtmlFile.append("<th>");
+        xhtmlFile.append("Title:");
+        xhtmlFile.append("</th>");
+
+        xhtmlFile.append("<th>");
+        xhtmlFile.append("Likes:");
+        xhtmlFile.append("</th>");
+
+        xhtmlFile.append("<th>");
+        xhtmlFile.append("Favorite");
+        xhtmlFile.append("</th>");
+
         xhtmlFile.append("</tr>");
         xhtmlFile.append("</thead>");
 
@@ -81,6 +97,25 @@ public class CreateHTMLFile {
             xhtmlFile.append("<td>");
             xhtmlFile.append(iVideoInfo.getViewCount());
             xhtmlFile.append("</td>");
+
+            xhtmlFile.append("<td>");
+            xhtmlFile.append(iVideoInfo.getTitle());
+            xhtmlFile.append("</td>");
+
+            xhtmlFile.append("<td>");
+
+            if(iVideoInfo.getLikes() != null) {
+                xhtmlFile.append(iVideoInfo.getLikes());
+            }else {
+                xhtmlFile.append("??");
+            }
+
+            xhtmlFile.append("</td>");
+
+            xhtmlFile.append("<td>");
+            xhtmlFile.append(iVideoInfo.getFavorite());
+            xhtmlFile.append("</td>");
+
             xhtmlFile.append("</tr>");
         }
         xhtmlFile.append("</tbody>");
@@ -93,10 +128,10 @@ public class CreateHTMLFile {
         return xhtmlFile.toString();
     }
 
-    public void writeHTMLFile(final File file) throws IOException {
+    public void writeHTMLFile(final File file, final String docName) throws IOException {
         List<IVideoInfo> iVideoInfoList = this.videoDaoHibernateImp.findAllVideoInfos();
         FileWriter fileWriter = new FileWriter(file);
-        String html = arrayListToXHTMLFile(iVideoInfoList);
+        String html = arrayListToXHTMLFile(iVideoInfoList, docName);
 
         fileWriter.write(html);
 

@@ -1,29 +1,44 @@
 package controller;
 
-import dao.VideoDaoHibernateImp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import model.interfaces.IVideoInfo;
+import model.interfaces.fx.IVideoInfoFx;
+import service.classes.VideoInfoService;
 import service.classes.csv.CreateCSVFile;
 import service.classes.html.CreateHTMLFile;
+import service.inferfaces.IVideoInfoService;
 import util.FileEnum;
 import util.FileUtils;
+import util.converter.VideoInfoConverter;
 import util.gui.i18n.I18nUtil;
 
 import java.io.*;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainApp extends Application {
     private AnchorPane rootLayout;
 
+    private List<IVideoInfoFx> videoInfoFxList;
+
     private Stage primaryStage;
 
     public MainApp(){
 
+    }
+
+    @Override
+    public void init() throws Exception {
+        IVideoInfoService iVideoInfoService = new VideoInfoService();
+        List<IVideoInfo> iVideoInfoList = iVideoInfoService.getAllVideoInfos();
+        this.videoInfoFxList = VideoInfoConverter.
+                convertVideoInfoToVideoInfoFx(iVideoInfoList);
     }
 
     @Override
@@ -50,14 +65,29 @@ public class MainApp extends Application {
             primaryStage.initStyle(StageStyle.TRANSPARENT);
             RootController rootController = loader.getController();
             rootController.setMainApp(this);
-            primaryStage.show();
 
+            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void showSaveFiles(final FileEnum fileEnum, final String i18n0,final String i18n1) throws IOException {
+    private void showSplashScreen() throws IOException {
+        //ToDo fixen
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/view/preloadStartScreen.fxml"));
+        Pane page = loader.load();
+        Stage dialogStage = new Stage();
+        Scene scene = new Scene(page);
+        dialogStage.initStyle(StageStyle.TRANSPARENT);
+        dialogStage.initOwner(primaryStage);
+        dialogStage.setScene(scene);
+        dialogStage.setResizable(false);
+
+        dialogStage.showAndWait();
+    }
+
+    public void showSaveFiles(final FileEnum fileEnum, final String i18n0,final String i18n1, final String docName) throws IOException {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(i18n0);
         fileChooser.getExtensionFilters()
@@ -70,7 +100,7 @@ public class MainApp extends Application {
                 createCSVFile.createCSVVideoInfos(file);
             }else if(fileEnum.equals(FileEnum.HTML)){
                 CreateHTMLFile createHTMLFile = new CreateHTMLFile();
-                createHTMLFile.writeHTMLFile(file);
+                createHTMLFile.writeHTMLFile(file, docName);
             }
         }
     }
@@ -99,7 +129,7 @@ public class MainApp extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public List<IVideoInfoFx> getiVideoInfoFxList() {
+        return videoInfoFxList;
     }
 }

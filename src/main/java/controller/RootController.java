@@ -2,9 +2,11 @@ package controller;
 
 import javafx.collections.*;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.FileChooser;
 import model.classes.fx.VideoInfoFx;
 import model.interfaces.IVideoInfo;
 import model.interfaces.fx.IVideoInfoFx;
@@ -13,8 +15,7 @@ import service.inferfaces.IVideoInfoService;
 import util.*;
 import util.converter.VideoInfoConverter;
 import util.gui.FXUtils;
-import util.gui.i18n.I18nComponentsUtil;
-import util.gui.i18n.I18nMessagesUtil;
+import util.gui.i18n.*;
 
 import java.io.*;
 import java.util.List;
@@ -69,6 +70,9 @@ public class RootController {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+
+        iVideoInfoData.addAll(this.mainApp.getiVideoInfoFxList());
+        videoInfoTable.setItems(iVideoInfoData);
     }
 
     public RootController() {
@@ -82,12 +86,6 @@ public class RootController {
         if (iVideoInfoService.getClientId() != null) {
             clientSecretField.setText(iVideoInfoService.getClientId());
         }
-
-        List<IVideoInfoFx> videoInfoFxList = VideoInfoConverter.
-                convertVideoInfoToVideoInfoFx(iVideoInfoService.getAllVideoInfos());
-
-        iVideoInfoData.addAll(videoInfoFxList);
-        videoInfoTable.setItems(iVideoInfoData);
     }
 
     @FXML
@@ -99,12 +97,12 @@ public class RootController {
 
     @FXML
     private void handleCSV() throws IOException {
-        mainApp.showSaveFiles(FileEnum.CSV, I18nComponentsUtil.getLabelCsv(),I18nComponentsUtil.getLABELCSVFile());
+        mainApp.showSaveFiles(FileEnum.CSV, I18nComponentsUtil.getLabelCsv(), I18nComponentsUtil.getLABELCSVFile(), "");
     }
 
     @FXML
     private void handleHTML() throws IOException {
-        mainApp.showSaveFiles(FileEnum.HTML, I18nComponentsUtil.getLABELHTML(),I18nComponentsUtil.getLABELHTMLFile());
+        mainApp.showSaveFiles(FileEnum.HTML, I18nComponentsUtil.getLABELHTML(), I18nComponentsUtil.getLABELHTMLFile(), "Video Infos");
     }
 
     @FXML
@@ -113,7 +111,6 @@ public class RootController {
             if (FXUtils.isInputValid(videoIdField)) {
                 String clientSecret = clientSecretField.getText();
                 String videoId = videoIdField.getText();
-
                 Task<Void> task = new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
@@ -133,37 +130,38 @@ public class RootController {
                 };
                 Thread thread = new Thread(task);
                 thread.start();
-                //PropertyUtils.writeInPropertyFile(clientSecret);
-                //iVideoInfoService.initClientId();
-                //IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
-                //IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
-                //iVideoInfoService.getVideoInformations(iVideoInfo);
-                //iVideoInfoData.add(iVideoInfoFx);
-                //videoInfoTable.setItems(iVideoInfoData);
+
+                    //PropertyUtils.writeInPropertyFile(clientSecret);
+                    //iVideoInfoService.initClientId();
+                    //IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
+                    //IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
+                    //iVideoInfoService.getVideoInformations(iVideoInfo);
+                    //iVideoInfoData.add(iVideoInfoFx);
+                    //videoInfoTable.setItems(iVideoInfoData);
+                } else{
+                    FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutVideoid(), ButtonType.OK);
+                }
+
             } else {
-                FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutVideoid(), ButtonType.OK);
+                FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutClientid(), ButtonType.OK);
             }
-
-        } else {
-            FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutClientid(), ButtonType.OK);
         }
-    }
 
-    @FXML
-    private void handleExit() {
-        System.exit(0);
-    }
+        @FXML
+        private void handleExit () {
+            System.exit(0);
+        }
 
-    private void initColumn() {
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getChannelTitle());
-        likeColumn.setCellValueFactory(cellData -> cellData.getValue().getLikes());
-        favoritColumn.setCellValueFactory(cellData -> cellData.getValue().getFavorite());
-        descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoDescription());
-        countColumn.setCellValueFactory(cellData -> cellData.getValue().getViewCount());
-        titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle());
-        timeColumn.setCellValueFactory(cellData -> cellData.getValue().getTimestamp());
-        videoIdColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoId());
-        commentCountColumn.setCellValueFactory(cellData -> cellData.getValue().getCommentCount());
-    }
+        private void initColumn () {
+            nameColumn.setCellValueFactory(cellData -> cellData.getValue().getChannelTitle());
+            likeColumn.setCellValueFactory(cellData -> cellData.getValue().getLikes());
+            favoritColumn.setCellValueFactory(cellData -> cellData.getValue().getFavorite());
+            descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoDescription());
+            countColumn.setCellValueFactory(cellData -> cellData.getValue().getViewCount());
+            titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle());
+            timeColumn.setCellValueFactory(cellData -> cellData.getValue().getTimestamp());
+            videoIdColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoId());
+            commentCountColumn.setCellValueFactory(cellData -> cellData.getValue().getCommentCount());
+        }
 
-}
+    }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppPreloader">
+   <children>
+      <ImageView fitHeight="200.0" fitWidth="400.0">
+         <image>
+            <Image url="@../images/cms.jpg" />
+         </image>
+      </ImageView>
+      <Pane prefHeight="200.0" prefWidth="400.0">
+         <children>
+            <ProgressBar fx:id="progressbarId" layoutX="66.0" layoutY="141.0" prefHeight="45.0" prefWidth="262.0" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
