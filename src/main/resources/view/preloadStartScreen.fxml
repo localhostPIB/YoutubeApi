@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ProgressBar?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppPreloader">
    <children>
@@ -14,8 +20,28 @@
       </ImageView>
       <Pane prefHeight="200.0" prefWidth="400.0">
          <children>
-            <ProgressBar fx:id="progressbarId" layoutX="66.0" layoutY="141.0" prefHeight="45.0" prefWidth="262.0" />
+            <MFXProgressBar fx:id="progressbarId" animationSpeed="0.4" layoutY="189.0" prefHeight="14.0" prefWidth="400.0">
+               <cursor>
+                  <Cursor fx:constant="WAIT" />
+               </cursor>
+               <effect>
+                  <Reflection />
+               </effect>
+            </MFXProgressBar>
+            <MFXProgressSpinner layoutX="14.0" layoutY="36.0" prefHeight="23.0" prefWidth="24.0">
+               <color4>
+                  <Color red="0.5428560972213745" green="0.6100000143051147" blue="0.061000000685453415" />
+               </color4>
+            </MFXProgressSpinner>
+            <Text fx:id="loadingTextId" fill="#e3da09" layoutX="52.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%message-loading" wrappingWidth="271.13671875">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Text>
          </children>
+         <cursor>
+            <Cursor fx:constant="WAIT" />
+         </cursor>
       </Pane>
    </children>
 </Pane>

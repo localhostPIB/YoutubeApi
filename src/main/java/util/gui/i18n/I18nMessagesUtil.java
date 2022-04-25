@@ -5,7 +5,8 @@ import java.util.ResourceBundle;
 public class I18nMessagesUtil {
 
     private static final String ERROR_WITHOUT_CLIENTID ="message-error-empty-clientid";
-    private static final String ERROR_WITHOUT_VIDEOID ="message-error-empty-videoid";
+    private static final String ERROR_WITHOUT_VIDEOID  ="message-error-empty-videoid";
+    private static final String MESSAGE_LOADING        ="message-loading";
 
     private static ResourceBundle resourceBundle;
 
@@ -20,5 +21,9 @@ public class I18nMessagesUtil {
 
     public static String getErrorWithoutVideoid(){
         return resourceBundle.getString(ERROR_WITHOUT_VIDEOID);
+    }
+
+    public static String getMessageLoading(){
+        return resourceBundle.getString(MESSAGE_LOADING);
     }
 }

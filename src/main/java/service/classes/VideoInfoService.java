@@ -3,7 +3,6 @@ package service.classes;
 import dao.VideoDaoHibernateImp;
 import model.interfaces.IVideoInfo;
 import service.classes.api.videoInformations.GetYTVideoInformations;
-import service.classes.threading.ServiceThread;
 import service.inferfaces.IVideoInfoService;
 
 import java.io.*;

@@ -2,9 +2,6 @@ package controller;
 
 import javafx.collections.*;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import model.classes.fx.VideoInfoFx;
@@ -12,13 +9,11 @@ import model.interfaces.IVideoInfo;
 import model.interfaces.fx.IVideoInfoFx;
 import service.classes.VideoInfoService;
 import service.inferfaces.IVideoInfoService;
-import util.*;
 import util.converter.VideoInfoConverter;
+import util.*;
 import util.gui.FXUtils;
 import util.gui.i18n.*;
-
 import java.io.*;
-import java.util.List;
 
 /**
  * mvn clean javafx:run
