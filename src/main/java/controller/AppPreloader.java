@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -27,6 +28,7 @@ public class AppPreloader extends Preloader {
         Pane pane = loader.load();
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image("images/cd.png"));
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
 

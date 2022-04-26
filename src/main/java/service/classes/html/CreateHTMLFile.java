@@ -45,6 +45,10 @@ public class CreateHTMLFile {
         xhtmlFile.append("</th>");
 
         xhtmlFile.append("<th>");
+        xhtmlFile.append("Thumbnail:");
+        xhtmlFile.append("</th>");
+
+        xhtmlFile.append("<th>");
         xhtmlFile.append("Time:");
         xhtmlFile.append("</th>");
 
@@ -80,6 +84,12 @@ public class CreateHTMLFile {
             xhtmlFile.append("<tr>");
             xhtmlFile.append("<td>");
             xhtmlFile.append(iVideoInfo.getVideoId());
+            xhtmlFile.append("</td>");
+
+            xhtmlFile.append("<td>");
+            xhtmlFile.append("<img src=");
+            xhtmlFile.append(iVideoInfo.getThumbnailUrl());
+            xhtmlFile.append(">");
             xhtmlFile.append("</td>");
 
             xhtmlFile.append("<td>");

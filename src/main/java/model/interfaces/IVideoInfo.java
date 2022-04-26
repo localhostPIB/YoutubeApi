@@ -16,6 +16,8 @@ public interface IVideoInfo {
 
     void setLikes(BigInteger count);
 
+    void setThumbnailUrl(String thumbnailUrl);
+
     void setVideoDescription(String videoDescription);
 
     void setCommentCount(BigInteger count);
@@ -25,6 +27,8 @@ public interface IVideoInfo {
     void setTitle(String title);
 
     String getTitle();
+
+    String getThumbnailUrl();
 
     String getChannelTitle();
 

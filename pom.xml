@@ -14,6 +14,7 @@
 
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
+        <java.version>17</java.version>
         <maven.compiler.target>14</maven.compiler.target>
         <project.youtube.version>v3-rev182-1.22.0</project.youtube.version>
         <project.youtube.analytics.version>v1-rev63-1.22.0</project.youtube.analytics.version>
@@ -113,6 +114,7 @@
                         <archive>
                             <manifest>
                                 <mainClass>StarterCLI</mainClass>
+                               <!-- <mainClass>controller.Main</mainClass> -->
                             </manifest>
                             <manifestEntries>
                                 <Class-Path>./</Class-Path>

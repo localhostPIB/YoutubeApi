@@ -19,10 +19,10 @@ public class StaticModelFactory {
 
     public static IVideoInfo getVideoInfoObject(String videoId, String timestamp, BigInteger viewCount, BigInteger likes,
                                                 BigInteger commentCount, BigInteger favorite, String title,
-                                                String channelTitle, String videoDescription){
+                                                String channelTitle, String videoDescription, String thumbnailDetails){
 
         IVideoInfo iVideoInfo = new VideoInfo(videoId, timestamp, viewCount, likes,commentCount, favorite,
-                                              title, channelTitle, videoDescription);
+                                              title, channelTitle, videoDescription, thumbnailDetails);
 
         return iVideoInfo;
     }

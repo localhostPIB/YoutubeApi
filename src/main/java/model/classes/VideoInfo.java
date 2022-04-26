@@ -41,6 +41,8 @@ public class VideoInfo implements IVideoInfo {
 
     private BigInteger likes;
 
+    private String thumbnailUrl;
+
     private String videoDescription;
 
     @Column(nullable = false)
@@ -60,7 +62,7 @@ public class VideoInfo implements IVideoInfo {
 
     public VideoInfo(String videoId, String timestamp, BigInteger viewCount, BigInteger likes,
                      BigInteger commentCount, BigInteger favorite, String title,
-                     String channelTitle, String videoDescription){
+                     String channelTitle, String videoDescription, String thumbnailUrl){
 
         this.videoId = videoId;
         this.timestamp = timestamp;
@@ -71,5 +73,6 @@ public class VideoInfo implements IVideoInfo {
         this.title = title;
         this.channelTitle = channelTitle;
         this.videoDescription = videoDescription;
+        this.thumbnailUrl = thumbnailUrl;
     }
 }

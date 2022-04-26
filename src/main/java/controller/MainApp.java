@@ -17,8 +17,7 @@ import util.converter.VideoInfoConverter;
 import util.gui.i18n.I18nUtil;
 
 import java.io.*;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class MainApp extends Application {
     private AnchorPane rootLayout;
@@ -35,13 +34,13 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
+        FileUtils.createDirectory("res");
         this.iVideoInfoService = new VideoInfoService();
         this.iVideoInfoFxList = initVideoInfoList();
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        FileUtils.createDirectory("res");
         this.primaryStage = stage;
         this.primaryStage.setTitle("Youtube Comment Picker Alpha");
         this.primaryStage.getIcons().add(new Image("images/youtube.png"));

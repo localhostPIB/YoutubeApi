@@ -60,10 +60,11 @@ public class GetYTVideoInformations {
         String title            = video.getSnippet().getTitle();
         String channelTitle     = video.getSnippet().getChannelTitle();
         String videoDescription = video.getSnippet().getDescription();
+        String thumbnailDetails = video.getSnippet().getThumbnails().getMedium().getUrl();
 
         IVideoInfo iVideoInfo   = StaticModelFactory.getVideoInfoObject(videoId,StaticModelFactory.getActualDate(),
                                                                       viewCount,likes,comments, favorite,
-                                                                      title, channelTitle, videoDescription);
+                                                                      title, channelTitle, videoDescription, thumbnailDetails);
 
         setIVideoInfo(iVideoInfo);
 
