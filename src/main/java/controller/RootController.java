@@ -4,6 +4,7 @@ import javafx.collections.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import model.classes.fx.VideoInfoFx;
 import model.interfaces.IVideoInfo;
 import model.interfaces.fx.IVideoInfoFx;
@@ -85,9 +86,24 @@ public class RootController {
 
     @FXML
     private void handleRowSelect() throws IOException {
-        IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
-        IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(iVideoInfoFx);
-        mainApp.showVideoInfosLayout(iVideoInfo);
+
+        videoInfoTable.setOnMouseClicked(click -> {
+
+            if (click.getClickCount() == 2) {
+                IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
+                IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(iVideoInfoFx);
+                try {
+                    mainApp.showVideoInfosLayout(iVideoInfo);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if(click.getButton() == MouseButton.SECONDARY){
+                IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
+                //todo
+            }
+        });
     }
 
     @FXML

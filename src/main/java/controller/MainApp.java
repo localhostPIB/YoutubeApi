@@ -102,10 +102,10 @@ public class MainApp extends Application {
 
             VideoInfoController videoInfoController = loader.getController();
             videoInfoController.setMainApp(this);
-            videoInfoController.setDialogStage(dialogStage);
             videoInfoController.setVideoInfo(iVideoInfo);
-            dialogStage.showAndWait();
+            videoInfoController.setDialogStage(dialogStage);
 
+            dialogStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
