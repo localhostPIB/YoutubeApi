@@ -12,6 +12,8 @@ public interface IVideoInfoService {
 
     IVideoInfo callVideoInformations(String videoId) throws GeneralSecurityException, IOException;
 
+    void deleteVideoInfoById(int id);
+
     List<IVideoInfo> getAllVideoInfos();
 
     void initClientId() throws FileNotFoundException;

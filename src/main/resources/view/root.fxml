@@ -5,13 +5,20 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="RootLayout" prefHeight="560.0" prefWidth="1012.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RootController">
     <children>
-        <Text fx:id="labelYTCS" layoutX="103.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%labelYTClient" />
-        <Text fx:id="labelVideoId" layoutX="130.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%labelVideoid" wrappingWidth="50.791015625" />
+      <ImageView fitHeight="569.0" fitWidth="1024.0">
+         <image>
+            <Image url="@../images/film.jpg" />
+         </image>
+      </ImageView>
+        <Text fx:id="labelYTCS" fill="#00eaff" layoutX="107.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%labelYTClient" />
+        <Text fx:id="labelVideoId" fill="#eaffff" layoutX="130.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%labelVideoid" wrappingWidth="50.791015625" />
         <TableView fx:id="videoInfoTable" layoutX="7.0" layoutY="129.0" onMousePressed="#handleRowSelect" prefHeight="380.0" prefWidth="998.0">
             <columns>
                 <TableColumn fx:id="videoIdColumn" prefWidth="75.0" text="%col-video-Id" />

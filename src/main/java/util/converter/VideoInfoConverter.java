@@ -1,5 +1,6 @@
 package util.converter;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import model.classes.*;
 import model.classes.fx.VideoInfoFx;
@@ -12,8 +13,9 @@ import java.util.*;
 
 public class VideoInfoConverter {
 
-    public static IVideoInfoFx convertVideoInfoToVideoInfoFx(IVideoInfo iVideoInfo){
+    public static IVideoInfoFx convertVideoInfoToVideoInfoFx(final IVideoInfo iVideoInfo){
             IVideoInfoFx iVideoInfoFx = new VideoInfoFx();
+            iVideoInfoFx.setId(new SimpleIntegerProperty(iVideoInfo.getId()));
             iVideoInfoFx.setVideoId(new SimpleStringProperty(iVideoInfo.getVideoId()));
             iVideoInfoFx.setVideoDescription(new SimpleStringProperty(iVideoInfo.getVideoDescription()));
             iVideoInfoFx.setChannelTitle(new SimpleStringProperty(iVideoInfo.getChannelTitle()));
@@ -31,7 +33,7 @@ public class VideoInfoConverter {
         return iVideoInfoFx;
     }
 
-    public static List<IVideoInfoFx> convertVideoInfoToVideoInfoFx(List<IVideoInfo> iVideoInfoList){
+    public static List<IVideoInfoFx> convertVideoInfoToVideoInfoFx(final List<IVideoInfo> iVideoInfoList){
         List<IVideoInfoFx> videoInfoFxList = new ArrayList<>();
 
         for(IVideoInfo iVideoInfo :  iVideoInfoList){

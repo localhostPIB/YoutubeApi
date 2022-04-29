@@ -1,9 +1,12 @@
 package model.interfaces.fx;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
 public interface IVideoInfoFx {
     void setVideoId(StringProperty videoId);
+
+    void setId(IntegerProperty id);
 
     void setTimestamp(StringProperty timestamp);
 
@@ -22,6 +25,8 @@ public interface IVideoInfoFx {
     void setFavorite(StringProperty favorite);
 
     StringProperty getVideoId();
+
+    IntegerProperty getId();
 
     StringProperty getTimestamp();
 

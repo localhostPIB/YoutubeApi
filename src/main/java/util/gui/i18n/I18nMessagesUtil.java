@@ -6,7 +6,9 @@ public class I18nMessagesUtil {
 
     private static final String ERROR_WITHOUT_CLIENTID ="message-error-empty-clientid";
     private static final String ERROR_WITHOUT_VIDEOID  ="message-error-empty-videoid";
+
     private static final String MESSAGE_LOADING        ="message-loading";
+    private static final String ERROR_APP_CANT_START   ="message-error-cant-start";
 
     private static ResourceBundle resourceBundle;
 
@@ -17,6 +19,10 @@ public class I18nMessagesUtil {
 
     public static String getErrorWithoutClientid(){
         return resourceBundle.getString(ERROR_WITHOUT_CLIENTID);
+    }
+
+    public static String getErrorAppCantStart(){
+        return resourceBundle.getString(ERROR_APP_CANT_START);
     }
 
     public static String getErrorWithoutVideoid(){

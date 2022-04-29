@@ -6,6 +6,8 @@ import java.math.BigInteger;
 public interface IVideoInfo {
     String getVideoId();
 
+    int getId();
+
     void setVideoId(String VideoId);
 
     void setTimestamp(String timestamp);

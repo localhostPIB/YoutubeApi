@@ -4,6 +4,7 @@ import javafx.collections.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import model.classes.fx.VideoInfoFx;
 import model.interfaces.IVideoInfo;
@@ -14,6 +15,7 @@ import util.converter.VideoInfoConverter;
 import util.*;
 import util.gui.FXUtils;
 import util.gui.i18n.*;
+
 import java.io.*;
 
 /**
@@ -27,6 +29,18 @@ public class RootController {
 
     @FXML
     private TextField clientSecretField;
+
+    @FXML
+    private Button buttonStart;
+
+    @FXML
+    private Button buttonExit;
+
+    @FXML
+    private Button buttonCSV;
+
+    @FXML
+    private Button buttonHTML;
 
     @FXML
     private TextField videoIdField;
@@ -86,24 +100,57 @@ public class RootController {
 
     @FXML
     private void handleRowSelect() throws IOException {
+        ContextMenu contextMenu = new ContextMenu();
 
-        videoInfoTable.setOnMouseClicked(click -> {
+        videoInfoTable.setOnMouseClicked(click-> {
 
             if (click.getClickCount() == 2) {
                 IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
-                IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(iVideoInfoFx);
-                try {
-                    mainApp.showVideoInfosLayout(iVideoInfo);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                openVideoInfo(iVideoInfoFx);
             }
 
-            if(click.getButton() == MouseButton.SECONDARY){
-                IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
-                //todo
+           else if(click.getButton() == MouseButton.SECONDARY){
+                MenuItem menuItemOpen   = new MenuItem(I18nComponentsUtil.getLabelOpen());
+                MenuItem menuItemDelete = new MenuItem(I18nComponentsUtil.getLabelDelete());
+                contextMenu.getItems().add(menuItemOpen);
+                contextMenu.getItems().add(menuItemDelete);
+                menuItemOpen.setOnAction(e -> {
+                    IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
+                    openVideoInfo(iVideoInfoFx);
+                });
+                menuItemDelete.setOnAction(e -> {
+                    IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
+                    deleteVideoInfo(iVideoInfoFx);
+                });
+                videoInfoTable.setContextMenu(contextMenu);
             }
         });
+
+        videoInfoTable.setOnKeyPressed(key -> {
+            if (key.getCode() == KeyCode.ENTER) {
+                IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
+                openVideoInfo(iVideoInfoFx);
+            }
+
+           else if (key.getCode() == KeyCode.DELETE) {
+                IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
+                deleteVideoInfo(iVideoInfoFx);
+            }
+        });
+        }
+
+    private void openVideoInfo(IVideoInfoFx iVideoInfoFx){
+        IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(iVideoInfoFx);
+        try {
+            mainApp.showVideoInfosLayout(iVideoInfo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteVideoInfo(IVideoInfoFx iVideoInfoFx){
+        this.iVideoInfoService.deleteVideoInfoById(iVideoInfoFx.getId().get());
+        this.iVideoInfoData.remove(iVideoInfoFx);
     }
 
     @FXML
@@ -122,6 +169,7 @@ public class RootController {
             if (FXUtils.isInputValid(videoIdField)) {
                 String clientSecret = clientSecretField.getText();
                 String videoId = videoIdField.getText();
+                disableButtons();
                 Task<Void> task = new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
@@ -135,6 +183,8 @@ public class RootController {
                             videoInfoTable.setItems(iVideoInfoData);
                         } catch (Exception e) {
                             e.printStackTrace();
+                        }finally {
+                            enableButtons();
                         }
                         return null;
                     }
@@ -156,6 +206,20 @@ public class RootController {
             } else {
                 FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutClientid(), ButtonType.OK);
             }
+        }
+
+        private void disableButtons(){
+            buttonStart.setDisable(true);
+            buttonHTML.setDisable(true);
+            buttonCSV.setDisable(true);
+            buttonExit.setDisable(true);
+        }
+
+        private void enableButtons(){
+            buttonStart.setDisable(false);
+            buttonHTML.setDisable(false);
+            buttonCSV.setDisable(false);
+            buttonExit.setDisable(false);
         }
 
         @FXML

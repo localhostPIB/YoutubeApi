@@ -30,6 +30,10 @@ public class VideoInfoService implements IVideoInfoService {
        return this.getYTVideoInformations.callYTVideoStatistics(videoId);
     }
 
+    public void deleteVideoInfoById(int id){
+        this.videoDaoHibernateImp.deleteVideoInfoById(id);
+    }
+
     public List<IVideoInfo> getAllVideoInfos(){
        return this.videoDaoHibernateImp.findAllVideoInfos();
     }

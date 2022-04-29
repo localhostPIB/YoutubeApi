@@ -35,6 +35,10 @@ public class I18nComponentsUtil {
 
     private static final String LABEL_CSV                 ="labelCSV";
 
+    private static final String LABEL_OPEN                ="labelOpen";
+
+    private static final String LABEL_DELETE              ="labelDelete";
+
     private static final String LABEL_CSVFile             ="labelCSVFile";
 
     private static final String LABEL_HTML                ="labelHTML";
@@ -67,6 +71,10 @@ public class I18nComponentsUtil {
     public static String getLabelCsv(){
         return resourceBundle.getString(LABEL_CSV);
     }
+
+    public static String getLabelDelete(){ return resourceBundle.getString(LABEL_DELETE); }
+
+    public static String getLabelOpen(){ return resourceBundle.getString(LABEL_OPEN); }
 
     public static String getLABELCSVFile(){
         return resourceBundle.getString(LABEL_CSVFile);
