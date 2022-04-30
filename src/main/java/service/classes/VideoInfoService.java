@@ -1,6 +1,7 @@
 package service.classes;
 
-import dao.VideoDaoHibernateImp;
+import dao.classes.VideoInfoDaoHibernateImp;
+import dao.interfaces.IVideoInfoDaoHibernate;
 import model.interfaces.IVideoInfo;
 import service.classes.api.videoInformations.GetYTVideoInformations;
 import service.inferfaces.IVideoInfoService;
@@ -13,29 +14,29 @@ public class VideoInfoService implements IVideoInfoService {
 
     private final GetYTVideoInformations getYTVideoInformations;
 
-    private final VideoDaoHibernateImp videoDaoHibernateImp;
+    private final IVideoInfoDaoHibernate iVideoInfoDaoHibernate;
 
     public VideoInfoService() {
-        this.videoDaoHibernateImp = new VideoDaoHibernateImp();
-        this.getYTVideoInformations = new GetYTVideoInformations(this.videoDaoHibernateImp);
+        this.iVideoInfoDaoHibernate = new VideoInfoDaoHibernateImp();
+        this.getYTVideoInformations = new GetYTVideoInformations(this.iVideoInfoDaoHibernate);
     }
 
-    public void getVideoInformations(IVideoInfo iVideoInfo) throws GeneralSecurityException, IOException {
+    public void getVideoInformations(final IVideoInfo iVideoInfo) throws GeneralSecurityException, IOException {
        // Runnable runnable = new ServiceThread(iVideoInfo, this.getYTVideoInformations);
        // new Thread(runnable).start();
         this.getYTVideoInformations.getYTVideoStatistics(iVideoInfo);
     }
 
-    public IVideoInfo callVideoInformations(String videoId) throws GeneralSecurityException, IOException {
+    public IVideoInfo callVideoInformations(final String videoId) throws GeneralSecurityException, IOException {
        return this.getYTVideoInformations.callYTVideoStatistics(videoId);
     }
 
-    public void deleteVideoInfoById(int id){
-        this.videoDaoHibernateImp.deleteVideoInfoById(id);
+    public void deleteVideoInfoById(final int id){
+        this.iVideoInfoDaoHibernate.deleteVideoInfoById(id);
     }
 
     public List<IVideoInfo> getAllVideoInfos(){
-       return this.videoDaoHibernateImp.findAllVideoInfos();
+       return this.iVideoInfoDaoHibernate.findAllVideoInfos();
     }
 
     public void initClientId() throws FileNotFoundException {

@@ -2,7 +2,7 @@ package service.classes.api.videoInformations;
 
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;
-import dao.VideoDaoHibernateImp;
+import dao.interfaces.IVideoInfoDaoHibernate;
 import lombok.Getter;
 import model.interfaces.IVideoInfo;
 import service.classes.api.Auth;
@@ -17,13 +17,13 @@ import java.security.GeneralSecurityException;
 public class GetYTVideoInformations {
     private static String CLIENT_SECRET;
 
-    private final VideoDaoHibernateImp videoDaoHibernateImp;
+    private final IVideoInfoDaoHibernate iVideoInfoDaoHibernate;
 
     private IVideoInfo iVideoInfo;
 
 
-    public GetYTVideoInformations(VideoDaoHibernateImp videoDaoHibernateImp){
-        this.videoDaoHibernateImp = videoDaoHibernateImp;
+    public GetYTVideoInformations(IVideoInfoDaoHibernate iVideoInfoDaoHibernate){
+        this.iVideoInfoDaoHibernate = iVideoInfoDaoHibernate;
     }
 
     public void initClientSecret() throws FileNotFoundException {
@@ -80,6 +80,6 @@ public class GetYTVideoInformations {
     }
 
     private void saveVideoInfos(IVideoInfo iVideoInfo){
-        videoDaoHibernateImp.saveVideoInfo(iVideoInfo);
+        iVideoInfoDaoHibernate.saveVideoInfo(iVideoInfo);
     }
 }

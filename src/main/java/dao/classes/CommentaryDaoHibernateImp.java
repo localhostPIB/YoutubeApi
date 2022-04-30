@@ -1,21 +1,23 @@
-package dao;
+package dao.classes;
 
-import model.interfaces.IReply;
+import model.interfaces.ICommentary;
+import model.interfaces.IYoutubeUser;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ReplyDaoHibernateImp {
+public class CommentaryDaoHibernateImp {
 
-    public void saveReply(final IReply iReply) {
+    public void saveCommentary(final ICommentary iCommentary) {
         Session session = null;
 
         try {
             session = HibernateUtils.getSession();
             session.beginTransaction();
-            session.saveOrUpdate(iReply);
+            session.saveOrUpdate(iCommentary);
             session.flush();
             session.getTransaction().commit();
         } catch (Exception ex) {
@@ -25,16 +27,20 @@ public class ReplyDaoHibernateImp {
         }
     }
 
-    public List<IReply> findAllReplies(){
+    public List<ICommentary> findAllYTCommentariesByVideoId(final String videoId){
         Session session = null;
-        List<IReply> replyList  = new ArrayList<>();
+        List<ICommentary> commentaryList  = new ArrayList<>();
 
         try{
             session = HibernateUtils.getSession();
             session.beginTransaction();
-            String queryString ="SELECT r FROM Reply r";
+
+            String queryString ="SELECT c " +
+                                "FROM Commentary c " +
+                                "WHERE c.iVideoInfo.videoId=" +"'"+videoId+"'";
+
             Query query = session.createQuery(queryString);
-            replyList = (List<IReply>) query.getResultList();
+            commentaryList = (List<ICommentary>) query.getResultList();
             session.flush();
             session.getTransaction().commit();
         }catch (Exception ex){
@@ -43,6 +49,7 @@ public class ReplyDaoHibernateImp {
             HibernateUtils.closeSession(session);
         }
 
-        return replyList;
+        return commentaryList;
     }
 }
+

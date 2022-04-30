@@ -114,7 +114,7 @@
                         <archive>
                             <manifest>
                                 <mainClass>StarterCLI</mainClass>
-                               <!-- <mainClass>controller.Main</mainClass> -->
+                               <!-- <mainClass>controller.Main</mainClass> Later ;-) -->
                             </manifest>
                             <manifestEntries>
                                 <Class-Path>./</Class-Path>

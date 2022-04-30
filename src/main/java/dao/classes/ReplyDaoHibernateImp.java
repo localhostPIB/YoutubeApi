@@ -1,26 +1,21 @@
-package dao;
+package dao.classes;
 
-import model.interfaces.IYoutubeUser;
+import model.interfaces.IReply;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
 
 import java.util.*;
 
-public class YTUserDaoHibernateImp {
+public class ReplyDaoHibernateImp {
 
-
-    public YTUserDaoHibernateImp() {
-
-    }
-
-    public void saveUser(final IYoutubeUser iYoutubeUser) {
+    public void saveReply(final IReply iReply) {
         Session session = null;
 
         try {
             session = HibernateUtils.getSession();
             session.beginTransaction();
-            session.saveOrUpdate(iYoutubeUser);
+            session.saveOrUpdate(iReply);
             session.flush();
             session.getTransaction().commit();
         } catch (Exception ex) {
@@ -30,27 +25,16 @@ public class YTUserDaoHibernateImp {
         }
     }
 
-    public List<IYoutubeUser> findAllYTUsersByVideoId(final String videoId){
-        List<IYoutubeUser> userList = new ArrayList<>();
-        findAllYTUsers().forEach(iYoutubeUser -> iYoutubeUser.getIVideoInfoList()
-                        .forEach(i -> {if(videoId.equals(i.getVideoId())){ userList.add(iYoutubeUser);}}));
-
-        return userList;
-    }
-
-    private List<IYoutubeUser> findAllYTUsers(){
+    public List<IReply> findAllReplies(){
         Session session = null;
-        List<IYoutubeUser> userList  = new ArrayList<>();
+        List<IReply> replyList  = new ArrayList<>();
 
         try{
             session = HibernateUtils.getSession();
             session.beginTransaction();
-
-            String queryString ="SELECT yU " +
-                                "FROM YoutubeUser yU";
-
+            String queryString ="SELECT r FROM Reply r";
             Query query = session.createQuery(queryString);
-            userList = (List<IYoutubeUser>) query.getResultList();
+            replyList = (List<IReply>) query.getResultList();
             session.flush();
             session.getTransaction().commit();
         }catch (Exception ex){
@@ -59,6 +43,6 @@ public class YTUserDaoHibernateImp {
             HibernateUtils.closeSession(session);
         }
 
-        return userList;
+        return replyList;
     }
 }

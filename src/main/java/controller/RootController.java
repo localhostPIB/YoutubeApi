@@ -101,45 +101,40 @@ public class RootController {
     @FXML
     private void handleRowSelect() throws IOException {
         ContextMenu contextMenu = new ContextMenu();
-
-        videoInfoTable.setOnMouseClicked(click-> {
-
-            if (click.getClickCount() == 2) {
-                IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
-                openVideoInfo(iVideoInfoFx);
-            }
-
-           else if(click.getButton() == MouseButton.SECONDARY){
-                MenuItem menuItemOpen   = new MenuItem(I18nComponentsUtil.getLabelOpen());
-                MenuItem menuItemDelete = new MenuItem(I18nComponentsUtil.getLabelDelete());
-                contextMenu.getItems().add(menuItemOpen);
-                contextMenu.getItems().add(menuItemDelete);
-                menuItemOpen.setOnAction(e -> {
-                    IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
+        IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
+        videoInfoTable.setOnMouseClicked(click -> {
+            if (iVideoInfoFx != null) {
+                if (click.getClickCount() == 2) {
                     openVideoInfo(iVideoInfoFx);
-                });
-                menuItemDelete.setOnAction(e -> {
-                    IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
-                    deleteVideoInfo(iVideoInfoFx);
-                });
-                videoInfoTable.setContextMenu(contextMenu);
-            }
+                } else if (click.getButton() == MouseButton.SECONDARY) {
+                    MenuItem menuItemOpen = new MenuItem(I18nComponentsUtil.getLabelOpen());
+                    MenuItem menuItemDelete = new MenuItem(I18nComponentsUtil.getLabelDelete());
+                    contextMenu.getItems().add(menuItemOpen);
+                    contextMenu.getItems().add(menuItemDelete);
+
+                        menuItemOpen.setOnAction(e -> {
+                            openVideoInfo(iVideoInfoFx);
+                        });
+                        menuItemDelete.setOnAction(e -> {
+                            deleteVideoInfo(iVideoInfoFx);
+                        });
+                        videoInfoTable.setContextMenu(contextMenu);
+                    }
+                }
         });
 
         videoInfoTable.setOnKeyPressed(key -> {
-            if (key.getCode() == KeyCode.ENTER) {
-                IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
-                openVideoInfo(iVideoInfoFx);
-            }
-
-           else if (key.getCode() == KeyCode.DELETE) {
-                IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
-                deleteVideoInfo(iVideoInfoFx);
+            if (iVideoInfoFx != null) {
+                if (key.getCode() == KeyCode.ENTER) {
+                    openVideoInfo(iVideoInfoFx);
+                } else if (key.getCode() == KeyCode.DELETE) {
+                    deleteVideoInfo(iVideoInfoFx);
+                }
             }
         });
-        }
+    }
 
-    private void openVideoInfo(IVideoInfoFx iVideoInfoFx){
+    private void openVideoInfo(IVideoInfoFx iVideoInfoFx) {
         IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(iVideoInfoFx);
         try {
             mainApp.showVideoInfosLayout(iVideoInfo);
@@ -148,7 +143,7 @@ public class RootController {
         }
     }
 
-    private void deleteVideoInfo(IVideoInfoFx iVideoInfoFx){
+    private void deleteVideoInfo(IVideoInfoFx iVideoInfoFx) {
         this.iVideoInfoService.deleteVideoInfoById(iVideoInfoFx.getId().get());
         this.iVideoInfoData.remove(iVideoInfoFx);
     }
@@ -183,7 +178,7 @@ public class RootController {
                             videoInfoTable.setItems(iVideoInfoData);
                         } catch (Exception e) {
                             e.printStackTrace();
-                        }finally {
+                        } finally {
                             enableButtons();
                         }
                         return null;
@@ -192,51 +187,51 @@ public class RootController {
                 Thread thread = new Thread(task);
                 thread.start();
 
-                    //PropertyUtils.writeInPropertyFile(clientSecret);
-                    //iVideoInfoService.initClientId();
-                    //IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
-                    //IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
-                    //iVideoInfoService.getVideoInformations(iVideoInfo);
-                    //iVideoInfoData.add(iVideoInfoFx);
-                    //videoInfoTable.setItems(iVideoInfoData);
-                } else{
-                    FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutVideoid(), ButtonType.OK);
-                }
-
+                //PropertyUtils.writeInPropertyFile(clientSecret);
+                //iVideoInfoService.initClientId();
+                //IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
+                //IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
+                //iVideoInfoService.getVideoInformations(iVideoInfo);
+                //iVideoInfoData.add(iVideoInfoFx);
+                //videoInfoTable.setItems(iVideoInfoData);
             } else {
-                FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutClientid(), ButtonType.OK);
+                FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutVideoid(), ButtonType.OK);
             }
-        }
 
-        private void disableButtons(){
-            buttonStart.setDisable(true);
-            buttonHTML.setDisable(true);
-            buttonCSV.setDisable(true);
-            buttonExit.setDisable(true);
+        } else {
+            FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutClientid(), ButtonType.OK);
         }
-
-        private void enableButtons(){
-            buttonStart.setDisable(false);
-            buttonHTML.setDisable(false);
-            buttonCSV.setDisable(false);
-            buttonExit.setDisable(false);
-        }
-
-        @FXML
-        private void handleExit () {
-            System.exit(0);
-        }
-
-        private void initColumn () {
-            nameColumn.setCellValueFactory(cellData -> cellData.getValue().getChannelTitle());
-            likeColumn.setCellValueFactory(cellData -> cellData.getValue().getLikes());
-            favoritColumn.setCellValueFactory(cellData -> cellData.getValue().getFavorite());
-            descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoDescription());
-            countColumn.setCellValueFactory(cellData -> cellData.getValue().getViewCount());
-            titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle());
-            timeColumn.setCellValueFactory(cellData -> cellData.getValue().getTimestamp());
-            videoIdColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoId());
-            commentCountColumn.setCellValueFactory(cellData -> cellData.getValue().getCommentCount());
-        }
-
     }
+
+    private void disableButtons() {
+        buttonStart.setDisable(true);
+        buttonHTML.setDisable(true);
+        buttonCSV.setDisable(true);
+        buttonExit.setDisable(true);
+    }
+
+    private void enableButtons() {
+        buttonStart.setDisable(false);
+        buttonHTML.setDisable(false);
+        buttonCSV.setDisable(false);
+        buttonExit.setDisable(false);
+    }
+
+    @FXML
+    private void handleExit() {
+        System.exit(0);
+    }
+
+    private void initColumn() {
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getChannelTitle());
+        likeColumn.setCellValueFactory(cellData -> cellData.getValue().getLikes());
+        favoritColumn.setCellValueFactory(cellData -> cellData.getValue().getFavorite());
+        descriptionColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoDescription());
+        countColumn.setCellValueFactory(cellData -> cellData.getValue().getViewCount());
+        titleColumn.setCellValueFactory(cellData -> cellData.getValue().getTitle());
+        timeColumn.setCellValueFactory(cellData -> cellData.getValue().getTimestamp());
+        videoIdColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoId());
+        commentCountColumn.setCellValueFactory(cellData -> cellData.getValue().getCommentCount());
+    }
+
+}

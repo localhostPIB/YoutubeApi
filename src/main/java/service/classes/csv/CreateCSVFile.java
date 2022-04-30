@@ -1,6 +1,8 @@
 package service.classes.csv;
 
-import dao.*;
+import dao.classes.CommentaryDaoHibernateImp;
+import dao.classes.VideoInfoDaoHibernateImp;
+import dao.classes.YTUserDaoHibernateImp;
 import util.*;
 import java.io.*;
 import org.apache.commons.csv.*;
@@ -29,7 +31,7 @@ public class CreateCSVFile {
         try (CSVPrinter printer = new CSVPrinter(fileWriter, csvFileFormat)) {
 
             printer.printRecord(FILE_HEADER_VIDEOINFO);
-            VideoDaoHibernateImp videoDaoHibernateImp = new VideoDaoHibernateImp();
+            VideoInfoDaoHibernateImp videoDaoHibernateImp = new VideoInfoDaoHibernateImp();
             videoDaoHibernateImp.findAllVideoInfos().forEach((iVideoInfo) -> {
                 try {
                     printer.printRecord(iVideoInfo.toString());

@@ -1,6 +1,6 @@
 package service.classes.html;
 
-import dao.VideoDaoHibernateImp;
+import dao.classes.VideoInfoDaoHibernateImp;
 import model.interfaces.IVideoInfo;
 
 import java.io.File;
@@ -11,10 +11,10 @@ import java.util.List;
 
 public class CreateHTMLFile {
 
-    private VideoDaoHibernateImp videoDaoHibernateImp;
+    private VideoInfoDaoHibernateImp videoDaoHibernateImp;
 
     public CreateHTMLFile() {
-        this.videoDaoHibernateImp = new VideoDaoHibernateImp();
+        this.videoDaoHibernateImp = new VideoInfoDaoHibernateImp();
     }
 
     private String arrayListToXHTMLFile(final List<IVideoInfo> iVideoInfoList, final String docName) {

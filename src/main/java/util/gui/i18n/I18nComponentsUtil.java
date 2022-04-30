@@ -37,6 +37,14 @@ public class I18nComponentsUtil {
 
     private static final String LABEL_OPEN                ="labelOpen";
 
+    private static final String BUTTON_LOADVIDEO          ="labelLoadVideo";
+
+    private static final String BUTTON_CANCEL             ="labelCancel";
+
+    private static final String COLUMN_USER               ="col-user";
+
+    private static final String COLUMN_COMMENT            ="col-comment";
+
     private static final String LABEL_DELETE              ="labelDelete";
 
     private static final String LABEL_CSVFile             ="labelCSVFile";
@@ -67,6 +75,23 @@ public class I18nComponentsUtil {
     public static String getButtonHtml(){
         return resourceBundle.getString(BUTTON_HTML);
     }
+
+    public static String getButtonCancel(){
+        return resourceBundle.getString(BUTTON_CANCEL);
+    }
+
+    public static String getButtonLoadvideo(){
+        return resourceBundle.getString(BUTTON_LOADVIDEO);
+    }
+
+    public static String getColumnUser(){
+        return resourceBundle.getString(COLUMN_USER);
+    }
+
+    public static String getColumnComment(){
+        return resourceBundle.getString(COLUMN_COMMENT);
+    }
+
 
     public static String getLabelCsv(){
         return resourceBundle.getString(LABEL_CSV);

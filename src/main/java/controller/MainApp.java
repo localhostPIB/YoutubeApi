@@ -90,12 +90,14 @@ public class MainApp extends Application {
     public void showVideoInfosLayout(IVideoInfo iVideoInfo) throws IOException{
         try {
             FXMLLoader loader = new FXMLLoader();
+            ResourceBundle bundle = I18nUtil.getComponentsResourceBundle();
             loader.setLocation(getClass().getResource("/view/videoInfos.fxml"));
+            loader.setResources(bundle);
             Pane page = loader.load();
             Stage dialogStage = new Stage();
             Scene scene = new Scene(page);
 
-            dialogStage.setTitle("Video");
+            dialogStage.setTitle(iVideoInfo.getTitle());
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             dialogStage.initOwner(primaryStage);
             dialogStage.setScene(scene);

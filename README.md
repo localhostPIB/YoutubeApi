@@ -31,9 +31,10 @@ can be downloaded (from Maven) before starting the program.
 ## Hint
 The logos are from [Pixabay](https://pixabay.com/).
 * [Icon MainFrame](https://pixabay.com/de/vectors/youtube-logo-grafik-rot-1837872/)
-* [CD Frame](https://pixabay.com/de/vectors/cd-computer-scheibe-gerettet-1169624/)
+* [CD Icon](https://pixabay.com/de/vectors/cd-computer-scheibe-gerettet-1169624/)
 * [Loadscreen](https://pixabay.com/de/photos/cms-wordpress-265128/)
 * [Root-Screen](https://pixabay.com/de/vectors/film-kino-video-motion-picture-158157/)
+* [VideoInfo Frame](https://pixabay.com/de/vectors/rahmen-schwarz-wei%c3%9f-film-1662287/)
 
 ## System-Requirements
 * ![Java 17](https://img.shields.io/badge/Java-17-green.svg) / ![](https://img.shields.io/badge/Java%20JDK-1.8-green)/ ![](https://img.shields.io/badge/Maven-3.8.4-green.svg)

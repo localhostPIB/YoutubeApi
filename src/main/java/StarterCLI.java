@@ -1,8 +1,11 @@
+import dao.classes.CommentaryDaoHibernateImp;
+import dao.classes.ReplyDaoHibernateImp;
+import dao.classes.VideoInfoDaoHibernateImp;
+import dao.classes.YTUserDaoHibernateImp;
 import service.classes.api.videoInformations.GetYTCommentaries;
 import service.classes.api.videoInformations.GetYTVideoInformations;
 import util.validator.StringValidator;
 import service.classes.csv.CreateCSVFile;
-import dao.*;
 import util.*;
 
 @Deprecated
@@ -21,7 +24,7 @@ public class StarterCLI {
                 PropertyUtils.writeInPropertyFile(args[1]);
             }
 
-            GetYTVideoInformations getYTVideoInformations = new GetYTVideoInformations(new VideoDaoHibernateImp());
+            GetYTVideoInformations getYTVideoInformations = new GetYTVideoInformations(new VideoInfoDaoHibernateImp());
             getYTVideoInformations.initClientSecret();
             getYTVideoInformations.callYTVideoStatistics(args[0]);
 

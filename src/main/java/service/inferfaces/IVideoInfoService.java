@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface IVideoInfoService {
 
-    void getVideoInformations(IVideoInfo iVideoInfo) throws GeneralSecurityException, IOException;
+    void getVideoInformations(final IVideoInfo iVideoInfo) throws GeneralSecurityException, IOException;
 
-    IVideoInfo callVideoInformations(String videoId) throws GeneralSecurityException, IOException;
+    IVideoInfo callVideoInformations(final String videoId) throws GeneralSecurityException, IOException;
 
-    void deleteVideoInfoById(int id);
+    void deleteVideoInfoById(final int id);
 
     List<IVideoInfo> getAllVideoInfos();
 
