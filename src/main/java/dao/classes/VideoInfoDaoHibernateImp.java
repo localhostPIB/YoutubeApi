@@ -57,11 +57,11 @@ public class VideoInfoDaoHibernateImp implements IVideoInfoDaoHibernate {
             try {
                 session = HibernateUtils.getSession();
                 session.beginTransaction();
-                IVideoInfo iBand = (IVideoInfo) session.get(VideoInfo.class, id);
+                IVideoInfo iVideoInfo = (IVideoInfo) session.get(VideoInfo.class, id);
                 session.flush();
                 session.getTransaction().commit();
 
-                return iBand;
+                return iVideoInfo;
             } catch (Exception ex) {
                 ex.fillInStackTrace();
             } finally {

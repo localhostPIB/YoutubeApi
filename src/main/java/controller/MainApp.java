@@ -2,6 +2,7 @@ package controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -27,6 +28,8 @@ public class MainApp extends Application {
     private IVideoInfoService iVideoInfoService;
 
     private Stage primaryStage;
+
+    private Stage loadStage;
 
     public MainApp(){
 
@@ -111,6 +114,29 @@ public class MainApp extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showLoadScreen() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        ResourceBundle bundle = I18nUtil.getMessagesResourceBundle();
+        loader.setLocation(getClass().getResource("/view/loadScreen.fxml"));
+        loader.setResources(bundle);
+        this.loadStage = new Stage();
+
+        Pane page = loader.load();
+        Scene scene = new Scene(page);
+
+        this.loadStage.initStyle(StageStyle.TRANSPARENT);
+        this.loadStage.setAlwaysOnTop(true);
+        this.loadStage.initOwner(primaryStage);
+        this.loadStage.setScene(scene);
+
+        this.loadStage.show();
+    }
+
+    public void hideLoadScreen(){
+
+        this.loadStage.close();
     }
 
     public List<IVideoInfoFx> initVideoInfoList(){

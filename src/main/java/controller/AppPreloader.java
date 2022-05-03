@@ -2,21 +2,16 @@ package controller;
 
 import javafx.application.Preloader.StateChangeNotification.Type;
 import javafx.application.Preloader;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
 import util.gui.FXUtils;
-import util.gui.i18n.I18nMessagesUtil;
-import util.gui.i18n.I18nUtil;
-
+import util.gui.i18n.*;
 import java.util.ResourceBundle;
+
 
 public class AppPreloader extends Preloader {
 

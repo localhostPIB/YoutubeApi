@@ -165,6 +165,7 @@ public class RootController {
                 String clientSecret = clientSecretField.getText();
                 String videoId = videoIdField.getText();
                 disableButtons();
+
                 Task<Void> task = new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
@@ -172,8 +173,8 @@ public class RootController {
                             PropertyUtils.writeInPropertyFile(clientSecret);
                             iVideoInfoService.initClientId();
                             IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
-                            IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
                             iVideoInfoService.getVideoInformations(iVideoInfo);
+                            IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
                             iVideoInfoData.add(iVideoInfoFx);
                             videoInfoTable.setItems(iVideoInfoData);
                         } catch (Exception e) {
@@ -184,16 +185,13 @@ public class RootController {
                         return null;
                     }
                 };
-                Thread thread = new Thread(task);
-                thread.start();
 
-                //PropertyUtils.writeInPropertyFile(clientSecret);
-                //iVideoInfoService.initClientId();
-                //IVideoInfo iVideoInfo = iVideoInfoService.callVideoInformations(videoId);
-                //IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
-                //iVideoInfoService.getVideoInformations(iVideoInfo);
-                //iVideoInfoData.add(iVideoInfoFx);
-                //videoInfoTable.setItems(iVideoInfoData);
+                task.setOnSucceeded(e -> {
+                    hideLoadScreen();
+                });
+
+                new Thread(task).start();
+                loadScreen();
             } else {
                 FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutVideoid(), ButtonType.OK);
             }
@@ -201,6 +199,14 @@ public class RootController {
         } else {
             FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutClientid(), ButtonType.OK);
         }
+    }
+
+    private void loadScreen() throws IOException {
+       mainApp.showLoadScreen();
+    }
+
+    private void hideLoadScreen(){
+        mainApp.hideLoadScreen();
     }
 
     private void disableButtons() {
