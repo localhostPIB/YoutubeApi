@@ -25,6 +25,7 @@ can be downloaded (from Maven) before starting the program.
 * [OAuth 2.0 for Google-API](https://developers.google.com/identity/protocols/oauth2)
 * [YouTube Data V3 support](https://developers.google.com/resources/api-libraries/documentation/youtube/v3/java/latest/com/google/api/services/youtube/YouTube.html)
 * [Apache Commons CSV](https://commons.apache.org/proper/commons-csv/)
+* [Apache PDFBox](https://pdfbox.apache.org)
 * [OpenjFX](https://openjfx.io/)
 * [MaterialFX](https://github.com/palexdev/MaterialFX/)
 

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,6 +15,12 @@
          <image>
             <Image url="@../images/earth.jpg" />
          </image>
+         <cursor>
+            <Cursor fx:constant="WAIT" />
+         </cursor>
+         <effect>
+            <Bloom threshold="0.71" />
+         </effect>
       </ImageView>
       <ProgressIndicator layoutX="14.0" layoutY="73.0" prefHeight="114.0" prefWidth="185.0" />
       <Text fill="#fcf8f8" layoutX="70.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%message-loading" wrappingWidth="208.734375">

@@ -2,7 +2,6 @@ package controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -12,6 +11,7 @@ import model.interfaces.fx.IVideoInfoFx;
 import service.classes.VideoInfoService;
 import service.classes.csv.CreateCSVFile;
 import service.classes.html.CreateHTMLFile;
+import service.classes.pdf.CreatePDFFile;
 import service.inferfaces.IVideoInfoService;
 import util.*;
 import util.converter.VideoInfoConverter;
@@ -31,25 +31,33 @@ public class MainApp extends Application {
 
     private Stage loadStage;
 
-    public MainApp(){
+    public MainApp() {
 
     }
 
     @Override
     public void init() throws Exception {
-        FileUtils.createDirectory("res");
-        this.iVideoInfoService = new VideoInfoService();
-        this.iVideoInfoFxList = initVideoInfoList();
+        try {
+            FileUtils.createDirectory("res");
+            this.iVideoInfoService = new VideoInfoService();
+            this.iVideoInfoFxList = initVideoInfoList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        this.primaryStage = stage;
-        this.primaryStage.setTitle("Youtube Comment Picker Alpha");
-        this.primaryStage.getIcons().add(new Image("images/youtube.png"));
-        this.primaryStage.setResizable(false);
+        try {
+            this.primaryStage = stage;
+            this.primaryStage.setTitle("Youtube Comment Picker Alpha");
+            this.primaryStage.getIcons().add(new Image("images/youtube.png"));
+            this.primaryStage.setResizable(false);
 
-        initRootLayout();
+            initRootLayout();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void initRootLayout() throws IOException {
@@ -67,30 +75,37 @@ public class MainApp extends Application {
             rootController.setMainApp(this);
 
             primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
     }
 
-    public void showSaveFiles(final FileEnum fileEnum, final String i18n0,final String i18n1, final String docName) throws IOException {
-        final FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(i18n0);
-        fileChooser.getExtensionFilters()
-                   .add(new FileChooser.ExtensionFilter(i18n1, "*."+fileEnum.toString().toLowerCase()));
-        File file = fileChooser.showSaveDialog(primaryStage);
+    public void showSaveFiles(final FileEnum fileEnum, final String i18n0, final String i18n1, final String docName) throws IOException {
+        try {
+            final FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle(i18n0);
+            fileChooser.getExtensionFilters()
+                    .add(new FileChooser.ExtensionFilter(i18n1, "*." + fileEnum.toString().toLowerCase()));
+            File file = fileChooser.showSaveDialog(primaryStage);
 
-        if(file != null){
-            if(fileEnum.equals(FileEnum.CSV)) {
-                CreateCSVFile createCSVFile = new CreateCSVFile();
-                createCSVFile.createCSVVideoInfos(file);
-            }else if(fileEnum.equals(FileEnum.HTML)){
-                CreateHTMLFile createHTMLFile = new CreateHTMLFile();
-                createHTMLFile.writeHTMLFile(file, docName);
+            if (file != null) {
+                if (fileEnum.equals(FileEnum.CSV)) {
+                    CreateCSVFile createCSVFile = new CreateCSVFile();
+                    createCSVFile.createCSVVideoInfos(file);
+                } else if (fileEnum.equals(FileEnum.HTML)) {
+                    CreateHTMLFile createHTMLFile = new CreateHTMLFile();
+                    createHTMLFile.writeHTMLFile(file, docName);
+                } else if (fileEnum.equals(FileEnum.PDF)) {
+                    CreatePDFFile createPDFFile = new CreatePDFFile();
+                    createPDFFile.writePDFFile(file);
+                }
             }
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
     }
 
-    public void showVideoInfosLayout(IVideoInfo iVideoInfo) throws IOException{
+    public void showVideoInfosLayout(IVideoInfo iVideoInfo) throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
             ResourceBundle bundle = I18nUtil.getComponentsResourceBundle();
@@ -117,29 +132,33 @@ public class MainApp extends Application {
     }
 
     public void showLoadScreen() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        ResourceBundle bundle = I18nUtil.getMessagesResourceBundle();
-        loader.setLocation(getClass().getResource("/view/loadScreen.fxml"));
-        loader.setResources(bundle);
-        this.loadStage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            ResourceBundle bundle = I18nUtil.getMessagesResourceBundle();
+            loader.setLocation(getClass().getResource("/view/loadScreen.fxml"));
+            loader.setResources(bundle);
+            this.loadStage = new Stage();
 
-        Pane page = loader.load();
-        Scene scene = new Scene(page);
+            Pane page = loader.load();
+            Scene scene = new Scene(page);
 
-        this.loadStage.initStyle(StageStyle.TRANSPARENT);
-        this.loadStage.setAlwaysOnTop(true);
-        this.loadStage.initOwner(primaryStage);
-        this.loadStage.setScene(scene);
+            this.loadStage.initStyle(StageStyle.TRANSPARENT);
+            this.loadStage.setAlwaysOnTop(true);
+            this.loadStage.initOwner(primaryStage);
+            this.loadStage.setScene(scene);
 
-        this.loadStage.show();
+            this.loadStage.show();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
     }
 
-    public void hideLoadScreen(){
+    public void hideLoadScreen() {
 
         this.loadStage.close();
     }
 
-    public List<IVideoInfoFx> initVideoInfoList(){
+    public List<IVideoInfoFx> initVideoInfoList() {
         List<IVideoInfo> iVideoInfoList = iVideoInfoService.getAllVideoInfos();
 
         return VideoInfoConverter.

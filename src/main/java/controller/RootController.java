@@ -159,6 +159,11 @@ public class RootController {
     }
 
     @FXML
+    private void handlePDF() throws IOException {
+        mainApp.showSaveFiles(FileEnum.PDF, I18nComponentsUtil.getLabelPDF(), I18nComponentsUtil.getLABELPDFFile(), "Video Infos");
+    }
+
+    @FXML
     private void handleStart() throws Exception {
         if (FXUtils.isInputValid(clientSecretField)) {
             if (FXUtils.isInputValid(videoIdField)) {

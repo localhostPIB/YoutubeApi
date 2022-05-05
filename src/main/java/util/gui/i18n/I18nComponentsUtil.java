@@ -11,6 +11,8 @@ public class I18nComponentsUtil {
 
     private static final String BUTTON_CSV                ="button-csv";
 
+    private static final String BUTTON_PDF                ="button-pdf";
+
     private static final String BUTTON_HTML               ="button-html";
 
     private static final String COLUMN_TIME               ="timeColumn";
@@ -35,6 +37,8 @@ public class I18nComponentsUtil {
 
     private static final String LABEL_CSV                 ="labelCSV";
 
+    private static final String LABEL_PDF                 ="labelPDF";
+
     private static final String LABEL_OPEN                ="labelOpen";
 
     private static final String BUTTON_LOADVIDEO          ="labelLoadVideo";
@@ -53,6 +57,8 @@ public class I18nComponentsUtil {
 
     private static final String LABEL_HTMLFile            ="labelHTMLFile";
 
+    private static final String LABEL_PDFFile            ="labelPDFFile";
+
     private static final String LABEL_VIDEOID             ="labelVideoId";
 
     private static final String LABEL_NA                  ="label-nA";
@@ -70,6 +76,10 @@ public class I18nComponentsUtil {
 
     public static String getButtonCsv(){
         return resourceBundle.getString(BUTTON_CSV);
+    }
+
+    public static String getButtonPdf(){
+        return resourceBundle.getString(BUTTON_PDF);
     }
 
     public static String getButtonHtml(){
@@ -92,9 +102,12 @@ public class I18nComponentsUtil {
         return resourceBundle.getString(COLUMN_COMMENT);
     }
 
-
     public static String getLabelCsv(){
         return resourceBundle.getString(LABEL_CSV);
+    }
+
+    public static String getLabelPDF(){
+        return resourceBundle.getString(LABEL_PDF);
     }
 
     public static String getLabelDelete(){ return resourceBundle.getString(LABEL_DELETE); }
@@ -107,6 +120,10 @@ public class I18nComponentsUtil {
 
     public static String getLABELHTMLFile(){
         return resourceBundle.getString(LABEL_HTMLFile);
+    }
+
+    public static String getLABELPDFFile(){
+        return resourceBundle.getString(LABEL_PDFFile);
     }
 
     public static String getLABELHTML(){

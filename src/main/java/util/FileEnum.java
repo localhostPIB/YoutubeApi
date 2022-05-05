@@ -2,5 +2,6 @@ package util;
 
 public enum FileEnum {
     CSV,
-    HTML
+    HTML,
+    PDF
 }

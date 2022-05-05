@@ -43,6 +43,7 @@
         <project.openjfx.fxml>18</project.openjfx.fxml>
         <project.openjfx.web>18</project.openjfx.web>
         <project.materialFX.version>11.13.5</project.materialFX.version>
+        <project.pfdBox.version>2.0.26</project.pfdBox.version>
         <project.target>1.8</project.target>
         <project.source>1.8</project.source>
     </properties>
@@ -187,6 +188,13 @@
             <groupId>io.github.palexdev</groupId>
             <artifactId>materialfx</artifactId>
             <version>${project.materialFX.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>${project.pfdBox.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->

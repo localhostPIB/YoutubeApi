@@ -41,5 +41,6 @@
         <MFXTextField fx:id="videoIdField" layoutX="215.0" layoutY="74.0" prefHeight="16.0" prefWidth="270.0" promptText=" FVFGFY5YmBI" />
         <MFXButton fx:id="buttonCSV" buttonType="RAISED" layoutX="22.0" layoutY="521.0" onAction="#handleCSV" text="%button-csv" textFill="#07f5bc" />
         <MFXButton fx:id="buttonHTML" buttonType="RAISED" layoutX="208.0" layoutY="521.0" onAction="#handleHTML" text="%button-html" textFill="#453ec9" />
+      <MFXButton fx:id="buttonPDF" buttonType="RAISED" layoutX="425.0" layoutY="521.0" onAction="#handlePDF" text="%button-pdf" textFill="#c73e9c" />
     </children>
 </AnchorPane>
