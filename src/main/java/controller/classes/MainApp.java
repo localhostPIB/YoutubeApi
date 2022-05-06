@@ -1,5 +1,6 @@
-package controller;
+package controller.classes;
 
+import controller.interfaces.IMainApp;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,9 +10,6 @@ import javafx.stage.*;
 import model.interfaces.IVideoInfo;
 import model.interfaces.fx.IVideoInfoFx;
 import service.classes.VideoInfoService;
-import service.classes.csv.CreateCSVFile;
-import service.classes.html.CreateHTMLFile;
-import service.classes.pdf.CreatePDFFile;
 import service.inferfaces.IVideoInfoService;
 import util.*;
 import util.converter.VideoInfoConverter;
@@ -20,7 +18,7 @@ import util.gui.i18n.I18nUtil;
 import java.io.*;
 import java.util.*;
 
-public class MainApp extends Application {
+public class MainApp extends Application implements IMainApp {
     private AnchorPane rootLayout;
 
     private List<IVideoInfoFx> iVideoInfoFxList;
@@ -42,7 +40,7 @@ public class MainApp extends Application {
             this.iVideoInfoService = new VideoInfoService();
             this.iVideoInfoFxList = initVideoInfoList();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception(e);
         }
     }
 
@@ -76,11 +74,11 @@ public class MainApp extends Application {
 
             primaryStage.show();
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+            throw new IOException(ioException);
         }
     }
 
-    public void showSaveFiles(final FileEnum fileEnum, final String i18n0, final String i18n1, final String docName) throws IOException {
+    public void showSaveFiles(final FileEnum fileEnum, final String i18n0, final String i18n1, final String docName) throws Exception {
         try {
             final FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle(i18n0);
@@ -90,18 +88,17 @@ public class MainApp extends Application {
 
             if (file != null) {
                 if (fileEnum.equals(FileEnum.CSV)) {
-                    CreateCSVFile createCSVFile = new CreateCSVFile();
-                    createCSVFile.createCSVVideoInfos(file);
+                    iVideoInfoService.createVideoInfosAsCSV(file);
                 } else if (fileEnum.equals(FileEnum.HTML)) {
-                    CreateHTMLFile createHTMLFile = new CreateHTMLFile();
-                    createHTMLFile.writeHTMLFile(file, docName);
+                    iVideoInfoService.createVideoInfosAsHTML(file, docName);
                 } else if (fileEnum.equals(FileEnum.PDF)) {
-                    CreatePDFFile createPDFFile = new CreatePDFFile();
-                    createPDFFile.writePDFFile(file);
+                    iVideoInfoService.createVideoInfosAsPDF(file, docName);
                 }
             }
         } catch (IOException ioException) {
             ioException.printStackTrace();
+        } catch (Exception e) {
+            throw new Exception(e);
         }
     }
 
@@ -119,7 +116,7 @@ public class MainApp extends Application {
             dialogStage.initModality(Modality.APPLICATION_MODAL);
             dialogStage.initOwner(primaryStage);
             dialogStage.setScene(scene);
-
+            dialogStage.getIcons().add(new Image("images/videocassette.png"));
             VideoInfoController videoInfoController = loader.getController();
             videoInfoController.setMainApp(this);
             videoInfoController.setVideoInfo(iVideoInfo);
@@ -127,7 +124,7 @@ public class MainApp extends Application {
 
             dialogStage.showAndWait();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOException(e);
         }
     }
 
@@ -149,7 +146,7 @@ public class MainApp extends Application {
 
             this.loadStage.show();
         } catch (IOException ioException) {
-            ioException.printStackTrace();
+           throw new IOException(ioException);
         }
     }
 
@@ -158,7 +155,7 @@ public class MainApp extends Application {
         this.loadStage.close();
     }
 
-    public List<IVideoInfoFx> initVideoInfoList() {
+    public List<IVideoInfoFx> initVideoInfoList() throws Exception {
         List<IVideoInfo> iVideoInfoList = iVideoInfoService.getAllVideoInfos();
 
         return VideoInfoConverter.

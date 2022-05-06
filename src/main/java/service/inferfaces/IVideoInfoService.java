@@ -8,13 +8,19 @@ import java.util.List;
 
 public interface IVideoInfoService {
 
-    void getVideoInformations(final IVideoInfo iVideoInfo) throws GeneralSecurityException, IOException;
+    void getVideoInformations(final IVideoInfo iVideoInfo) throws Exception;
 
     IVideoInfo callVideoInformations(final String videoId) throws GeneralSecurityException, IOException;
 
-    void deleteVideoInfoById(final int id);
+    void deleteVideoInfoById(final int id) throws Exception;
 
-    List<IVideoInfo> getAllVideoInfos();
+    void createVideoInfosAsCSV(final File file) throws Exception;
+
+    void createVideoInfosAsHTML(final File file, String docName) throws IOException;
+
+    void createVideoInfosAsPDF(final File file, String docName) throws IOException;
+
+    List<IVideoInfo> getAllVideoInfos() throws Exception;
 
     void initClientId() throws FileNotFoundException;
 

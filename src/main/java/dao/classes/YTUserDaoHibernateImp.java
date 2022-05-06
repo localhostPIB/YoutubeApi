@@ -14,7 +14,7 @@ public class YTUserDaoHibernateImp {
 
     }
 
-    public void saveUser(final IYoutubeUser iYoutubeUser) {
+    public void saveUser(final IYoutubeUser iYoutubeUser) throws Exception {
         Session session = null;
 
         try {
@@ -24,21 +24,29 @@ public class YTUserDaoHibernateImp {
             session.flush();
             session.getTransaction().commit();
         } catch (Exception ex) {
-            ex.fillInStackTrace();
+           throw new Exception(ex);
         } finally {
             HibernateUtils.closeSession(session);
         }
     }
 
-    public List<IYoutubeUser> findAllYTUsersByVideoId(final String videoId){
+    public List<IYoutubeUser> findAllYTUsersByVideoId(final String videoId) throws Exception {
         List<IYoutubeUser> userList = new ArrayList<>();
-        findAllYTUsers().forEach(iYoutubeUser -> iYoutubeUser.getIVideoInfoList()
-                        .forEach(i -> {if(videoId.equals(i.getVideoId())){ userList.add(iYoutubeUser);}}));
+        try {
+            findAllYTUsers().forEach(iYoutubeUser -> iYoutubeUser.getIVideoInfoList()
+                    .forEach(i -> {
+                        if (videoId.equals(i.getVideoId())) {
+                            userList.add(iYoutubeUser);
+                        }
+                    }));
+        }catch (Exception ex){
+            throw new Exception(ex);
+        }
 
         return userList;
     }
 
-    private List<IYoutubeUser> findAllYTUsers(){
+    private List<IYoutubeUser> findAllYTUsers() throws Exception{
         Session session = null;
         List<IYoutubeUser> userList  = new ArrayList<>();
 
@@ -54,7 +62,7 @@ public class YTUserDaoHibernateImp {
             session.flush();
             session.getTransaction().commit();
         }catch (Exception ex){
-            ex.fillInStackTrace();
+            throw new Exception(ex);
         }finally{
             HibernateUtils.closeSession(session);
         }

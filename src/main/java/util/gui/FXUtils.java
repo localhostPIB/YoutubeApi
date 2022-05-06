@@ -14,7 +14,7 @@ import java.util.List;
 public class FXUtils {
 
     public static void handleFXList(TableView<IVideoInfoFx> videoInfoTable, IVideoInfoService iVideoInfoService,
-                                    ObservableList<IVideoInfoFx> iVideoInfoData){
+                                    ObservableList<IVideoInfoFx> iVideoInfoData) throws Exception {
         videoInfoTable.getItems().clear();
         List<IVideoInfoFx> iVideoInfoFxList = VideoInfoConverter.
                 convertVideoInfoToVideoInfoFx(iVideoInfoService.getAllVideoInfos());

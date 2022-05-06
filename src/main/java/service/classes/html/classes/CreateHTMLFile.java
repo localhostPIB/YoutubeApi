@@ -1,7 +1,8 @@
-package service.classes.html;
+package service.classes.html.classes;
 
 import dao.classes.VideoInfoDaoHibernateImp;
 import model.interfaces.IVideoInfo;
+import service.classes.html.interfaces.ICreateHTMLFile;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-public class CreateHTMLFile {
+public class CreateHTMLFile implements ICreateHTMLFile {
 
     private VideoInfoDaoHibernateImp videoDaoHibernateImp;
 
@@ -138,7 +139,7 @@ public class CreateHTMLFile {
         return xhtmlFile.toString();
     }
 
-    public void writeHTMLFile(final File file, final String docName) throws IOException {
+    public void writeHTMLFile(final File file, final String docName) throws Exception {
         List<IVideoInfo> iVideoInfoList = this.videoDaoHibernateImp.findAllVideoInfos();
         FileWriter fileWriter = new FileWriter(file);
         String html = arrayListToXHTMLFile(iVideoInfoList, docName);

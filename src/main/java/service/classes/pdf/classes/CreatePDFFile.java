@@ -1,17 +1,16 @@
-package service.classes.pdf;
+package service.classes.pdf.classes;
 
 import dao.classes.VideoInfoDaoHibernateImp;
 import model.interfaces.IVideoInfo;
 import org.apache.pdfbox.pdmodel.*;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
-import org.apache.pdfbox.pdmodel.interactive.action.PDActionURI;
-import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationLink;
+import service.classes.pdf.interfaces.ICreatePDFFile;
 
 import java.io.*;
 import java.util.*;
 
 
-public class CreatePDFFile {
+public class CreatePDFFile implements ICreatePDFFile {
     private final VideoInfoDaoHibernateImp videoDaoHibernateImp;
 
     public CreatePDFFile() {
@@ -56,7 +55,7 @@ public class CreatePDFFile {
         }
     }
 
-    public void writePDFFile(final File file) throws IOException {
+    public void writePDFFile(final File file) throws Exception {
         List<IVideoInfo> iVideoInfoList = this.videoDaoHibernateImp.findAllVideoInfos();
         arrayListToPDFFile(iVideoInfoList, file.getPath());
     }

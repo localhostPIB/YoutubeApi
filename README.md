@@ -37,6 +37,8 @@ The logos are from [Pixabay](https://pixabay.com/).
 * [Root-Screen](https://pixabay.com/de/vectors/film-kino-video-motion-picture-158157/)
 * [VideoInfo Frame](https://pixabay.com/de/vectors/rahmen-schwarz-wei%c3%9f-film-1662287/)
 * [Loading Frame](https://pixabay.com/de/photos/erde-internet-globalisierung-2254769/)
+* [VideoInfo Icon](https://pixabay.com/de/vectors/videokassette-vhs-video-kassette-4010202/)
+
 ## System-Requirements
 * ![Java 17](https://img.shields.io/badge/Java-17-green.svg) / ![](https://img.shields.io/badge/Java%20JDK-1.8-green)/ ![](https://img.shields.io/badge/Maven-3.8.4-green.svg)
 * ![OSX](https://img.shields.io/badge/OS-OSX-green.svg) / ![Linux](https://img.shields.io/badge/OS-Linux-green.svg)/ ![Ubuntu](https://img.shields.io/badge/OS-Ubuntu-green.svg) /

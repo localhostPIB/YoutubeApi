@@ -12,7 +12,7 @@ import java.util.*;
 
 public class VideoInfoDaoHibernateImp implements IVideoInfoDaoHibernate {
 
-    public void saveVideoInfo(final IVideoInfo iVideoInfo) {
+    public void saveVideoInfo(final IVideoInfo iVideoInfo) throws Exception{
         Session session = null;
 
         try {
@@ -24,15 +24,15 @@ public class VideoInfoDaoHibernateImp implements IVideoInfoDaoHibernate {
             }
             session.getTransaction().commit();
         } catch (Exception ex) {
-            ex.fillInStackTrace();
+            throw new Exception(ex);
         } finally {
             HibernateUtils.closeSession(session);
         }
     }
 
-    public List<IVideoInfo> findAllVideoInfos() {
+    public List<IVideoInfo> findAllVideoInfos() throws Exception{
         Session session = null;
-        List<IVideoInfo> videoInfoList = new ArrayList<>();
+        List<IVideoInfo> videoInfoList;
 
         try {
             session = HibernateUtils.getSession();
@@ -43,7 +43,7 @@ public class VideoInfoDaoHibernateImp implements IVideoInfoDaoHibernate {
             session.flush();
             session.getTransaction().commit();
         } catch (Exception ex) {
-            ex.fillInStackTrace();
+            throw new Exception(ex);
         } finally {
             HibernateUtils.closeSession(session);
         }
@@ -51,7 +51,7 @@ public class VideoInfoDaoHibernateImp implements IVideoInfoDaoHibernate {
         return videoInfoList;
     }
 
-    public IVideoInfo findVideoInfoById(final int id){
+    public IVideoInfo findVideoInfoById(final int id) throws Exception{
             Session session = null;
 
             try {
@@ -63,15 +63,13 @@ public class VideoInfoDaoHibernateImp implements IVideoInfoDaoHibernate {
 
                 return iVideoInfo;
             } catch (Exception ex) {
-                ex.fillInStackTrace();
+                throw new Exception(ex);
             } finally {
                 HibernateUtils.closeSession(session);
             }
-
-            return null;
         }
 
-    public void deleteVideoInfoById(final int id) {
+    public void deleteVideoInfoById(final int id) throws Exception {
         Session session = null;
         IVideoInfo iVideoInfo = findVideoInfoById(id);
         try {
@@ -84,7 +82,7 @@ public class VideoInfoDaoHibernateImp implements IVideoInfoDaoHibernate {
             }
             session.getTransaction().commit();
         } catch (Exception ex) {
-            ex.fillInStackTrace();
+            throw new Exception(ex);
         } finally {
             HibernateUtils.closeSession(session);
         }

@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ReplyDaoHibernateImp {
 
-    public void saveReply(final IReply iReply) {
+    public void saveReply(final IReply iReply) throws Exception{
         Session session = null;
 
         try {
@@ -19,15 +19,15 @@ public class ReplyDaoHibernateImp {
             session.flush();
             session.getTransaction().commit();
         } catch (Exception ex) {
-            ex.fillInStackTrace();
+            throw new Exception(ex);
         } finally {
             HibernateUtils.closeSession(session);
         }
     }
 
-    public List<IReply> findAllReplies(){
+    public List<IReply> findAllReplies() throws Exception{
         Session session = null;
-        List<IReply> replyList  = new ArrayList<>();
+        List<IReply> replyList;
 
         try{
             session = HibernateUtils.getSession();
@@ -38,7 +38,7 @@ public class ReplyDaoHibernateImp {
             session.flush();
             session.getTransaction().commit();
         }catch (Exception ex){
-            ex.fillInStackTrace();
+            throw new Exception(ex);
         }finally{
             HibernateUtils.closeSession(session);
         }

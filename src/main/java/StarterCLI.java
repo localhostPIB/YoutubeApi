@@ -5,7 +5,7 @@ import dao.classes.YTUserDaoHibernateImp;
 import service.classes.api.videoInformations.GetYTCommentaries;
 import service.classes.api.videoInformations.GetYTVideoInformations;
 import util.validator.StringValidator;
-import service.classes.csv.CreateCSVFile;
+import service.classes.csv.classes.CreateCSVFile;
 import util.*;
 
 @Deprecated

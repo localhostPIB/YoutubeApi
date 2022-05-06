@@ -1,4 +1,4 @@
-package controller;
+package controller.classes;
 
 import com.sun.javafx.application.LauncherImpl;
 

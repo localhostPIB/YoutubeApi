@@ -41,9 +41,11 @@ public class I18nComponentsUtil {
 
     private static final String LABEL_OPEN                ="labelOpen";
 
-    private static final String BUTTON_LOADVIDEO          ="labelLoadVideo";
+    private static final String BUTTON_LOADVIDEO          ="buttonLoadVideo";
 
-    private static final String BUTTON_CANCEL             ="labelCancel";
+    private static final String BUTTON_CANCEL             ="buttonCancel";
+
+    private static final String BUTTON_LINK               ="buttonLink";
 
     private static final String COLUMN_USER               ="col-user";
 
@@ -132,6 +134,9 @@ public class I18nComponentsUtil {
 
     public static String getButtonExitString() {
         return resourceBundle.getString(BUTTON_EXIT);
+    }
+    public static String getButtonLinkString() {
+        return resourceBundle.getString(BUTTON_LINK);
     }
 
     public static String getColumnLikes(){

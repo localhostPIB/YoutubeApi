@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CommentaryDaoHibernateImp {
 
-    public void saveCommentary(final ICommentary iCommentary) {
+    public void saveCommentary(final ICommentary iCommentary) throws Exception {
         Session session = null;
 
         try {
@@ -21,15 +21,15 @@ public class CommentaryDaoHibernateImp {
             session.flush();
             session.getTransaction().commit();
         } catch (Exception ex) {
-            ex.fillInStackTrace();
+            throw new Exception(ex);
         } finally {
             HibernateUtils.closeSession(session);
         }
     }
 
-    public List<ICommentary> findAllYTCommentariesByVideoId(final String videoId){
+    public List<ICommentary> findAllYTCommentariesByVideoId(final String videoId) throws Exception{
         Session session = null;
-        List<ICommentary> commentaryList  = new ArrayList<>();
+        List<ICommentary> commentaryList;
 
         try{
             session = HibernateUtils.getSession();
@@ -44,7 +44,7 @@ public class CommentaryDaoHibernateImp {
             session.flush();
             session.getTransaction().commit();
         }catch (Exception ex){
-            ex.fillInStackTrace();
+            throw new Exception(ex);
         }finally{
             HibernateUtils.closeSession(session);
         }

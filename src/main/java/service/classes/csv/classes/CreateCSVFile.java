@@ -1,13 +1,12 @@
-package service.classes.csv;
+package service.classes.csv.classes;
 
-import dao.classes.CommentaryDaoHibernateImp;
-import dao.classes.VideoInfoDaoHibernateImp;
-import dao.classes.YTUserDaoHibernateImp;
+import dao.classes.*;
+import service.classes.csv.interfaces.ICreateCSVFile;
 import util.*;
 import java.io.*;
 import org.apache.commons.csv.*;
 
-public class CreateCSVFile {
+public class CreateCSVFile implements ICreateCSVFile {
 
     private static final String FILE_HEADER_COMMENTARY[]  = {"Likes:","Publish at:","Comment:","Username:"};
     private static final String FILE_HEADER_USER[]        = {"Channel-Id:","Username:","ChannelUrl:","ImageUrl:"};
@@ -23,7 +22,7 @@ public class CreateCSVFile {
         return StringUtils.deleteInvalidSymbols(fileName);
     }
 
-    public void createCSVVideoInfos(final File file) throws IOException {
+    public void createCSVVideoInfos(final File file) throws Exception {
         FileWriter fileWriter = new FileWriter(file);
 
         CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR);
@@ -42,10 +41,12 @@ public class CreateCSVFile {
             });
         }catch (IOException ioException){
             ioException.printStackTrace();
+        } catch (Exception e) {
+            throw new Exception(e);
         }
     }
 
-    public void createCSVCommentaryFile(final String fileName, final String videoId) throws IOException {
+    public void createCSVCommentaryFile(final String fileName, final String videoId) throws Exception {
         String fileNameWithoutInvalidSymbols = cutAllInvalidSymbols(fileName);
 
         FileWriter fileWriter = new FileWriter(new File(dir,fileNameWithoutInvalidSymbols+"_Commentaries"+".csv"));
@@ -66,10 +67,12 @@ public class CreateCSVFile {
             });
         }catch (IOException ioException){
             ioException.printStackTrace();
+        } catch (Exception e) {
+            throw new Exception(e);
         }
     }
 
-    public void createCSVYTUserFile(final String fileName,final String videoId) throws IOException {
+    public void createCSVYTUserFile(final String fileName,final String videoId) throws Exception {
         String fileNameWithoutInvalidSymbols = cutAllInvalidSymbols(fileName);
 
         FileWriter fileWriter = new FileWriter(new File(dir,fileNameWithoutInvalidSymbols+"_User"+".csv"));

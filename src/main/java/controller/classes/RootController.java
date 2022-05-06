@@ -1,5 +1,6 @@
-package controller;
+package controller.classes;
 
+import controller.interfaces.IMainApp;
 import javafx.collections.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ import java.io.*;
  * --module-path "C:\bla\lib" --add-modules javafx.controls,javafx.web,javafx.fxml
  */
 public class RootController {
-    private MainApp mainApp;
+    private IMainApp iMainApp;
 
     private final ObservableList<IVideoInfoFx> iVideoInfoData = FXCollections.observableArrayList();
 
@@ -79,9 +80,9 @@ public class RootController {
 
 
     public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
+        this.iMainApp = mainApp;
 
-        iVideoInfoData.addAll(this.mainApp.getiVideoInfoFxList());
+        iVideoInfoData.addAll(this.iMainApp.getiVideoInfoFxList());
         videoInfoTable.setItems(iVideoInfoData);
     }
 
@@ -116,7 +117,11 @@ public class RootController {
                             openVideoInfo(iVideoInfoFx);
                         });
                         menuItemDelete.setOnAction(e -> {
-                            deleteVideoInfo(iVideoInfoFx);
+                            try {
+                                deleteVideoInfo(iVideoInfoFx);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
                         });
                         videoInfoTable.setContextMenu(contextMenu);
                     }
@@ -128,7 +133,11 @@ public class RootController {
                 if (key.getCode() == KeyCode.ENTER) {
                     openVideoInfo(iVideoInfoFx);
                 } else if (key.getCode() == KeyCode.DELETE) {
-                    deleteVideoInfo(iVideoInfoFx);
+                    try {
+                        deleteVideoInfo(iVideoInfoFx);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -137,30 +146,30 @@ public class RootController {
     private void openVideoInfo(IVideoInfoFx iVideoInfoFx) {
         IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(iVideoInfoFx);
         try {
-            mainApp.showVideoInfosLayout(iVideoInfo);
+            iMainApp.showVideoInfosLayout(iVideoInfo);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void deleteVideoInfo(IVideoInfoFx iVideoInfoFx) {
+    private void deleteVideoInfo(IVideoInfoFx iVideoInfoFx) throws Exception {
         this.iVideoInfoService.deleteVideoInfoById(iVideoInfoFx.getId().get());
         this.iVideoInfoData.remove(iVideoInfoFx);
     }
 
     @FXML
-    private void handleCSV() throws IOException {
-        mainApp.showSaveFiles(FileEnum.CSV, I18nComponentsUtil.getLabelCsv(), I18nComponentsUtil.getLABELCSVFile(), "");
+    private void handleCSV() throws Exception {
+        iMainApp.showSaveFiles(FileEnum.CSV, I18nComponentsUtil.getLabelCsv(), I18nComponentsUtil.getLABELCSVFile(), "");
     }
 
     @FXML
-    private void handleHTML() throws IOException {
-        mainApp.showSaveFiles(FileEnum.HTML, I18nComponentsUtil.getLABELHTML(), I18nComponentsUtil.getLABELHTMLFile(), "Video Infos");
+    private void handleHTML() throws Exception {
+        iMainApp.showSaveFiles(FileEnum.HTML, I18nComponentsUtil.getLABELHTML(), I18nComponentsUtil.getLABELHTMLFile(), "Video Infos");
     }
 
     @FXML
-    private void handlePDF() throws IOException {
-        mainApp.showSaveFiles(FileEnum.PDF, I18nComponentsUtil.getLabelPDF(), I18nComponentsUtil.getLABELPDFFile(), "Video Infos");
+    private void handlePDF() throws Exception {
+        iMainApp.showSaveFiles(FileEnum.PDF, I18nComponentsUtil.getLabelPDF(), I18nComponentsUtil.getLABELPDFFile(), "Video Infos");
     }
 
     @FXML
@@ -207,11 +216,11 @@ public class RootController {
     }
 
     private void loadScreen() throws IOException {
-       mainApp.showLoadScreen();
+       iMainApp.showLoadScreen();
     }
 
-    private void hideLoadScreen(){
-        mainApp.hideLoadScreen();
+    public void hideLoadScreen(){
+        iMainApp.hideLoadScreen();
     }
 
     private void disableButtons() {

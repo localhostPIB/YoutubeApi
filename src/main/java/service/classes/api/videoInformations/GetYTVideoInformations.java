@@ -45,7 +45,7 @@ public class GetYTVideoInformations {
         return listVideosRequest;
     }
 
-    public void getYTVideoStatistics(final IVideoInfo iVideoInfo) throws GeneralSecurityException, IOException {
+    public void getYTVideoStatistics(final IVideoInfo iVideoInfo) throws Exception {
         saveVideoInfos(iVideoInfo);
     }
 
@@ -79,7 +79,11 @@ public class GetYTVideoInformations {
         this.iVideoInfo = iVideoInfo;
     }
 
-    private void saveVideoInfos(IVideoInfo iVideoInfo){
-        iVideoInfoDaoHibernate.saveVideoInfo(iVideoInfo);
+    private void saveVideoInfos(IVideoInfo iVideoInfo) throws Exception {
+        try {
+            iVideoInfoDaoHibernate.saveVideoInfo(iVideoInfo);
+        }catch (Exception ex){
+            throw new Exception(ex);
+        }
     }
 }

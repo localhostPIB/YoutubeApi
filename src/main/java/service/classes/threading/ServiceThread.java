@@ -25,6 +25,8 @@ public class ServiceThread implements Runnable {
 
         } catch (GeneralSecurityException | IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

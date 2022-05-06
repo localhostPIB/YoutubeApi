@@ -41,92 +41,117 @@ public class GetYTCommentaries {
         }
     }
 
-    private YouTube.CommentThreads.List prepareListRequest(String videoId) throws Exception {
-
-        return Auth.getService().commentThreads()
-                .list("snippet,replies")
-                .setKey(CLIENT_SECRET)
-                .setVideoId(videoId)
-                .setMaxResults(100L)
-                .setModerationStatus("published");
+    private YouTube.CommentThreads.List prepareListRequest(final String videoId) throws Exception {
+        try {
+            return Auth.getService().commentThreads()
+                    .list("snippet,replies")
+                    .setKey(CLIENT_SECRET)
+                    .setVideoId(videoId)
+                    .setMaxResults(100L)
+                    .setModerationStatus("published");
+        }catch (Exception e){
+            throw new Exception(e);
+        }
     }
 
     public void getAllMessages(final String videoId) throws Exception {
+        try {
+            CommentThreadListResponse commentsPage = prepareListRequest(videoId).execute();
 
-        CommentThreadListResponse commentsPage = prepareListRequest(videoId).execute();
+            while (true) {
+                handleCommentsThreads(commentsPage.getItems());
 
-        while (true) {
-            handleCommentsThreads(commentsPage.getItems());
+                String nextPageToken = commentsPage.getNextPageToken();
 
-            String nextPageToken = commentsPage.getNextPageToken();
-
-            if (APIValidator.checkNextPageToken(nextPageToken)) {
-                break;
+                if (APIValidator.checkNextPageToken(nextPageToken)) {
+                    break;
+                }
+                commentsPage = prepareListRequest(videoId).setPageToken(nextPageToken).execute();
             }
-            commentsPage = prepareListRequest(videoId).setPageToken(nextPageToken).execute();
+        }catch (Exception e){
+            throw new Exception(e);
         }
     }
 
-    private void handleCommentsThreads(List<CommentThread> commentThreads) {
+    private void handleCommentsThreads(final List<CommentThread> commentThreads) throws Exception {
+        try {
+            for (CommentThread commentThread : commentThreads) {
+                List<Comment> comments = Lists.newArrayList();
+                comments.add(commentThread.getSnippet().getTopLevelComment());
 
-        for (CommentThread commentThread : commentThreads) {
-            List<Comment> comments = Lists.newArrayList();
-            comments.add(commentThread.getSnippet().getTopLevelComment());
+                IYoutubeUser iYoutubeUser = StaticModelFactory
+                        .getYoutubeUserObject(comments.get(0).getSnippet().getAuthorDisplayName(),
+                                comments.get(0).getSnippet().getAuthorChannelUrl(),
+                                StringUtils.cutStringBeforeChar(comments.get(0).getSnippet().getAuthorChannelId().toString()),
+                                comments.get(0).getSnippet().getAuthorProfileImageUrl());
 
-            IYoutubeUser iYoutubeUser = StaticModelFactory
-                    .getYoutubeUserObject(comments.get(0).getSnippet().getAuthorDisplayName(),
-                            comments.get(0).getSnippet().getAuthorChannelUrl(),
-                            StringUtils.cutStringBeforeChar(comments.get(0).getSnippet().getAuthorChannelId().toString()),
-                            comments.get(0).getSnippet().getAuthorProfileImageUrl());
+                iYoutubeUser.setImageUrl(comments.get(0).getSnippet().getAuthorProfileImageUrl());
+                iYoutubeUser.addVideoInfo(iVideoInfo);
+                saveYTUser(iYoutubeUser);
 
-            iYoutubeUser.setImageUrl(comments.get(0).getSnippet().getAuthorProfileImageUrl());
-            iYoutubeUser.addVideoInfo(iVideoInfo);
-            saveYTUser(iYoutubeUser);
+                ICommentary iCommentary = StaticModelFactory.getCommentaryObject(comments.get(0).getSnippet().getLikeCount(),
+                        comments.get(0).getSnippet().getPublishedAt().toString(), comments.get(0).getSnippet().getTextOriginal(),
+                        iYoutubeUser, iVideoInfo);
+                saveCommentary(iCommentary);
 
-            ICommentary iCommentary = StaticModelFactory.getCommentaryObject(comments.get(0).getSnippet().getLikeCount(),
-                    comments.get(0).getSnippet().getPublishedAt().toString(), comments.get(0).getSnippet().getTextOriginal(),
-                    iYoutubeUser,iVideoInfo);
+                CommentThreadReplies replies = commentThread.getReplies();
+
+                if (replies != null) {
+                    handleReplyThreads(replies, iCommentary);
+                }
+            }
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+    }
+
+    private void handleReplyThreads(final CommentThreadReplies replies, final ICommentary iCommentary) throws Exception {
+        try {
+            for (Comment reply : replies.getComments()) {
+                IYoutubeUser iYoutubeUser = StaticModelFactory
+                        .getYoutubeUserObject(reply.getSnippet().getAuthorDisplayName(),
+                                reply.getSnippet().getAuthorChannelUrl(),
+                                StringUtils.cutStringBeforeChar(reply.getSnippet().getAuthorChannelId().toString()),
+                                reply.getSnippet().getAuthorProfileImageUrl());
+                iYoutubeUser.addVideoInfo(iVideoInfo);
+                saveYTUser(iYoutubeUser);
+
+                IReply iReply = StaticModelFactory.getReplyObject(reply.getSnippet().getTextDisplay(),
+                        iYoutubeUser, reply.getSnippet().getLikeCount(),
+                        reply.getSnippet().getPublishedAt().toString());
+
+                saveReply(iReply);
+                iCommentary.addIReply(iReply);
+            }
+
             saveCommentary(iCommentary);
-
-            CommentThreadReplies replies = commentThread.getReplies();
-
-            if (replies != null) {
-                handleReplyThreads(replies, iCommentary);
-            }
+        }catch (Exception e){
+          throw new Exception(e);
         }
     }
 
-    private void handleReplyThreads(CommentThreadReplies replies, ICommentary iCommentary) {
-
-        for (Comment reply : replies.getComments()) {
-            IYoutubeUser iYoutubeUser = StaticModelFactory
-                    .getYoutubeUserObject(reply.getSnippet().getAuthorDisplayName(),
-                            reply.getSnippet().getAuthorChannelUrl(),
-                            StringUtils.cutStringBeforeChar(reply.getSnippet().getAuthorChannelId().toString()),
-                            reply.getSnippet().getAuthorProfileImageUrl());
-            iYoutubeUser.addVideoInfo(iVideoInfo);
-            saveYTUser(iYoutubeUser);
-
-            IReply iReply = StaticModelFactory.getReplyObject(reply.getSnippet().getTextDisplay(),
-                    iYoutubeUser, reply.getSnippet().getLikeCount(),
-                    reply.getSnippet().getPublishedAt().toString());
-
-            saveReply(iReply);
-            iCommentary.addIReply(iReply);
+    private void saveCommentary(final ICommentary iCommentary) throws Exception {
+        try {
+            commentaryDaoHibernateImp.saveCommentary(iCommentary);
+        }catch (Exception e){
+            throw new Exception(e);
         }
 
-        saveCommentary(iCommentary);
     }
 
-    private void saveCommentary(ICommentary iCommentary) {
-        commentaryDaoHibernateImp.saveCommentary(iCommentary);
+    private void saveYTUser(final IYoutubeUser iYoutubeUser) throws Exception {
+        try {
+            ytUserDaoHibernateImp.saveUser(iYoutubeUser);
+        }catch (Exception ex){
+            throw new Exception(ex);
+        }
     }
 
-    private void saveYTUser(IYoutubeUser iYoutubeUser) {
-        ytUserDaoHibernateImp.saveUser(iYoutubeUser);
-    }
-
-    private void saveReply(IReply iReply) {
-        replyDaoHibernateImp.saveReply(iReply);
+    private void saveReply(final IReply iReply) throws Exception {
+        try {
+            replyDaoHibernateImp.saveReply(iReply);
+        }catch (Exception ex){
+            throw new Exception(ex);
+        }
     }
 }
