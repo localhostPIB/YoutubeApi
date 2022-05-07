@@ -15,6 +15,7 @@ public class VideoInfoConverter {
 
     public static IVideoInfoFx convertVideoInfoToVideoInfoFx(final IVideoInfo iVideoInfo){
             IVideoInfoFx iVideoInfoFx = new VideoInfoFx();
+
             iVideoInfoFx.setId(new SimpleIntegerProperty(iVideoInfo.getId()));
             iVideoInfoFx.setVideoId(new SimpleStringProperty(iVideoInfo.getVideoId()));
             iVideoInfoFx.setVideoDescription(new SimpleStringProperty(iVideoInfo.getVideoDescription()));

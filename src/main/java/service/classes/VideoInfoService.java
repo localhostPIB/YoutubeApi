@@ -3,7 +3,7 @@ package service.classes;
 import dao.classes.VideoInfoDaoHibernateImp;
 import dao.interfaces.IVideoInfoDaoHibernate;
 import model.interfaces.IVideoInfo;
-import service.classes.api.videoInformations.GetYTVideoInformations;
+import service.classes.api.videoInformations.classes.GetYTVideoInformations;
 import service.classes.csv.classes.CreateCSVFile;
 import service.classes.csv.interfaces.ICreateCSVFile;
 import service.classes.html.classes.CreateHTMLFile;

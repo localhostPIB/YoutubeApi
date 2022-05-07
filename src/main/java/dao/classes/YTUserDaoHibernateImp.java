@@ -1,5 +1,6 @@
 package dao.classes;
 
+import dao.interfaces.IYTUserDaoHibernate;
 import model.interfaces.IYoutubeUser;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -7,7 +8,7 @@ import util.HibernateUtils;
 
 import java.util.*;
 
-public class YTUserDaoHibernateImp {
+public class YTUserDaoHibernateImp implements IYTUserDaoHibernate {
 
 
     public YTUserDaoHibernateImp() {
@@ -48,7 +49,7 @@ public class YTUserDaoHibernateImp {
 
     private List<IYoutubeUser> findAllYTUsers() throws Exception{
         Session session = null;
-        List<IYoutubeUser> userList  = new ArrayList<>();
+        List<IYoutubeUser> userList;
 
         try{
             session = HibernateUtils.getSession();

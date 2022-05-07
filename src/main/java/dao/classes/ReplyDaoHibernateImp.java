@@ -1,5 +1,6 @@
 package dao.classes;
 
+import dao.interfaces.IReplyDaoHibernate;
 import model.interfaces.IReply;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -7,7 +8,7 @@ import util.HibernateUtils;
 
 import java.util.*;
 
-public class ReplyDaoHibernateImp {
+public class ReplyDaoHibernateImp implements IReplyDaoHibernate {
 
     public void saveReply(final IReply iReply) throws Exception{
         Session session = null;

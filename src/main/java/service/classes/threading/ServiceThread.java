@@ -1,7 +1,7 @@
 package service.classes.threading;
 
 import model.interfaces.IVideoInfo;
-import service.classes.api.videoInformations.GetYTVideoInformations;
+import service.classes.api.videoInformations.classes.GetYTVideoInformations;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;

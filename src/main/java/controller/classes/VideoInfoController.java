@@ -2,9 +2,12 @@ package controller.classes;
 
 import controller.interfaces.IMainApp;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import model.classes.fx.VideoInfoFx;
 import model.interfaces.IVideoInfo;
+import model.interfaces.fx.ICommentaryFx;
 import util.constants.URLConstantUtils;
 
 import java.awt.*;
@@ -24,13 +27,19 @@ public class VideoInfoController {
     @FXML
     private WebView idWebView;
 
+    @FXML
+    private TableColumn<ICommentaryFx, String> userColumn;
+
+    @FXML
+    private TableColumn<ICommentaryFx, String> commentColumn;
+
     public VideoInfoController() {
 
     }
 
     @FXML
     private void initialize() {
-
+        initColumn();
     }
 
     @FXML
@@ -49,10 +58,10 @@ public class VideoInfoController {
         String url = URL + URLConstantUtils.YOUTUBEWATCH + this.iVideoInfo.getVideoId();
         try {
             Desktop.getDesktop().browse(new URL(url).toURI());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
+        } catch (IOException ioException) {
+            throw new IOException(ioException);
+        } catch (URISyntaxException uriSyntaxException) {
+           throw new URISyntaxException("",uriSyntaxException.getMessage());
         }
     }
 
@@ -66,6 +75,11 @@ public class VideoInfoController {
 
     public void setMainApp(MainApp mainApp) {
         this.iMainApp = mainApp;
+    }
+
+    private void initColumn() {
+        userColumn.setCellValueFactory(cellData -> cellData.getValue().getIYoutubeUserFx().getUserName());
+        commentColumn.setCellValueFactory(cellData -> cellData.getValue().getComment());
     }
 
 }

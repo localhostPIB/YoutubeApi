@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>YoutubeApi</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <inceptionYear>2022</inceptionYear>
     <description>Saves the comments of a Youtube video including information
         about the authors into a SQLite database.</description>

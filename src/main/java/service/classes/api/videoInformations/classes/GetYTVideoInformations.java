@@ -1,4 +1,4 @@
-package service.classes.api.videoInformations;
+package service.classes.api.videoInformations.classes;
 
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.*;

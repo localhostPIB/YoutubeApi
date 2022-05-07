@@ -1,9 +1,10 @@
-package service.classes.api.videoInformations;
+package service.classes.api.videoInformations.classes;
 
 import dao.classes.CommentaryDaoHibernateImp;
 import dao.classes.ReplyDaoHibernateImp;
 import dao.classes.YTUserDaoHibernateImp;
 import service.classes.api.Auth;
+import service.classes.api.videoInformations.interfaces.IGetYTCommentaries;
 import util.*;
 import model.interfaces.*;
 import util.validator.APIValidator;
@@ -14,7 +15,7 @@ import com.google.api.services.youtube.model.*;
 import java.io.*;
 import java.util.List;
 
-public class GetYTCommentaries {
+public class GetYTCommentaries implements IGetYTCommentaries {
     private static String CLIENT_SECRET;
 
     private final YTUserDaoHibernateImp ytUserDaoHibernateImp;

@@ -1,5 +1,6 @@
 package dao.classes;
 
+import dao.interfaces.ICommentaryDaoHibernate;
 import model.interfaces.ICommentary;
 import model.interfaces.IYoutubeUser;
 import org.hibernate.Session;
@@ -9,7 +10,7 @@ import util.HibernateUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentaryDaoHibernateImp {
+public class CommentaryDaoHibernateImp implements ICommentaryDaoHibernate {
 
     public void saveCommentary(final ICommentary iCommentary) throws Exception {
         Session session = null;

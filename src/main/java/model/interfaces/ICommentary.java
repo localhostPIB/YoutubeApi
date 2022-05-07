@@ -1,7 +1,5 @@
 package model.interfaces;
 
-import com.google.api.client.util.DateTime;
-
 public interface ICommentary {
     String getComment();
 
@@ -9,7 +7,9 @@ public interface ICommentary {
 
     IYoutubeUser getIYoutubeUser();
 
-    void setIYoutubeUser(IYoutubeUser youtubeUser);
+    IVideoInfo getIVideoInfo();
+
+    void setIYoutubeUser(IYoutubeUser iYoutubeUser);
 
     void setLikes(long count);
 
@@ -17,7 +17,10 @@ public interface ICommentary {
 
     String getPublishAt();
 
-    void setPublishAt(String time);
+    void setPublishAt(String publishAt);
 
     void addIReply(IReply iReply);
+
+    void setIVideoInfo(IVideoInfo iVideoInfo);
+
 }

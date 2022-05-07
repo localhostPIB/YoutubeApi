@@ -1,9 +1,6 @@
-import dao.classes.CommentaryDaoHibernateImp;
-import dao.classes.ReplyDaoHibernateImp;
-import dao.classes.VideoInfoDaoHibernateImp;
-import dao.classes.YTUserDaoHibernateImp;
-import service.classes.api.videoInformations.GetYTCommentaries;
-import service.classes.api.videoInformations.GetYTVideoInformations;
+import dao.classes.*;
+import service.classes.api.videoInformations.classes.*;
+import service.classes.api.videoInformations.interfaces.IGetYTCommentaries;
 import util.validator.StringValidator;
 import service.classes.csv.classes.CreateCSVFile;
 import util.*;
@@ -28,7 +25,7 @@ public class StarterCLI {
             getYTVideoInformations.initClientSecret();
             getYTVideoInformations.callYTVideoStatistics(args[0]);
 
-            GetYTCommentaries getYTCommentaries = new GetYTCommentaries(new YTUserDaoHibernateImp(),
+            IGetYTCommentaries getYTCommentaries = new GetYTCommentaries(new YTUserDaoHibernateImp(),
              new CommentaryDaoHibernateImp(), new ReplyDaoHibernateImp(), getYTVideoInformations.getIVideoInfo());
             getYTCommentaries.getAllMessages(args[0]);
 

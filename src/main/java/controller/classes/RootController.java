@@ -1,16 +1,22 @@
 package controller.classes;
 
 import controller.interfaces.IMainApp;
+import dao.classes.CommentaryDaoHibernateImp;
+import dao.classes.ReplyDaoHibernateImp;
+import dao.classes.YTUserDaoHibernateImp;
 import javafx.collections.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
+import javafx.scene.input.*;
 import model.classes.fx.VideoInfoFx;
 import model.interfaces.IVideoInfo;
 import model.interfaces.fx.IVideoInfoFx;
+import service.classes.CommentService;
 import service.classes.VideoInfoService;
+import service.classes.api.videoInformations.classes.GetYTCommentaries;
+import service.classes.api.videoInformations.interfaces.IGetYTCommentaries;
+import service.inferfaces.ICommentService;
 import service.inferfaces.IVideoInfoService;
 import util.converter.VideoInfoConverter;
 import util.*;
@@ -94,6 +100,7 @@ public class RootController {
     private void initialize() throws FileNotFoundException {
         initColumn();
         iVideoInfoService.initClientId();
+
         if (iVideoInfoService.getClientId() != null) {
             clientSecretField.setText(iVideoInfoService.getClientId());
         }
@@ -191,8 +198,13 @@ public class RootController {
                             IVideoInfoFx iVideoInfoFx = VideoInfoConverter.convertVideoInfoToVideoInfoFx(iVideoInfo);
                             iVideoInfoData.add(iVideoInfoFx);
                             videoInfoTable.setItems(iVideoInfoData);
+
+                            IGetYTCommentaries getYTCommentaries = new GetYTCommentaries(new YTUserDaoHibernateImp(),
+                                    new CommentaryDaoHibernateImp(), new ReplyDaoHibernateImp(), iVideoInfo);
+                            ICommentService iCommentService = new CommentService(getYTCommentaries);
+                            iCommentService.getAllYTVideoMessages(videoId);
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            throw new Exception(e);
                         } finally {
                             enableButtons();
                         }
@@ -253,5 +265,4 @@ public class RootController {
         videoIdColumn.setCellValueFactory(cellData -> cellData.getValue().getVideoId());
         commentCountColumn.setCellValueFactory(cellData -> cellData.getValue().getCommentCount());
     }
-
 }

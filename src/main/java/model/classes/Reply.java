@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Reply implements IReply {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String comment;
