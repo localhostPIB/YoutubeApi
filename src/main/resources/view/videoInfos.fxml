@@ -21,7 +21,7 @@
       <Button fx:id="idPlay" layoutX="26.0" layoutY="305.0" mnemonicParsing="false" onAction="#handlePlay" prefHeight="62.0" prefWidth="83.0" text="%buttonLoadVideo" />
       <Button fx:id="idCancel" layoutX="133.0" layoutY="305.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="62.0" prefWidth="91.0" text="%buttonCancel" />
       <ButtonBar layoutX="495.0" layoutY="63.0" prefHeight="40.0" prefWidth="200.0" />
-      <TableView layoutX="415.0" layoutY="14.0" prefHeight="472.0" prefWidth="383.0">
+      <TableView fx:id="videoInfo" layoutX="415.0" layoutY="14.0" prefHeight="472.0" prefWidth="383.0">
         <columns>
           <TableColumn fx:id="userColumn" prefWidth="138.0" text="%col-user" />
           <TableColumn fx:id="commentColumn" prefWidth="198.0" text="%col-comment" />

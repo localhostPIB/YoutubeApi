@@ -118,8 +118,8 @@ public class MainApp extends Application implements IMainApp {
             dialogStage.setScene(scene);
             dialogStage.getIcons().add(new Image("images/videocassette.png"));
             VideoInfoController videoInfoController = loader.getController();
-            videoInfoController.setMainApp(this);
             videoInfoController.setVideoInfo(iVideoInfo);
+            videoInfoController.setMainApp(this);
             videoInfoController.setDialogStage(dialogStage);
 
             dialogStage.showAndWait();

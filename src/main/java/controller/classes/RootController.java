@@ -4,6 +4,7 @@ import controller.interfaces.IMainApp;
 import dao.classes.CommentaryDaoHibernateImp;
 import dao.classes.ReplyDaoHibernateImp;
 import dao.classes.YTUserDaoHibernateImp;
+import dao.interfaces.ICommentaryDaoHibernate;
 import javafx.collections.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -201,8 +202,8 @@ public class RootController {
 
                             IGetYTCommentaries getYTCommentaries = new GetYTCommentaries(new YTUserDaoHibernateImp(),
                                     new CommentaryDaoHibernateImp(), new ReplyDaoHibernateImp(), iVideoInfo);
-                            ICommentService iCommentService = new CommentService(getYTCommentaries);
-                            iCommentService.getAllYTVideoMessages(videoId);
+                            ICommentService iCommentService = new CommentService();
+                            iCommentService.saveAllYTVideoMessagesByVideoId(videoId, getYTCommentaries);
                         } catch (Exception e) {
                             throw new Exception(e);
                         } finally {
