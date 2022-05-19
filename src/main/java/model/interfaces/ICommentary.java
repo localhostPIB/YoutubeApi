@@ -1,5 +1,7 @@
 package model.interfaces;
 
+import java.util.List;
+
 public interface ICommentary {
     String getComment();
 
@@ -8,6 +10,8 @@ public interface ICommentary {
     IYoutubeUser getIYoutubeUser();
 
     IVideoInfo getIVideoInfo();
+
+    List<IReply> getIReplyList();
 
     void setIYoutubeUser(IYoutubeUser iYoutubeUser);
 

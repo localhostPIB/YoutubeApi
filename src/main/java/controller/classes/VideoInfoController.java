@@ -1,14 +1,12 @@
 package controller.classes;
 
 import controller.interfaces.IMainApp;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import model.interfaces.IVideoInfo;
+import model.interfaces.*;
 import model.interfaces.fx.ICommentaryFx;
 import service.classes.CommentService;
 import service.inferfaces.ICommentService;
@@ -20,7 +18,6 @@ import java.io.IOException;
 import java.net.*;
 import java.util.List;
 
-import static util.converter.CommentaryConverter.convertCommentaryToCommentaryFx;
 
 public class VideoInfoController {
 
@@ -55,14 +52,9 @@ public class VideoInfoController {
     }
 
     @FXML
-    private void handlePlay() throws Exception {
-        ICommentService iCommentService = new CommentService();
+    private void handlePlay() {
         String url = URL + URLConstantUtils.YOUTUBEEMBED + this.iVideoInfo.getVideoId();
         this.idWebView.getEngine().load(url);
-        List<ICommentaryFx> iCommentaryFxList = CommentaryConverter.convertCommentaryToCommentaryFx(iCommentService.getAllYTVideoMessagesByVideoId(this.iVideoInfo.getVideoId()));
-        iCommentData.addAll(iCommentaryFxList);
-        videoInfo.setItems(iCommentData);
-
     }
 
     @FXML
@@ -90,8 +82,15 @@ public class VideoInfoController {
         this.dialogStage = dialogStage;
     }
 
-    public void setMainApp(MainApp mainApp) {
+    public void setMainApp(MainApp mainApp) throws Exception {
+        ICommentService iCommentService = new CommentService();
         this.iMainApp = mainApp;
+
+        List<ICommentary> iCommentaryList = iCommentService.getAllYTVideoMessagesByVideoId(this.iVideoInfo.getVideoId());
+        List<ICommentaryFx> iCommentaryFxList = CommentaryConverter.convertCommentaryToCommentaryFx(iCommentaryList);
+
+        iCommentData.addAll(iCommentaryFxList);
+        videoInfo.setItems(iCommentData);
     }
 
     private void initColumn() {

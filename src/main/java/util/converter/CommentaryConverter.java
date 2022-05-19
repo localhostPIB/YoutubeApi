@@ -5,7 +5,6 @@ import model.classes.fx.CommentaryFx;
 import model.interfaces.ICommentary;
 import model.interfaces.fx.ICommentaryFx;
 
-
 import java.util.*;
 
 public class CommentaryConverter {

@@ -27,6 +27,8 @@ public class MainApp extends Application implements IMainApp {
 
     private Stage primaryStage;
 
+    private Stage dialogStage;
+
     private Stage loadStage;
 
     public MainApp() {
@@ -102,29 +104,32 @@ public class MainApp extends Application implements IMainApp {
         }
     }
 
-    public void showVideoInfosLayout(IVideoInfo iVideoInfo) throws IOException {
+    public void showVideoInfosLayout(IVideoInfo iVideoInfo) throws Exception {
         try {
             FXMLLoader loader = new FXMLLoader();
             ResourceBundle bundle = I18nUtil.getComponentsResourceBundle();
             loader.setLocation(getClass().getResource("/view/videoInfos.fxml"));
             loader.setResources(bundle);
             Pane page = loader.load();
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
             Scene scene = new Scene(page);
 
-            dialogStage.setTitle(iVideoInfo.getTitle());
-            dialogStage.initModality(Modality.APPLICATION_MODAL);
-            dialogStage.initOwner(primaryStage);
-            dialogStage.setScene(scene);
-            dialogStage.getIcons().add(new Image("images/videocassette.png"));
+            this.dialogStage.setTitle(iVideoInfo.getTitle());
+            this.dialogStage.initModality(Modality.APPLICATION_MODAL);
+            this.dialogStage.initOwner(primaryStage);
+            this.dialogStage.setScene(scene);
+            this.dialogStage.getIcons().add(new Image("images/videocassette.png"));
+            this.dialogStage.initStyle(StageStyle.TRANSPARENT);
             VideoInfoController videoInfoController = loader.getController();
             videoInfoController.setVideoInfo(iVideoInfo);
             videoInfoController.setMainApp(this);
             videoInfoController.setDialogStage(dialogStage);
 
-            dialogStage.showAndWait();
+            this.dialogStage.showAndWait();
         } catch (IOException e) {
             throw new IOException(e);
+        } catch (Exception e) {
+            throw new Exception(e);
         }
     }
 
@@ -140,7 +145,6 @@ public class MainApp extends Application implements IMainApp {
             Scene scene = new Scene(page);
 
             this.loadStage.initStyle(StageStyle.TRANSPARENT);
-            this.loadStage.setAlwaysOnTop(true);
             this.loadStage.initOwner(primaryStage);
             this.loadStage.setScene(scene);
 

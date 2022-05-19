@@ -1,10 +1,7 @@
 package controller.classes;
 
 import controller.interfaces.IMainApp;
-import dao.classes.CommentaryDaoHibernateImp;
-import dao.classes.ReplyDaoHibernateImp;
-import dao.classes.YTUserDaoHibernateImp;
-import dao.interfaces.ICommentaryDaoHibernate;
+import dao.classes.*;
 import javafx.collections.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -13,12 +10,10 @@ import javafx.scene.input.*;
 import model.classes.fx.VideoInfoFx;
 import model.interfaces.IVideoInfo;
 import model.interfaces.fx.IVideoInfoFx;
-import service.classes.CommentService;
-import service.classes.VideoInfoService;
+import service.classes.*;
 import service.classes.api.videoInformations.classes.GetYTCommentaries;
 import service.classes.api.videoInformations.interfaces.IGetYTCommentaries;
-import service.inferfaces.ICommentService;
-import service.inferfaces.IVideoInfoService;
+import service.inferfaces.*;
 import util.converter.VideoInfoConverter;
 import util.*;
 import util.gui.FXUtils;
@@ -114,7 +109,11 @@ public class RootController {
         videoInfoTable.setOnMouseClicked(click -> {
             if (iVideoInfoFx != null) {
                 if (click.getClickCount() == 2) {
-                    openVideoInfo(iVideoInfoFx);
+                    try {
+                        openVideoInfo(iVideoInfoFx);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } else if (click.getButton() == MouseButton.SECONDARY) {
                     MenuItem menuItemOpen = new MenuItem(I18nComponentsUtil.getLabelOpen());
                     MenuItem menuItemDelete = new MenuItem(I18nComponentsUtil.getLabelDelete());
@@ -122,7 +121,11 @@ public class RootController {
                     contextMenu.getItems().add(menuItemDelete);
 
                         menuItemOpen.setOnAction(e -> {
-                            openVideoInfo(iVideoInfoFx);
+                            try {
+                                openVideoInfo(iVideoInfoFx);
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
                         });
                         menuItemDelete.setOnAction(e -> {
                             try {
@@ -139,7 +142,11 @@ public class RootController {
         videoInfoTable.setOnKeyPressed(key -> {
             if (iVideoInfoFx != null) {
                 if (key.getCode() == KeyCode.ENTER) {
-                    openVideoInfo(iVideoInfoFx);
+                    try {
+                        openVideoInfo(iVideoInfoFx);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } else if (key.getCode() == KeyCode.DELETE) {
                     try {
                         deleteVideoInfo(iVideoInfoFx);
@@ -151,12 +158,14 @@ public class RootController {
         });
     }
 
-    private void openVideoInfo(IVideoInfoFx iVideoInfoFx) {
+    private void openVideoInfo(IVideoInfoFx iVideoInfoFx) throws Exception {
         IVideoInfo iVideoInfo = VideoInfoConverter.convertVideoInfoFXtoVideoInfo(iVideoInfoFx);
         try {
             iMainApp.showVideoInfosLayout(iVideoInfo);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOException(e);
+        } catch (Exception e) {
+            throw new Exception(e);
         }
     }
 
@@ -213,9 +222,7 @@ public class RootController {
                     }
                 };
 
-                task.setOnSucceeded(e -> {
-                    hideLoadScreen();
-                });
+                task.setOnSucceeded(e -> hideLoadScreen());
 
                 new Thread(task).start();
                 loadScreen();

@@ -17,7 +17,7 @@ public interface IMainApp {
 
     void showSaveFiles(final FileEnum fileEnum, final String i18n0, final String i18n1, final String docName) throws Exception;
 
-    void showVideoInfosLayout(IVideoInfo iVideoInfo) throws IOException;
+    void showVideoInfosLayout(IVideoInfo iVideoInfo) throws Exception;
 
     void showLoadScreen() throws IOException;
 
