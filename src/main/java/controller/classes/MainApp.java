@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.*;
+import model.interfaces.IReply;
 import model.interfaces.IVideoInfo;
 import model.interfaces.fx.IVideoInfoFx;
 import service.classes.VideoInfoService;
@@ -104,6 +105,34 @@ public class MainApp extends Application implements IMainApp {
         }
     }
 
+    public void showReplyLayout(IReply iReply) throws Exception {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+            ResourceBundle bundle = I18nUtil.getComponentsResourceBundle();
+            loader.setLocation(getClass().getResource("/view/replyInfos.fxml"));
+            loader.setResources(bundle);
+            Pane page = loader.load();
+            dialogStage = new Stage();
+            Scene scene = new Scene(page);
+            this.dialogStage.setTitle("");
+            this.dialogStage.initModality(Modality.NONE);
+            this.dialogStage.initOwner(primaryStage);
+            this.dialogStage.setScene(scene);
+            this.dialogStage.setResizable(false);
+            this.dialogStage.getIcons().add(new Image("images/videocassette.png"));
+            ReplyController replyController = loader.getController();
+            replyController.setReply(iReply);
+            replyController.setMainApp(this);
+
+            this.dialogStage.showAndWait();
+        } catch (IOException e) {
+            throw new IOException(e);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
     public void showVideoInfosLayout(IVideoInfo iVideoInfo) throws Exception {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -115,11 +144,11 @@ public class MainApp extends Application implements IMainApp {
             Scene scene = new Scene(page);
 
             this.dialogStage.setTitle(iVideoInfo.getTitle());
-            this.dialogStage.initModality(Modality.APPLICATION_MODAL);
+            this.dialogStage.initModality(Modality.NONE);
             this.dialogStage.initOwner(primaryStage);
             this.dialogStage.setScene(scene);
+            this.dialogStage.setResizable(false);
             this.dialogStage.getIcons().add(new Image("images/videocassette.png"));
-            this.dialogStage.initStyle(StageStyle.TRANSPARENT);
             VideoInfoController videoInfoController = loader.getController();
             videoInfoController.setVideoInfo(iVideoInfo);
             videoInfoController.setMainApp(this);

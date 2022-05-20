@@ -52,19 +52,8 @@ public class VideoInfoController {
     }
 
     @FXML
-    private void handlePlay() {
-        String url = URL + URLConstantUtils.YOUTUBEEMBED + this.iVideoInfo.getVideoId();
-        this.idWebView.getEngine().load(url);
-    }
-
-    @FXML
-    private void handleCancel() {
-        this.dialogStage.close();
-    }
-
-    @FXML
     private void handleOpenLink() throws IOException, URISyntaxException {
-        String url = URL + URLConstantUtils.YOUTUBEWATCH + this.iVideoInfo.getVideoId();
+       final String url = URL + URLConstantUtils.YOUTUBEWATCH + this.iVideoInfo.getVideoId();
         try {
             Desktop.getDesktop().browse(new URL(url).toURI());
         } catch (IOException ioException) {
@@ -85,6 +74,9 @@ public class VideoInfoController {
     public void setMainApp(MainApp mainApp) throws Exception {
         ICommentService iCommentService = new CommentService();
         this.iMainApp = mainApp;
+
+        String url = URL + URLConstantUtils.YOUTUBEEMBED + this.iVideoInfo.getVideoId();
+        this.idWebView.getEngine().load(url);
 
         List<ICommentary> iCommentaryList = iCommentService.getAllYTVideoMessagesByVideoId(this.iVideoInfo.getVideoId());
         List<ICommentaryFx> iCommentaryFxList = CommentaryConverter.convertCommentaryToCommentaryFx(iCommentaryList);

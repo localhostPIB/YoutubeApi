@@ -33,10 +33,11 @@ can be downloaded (from Maven) before starting the program.
 The logos are from [Pixabay](https://pixabay.com/).
 * [Icon MainFrame](https://pixabay.com/de/vectors/youtube-logo-grafik-rot-1837872/)
 * [CD Icon](https://pixabay.com/de/vectors/cd-computer-scheibe-gerettet-1169624/)
-* [Loadscreen](https://pixabay.com/de/photos/cms-wordpress-265128/)
+* [Load-Screen](https://pixabay.com/de/photos/cms-wordpress-265128/)
+* [Reply-Frame](https://pixabay.com/de/vectors/talk-reden-gespr%c3%a4ch-zwiegespr%c3%a4ch-2076968/)
 * [Root-Screen](https://pixabay.com/de/vectors/film-kino-video-motion-picture-158157/)
-* [VideoInfo Frame](https://pixabay.com/de/vectors/rahmen-schwarz-wei%c3%9f-film-1662287/)
-* [Loading Frame](https://pixabay.com/de/photos/erde-internet-globalisierung-2254769/)
+* [VideoInfo-Frame](https://pixabay.com/de/vectors/rahmen-schwarz-wei%c3%9f-film-1662287/)
+* [Loading-Frame](https://pixabay.com/de/photos/erde-internet-globalisierung-2254769/)
 * [VideoInfo Icon](https://pixabay.com/de/vectors/videokassette-vhs-video-kassette-4010202/)
 
 ## System-Requirements

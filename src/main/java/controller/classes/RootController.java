@@ -46,6 +46,9 @@ public class RootController {
     private Button buttonHTML;
 
     @FXML
+    private Button buttonPDF;
+
+    @FXML
     private TextField videoIdField;
 
     @FXML
@@ -248,6 +251,7 @@ public class RootController {
         buttonHTML.setDisable(true);
         buttonCSV.setDisable(true);
         buttonExit.setDisable(true);
+        buttonPDF.setDisable(true);
     }
 
     private void enableButtons() {
@@ -255,6 +259,7 @@ public class RootController {
         buttonHTML.setDisable(false);
         buttonCSV.setDisable(false);
         buttonExit.setDisable(false);
+        buttonPDF.setDisable(false);
     }
 
     @FXML
