@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -18,11 +19,14 @@
       </ImageView>
       <WebView fx:id="idWebView" layoutX="26.0" layoutY="14.0" prefHeight="312.0" prefWidth="383.0" />
       <ButtonBar layoutX="495.0" layoutY="63.0" prefHeight="40.0" prefWidth="200.0" />
-      <TableView fx:id="videoInfo" layoutX="415.0" layoutY="14.0" prefHeight="666.0" prefWidth="658.0">
+      <TableView fx:id="videoInfo" layoutX="415.0" layoutY="14.0" onMousePressed="#handleRowSelect" prefHeight="666.0" prefWidth="658.0">
         <columns>
           <TableColumn fx:id="userColumn" prefWidth="126.0" text="%col-user" />
           <TableColumn fx:id="commentColumn" prefWidth="531.0" text="%col-comment" />
         </columns>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </TableView>
       <MFXButton fx:id="idLink" layoutX="79.0" layoutY="350.0" onAction="#handleOpenLink" prefHeight="40.0" prefWidth="240.0" text="%button-link" />
    </children>

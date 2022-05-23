@@ -1,20 +1,26 @@
 package controller.classes;
 
 import controller.interfaces.IMainApp;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.web.WebView;
 import model.interfaces.*;
 import model.interfaces.fx.*;
+import util.converter.CommentaryConverter;
+import util.converter.ReplyConverter;
+
+import java.util.List;
 
 public class ReplyController {
 
     private IVideoInfo iVideoInfo;
 
-    private IReply iReply;
+    private List<IReply> iReplyList;
 
-    private ICommentary iCommentary;
+    private final ObservableList<IReplyFx> iReplyData = FXCollections.observableArrayList();
 
     private IMainApp iMainApp;
 
@@ -38,10 +44,16 @@ public class ReplyController {
     }
 
     public void setMainApp(IMainApp iMainApp){
+
+        List<IReplyFx> iReplyFxList = ReplyConverter.convertReliesToReplyFx(this.iReplyList);
+
+        iReplyData.addAll(iReplyFxList);
+        replyTable.setItems(iReplyData);
+
         this.iMainApp = iMainApp;
     }
 
-    public void setReply(IReply iReply){
-        this.iReply = iReply;
+    public void setReply(List<IReply> iReplyList){
+        this.iReplyList = iReplyList;
     }
 }

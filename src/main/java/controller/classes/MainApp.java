@@ -7,8 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.*;
-import model.interfaces.IReply;
-import model.interfaces.IVideoInfo;
+import model.interfaces.*;
 import model.interfaces.fx.IVideoInfoFx;
 import service.classes.VideoInfoService;
 import service.inferfaces.IVideoInfoService;
@@ -61,6 +60,7 @@ public class MainApp extends Application implements IMainApp {
         }
     }
 
+    @Override
     public void initRootLayout() throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -81,6 +81,7 @@ public class MainApp extends Application implements IMainApp {
         }
     }
 
+    @Override
     public void showSaveFiles(final FileEnum fileEnum, final String i18n0, final String i18n1, final String docName) throws Exception {
         try {
             final FileChooser fileChooser = new FileChooser();
@@ -105,7 +106,8 @@ public class MainApp extends Application implements IMainApp {
         }
     }
 
-    public void showReplyLayout(IReply iReply) throws Exception {
+    @Override
+    public void showReplyLayout(List<IReply> iReply) throws Exception {
         try {
 
             FXMLLoader loader = new FXMLLoader();
@@ -133,6 +135,7 @@ public class MainApp extends Application implements IMainApp {
         }
     }
 
+    @Override
     public void showVideoInfosLayout(IVideoInfo iVideoInfo) throws Exception {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -162,6 +165,7 @@ public class MainApp extends Application implements IMainApp {
         }
     }
 
+    @Override
     public void showLoadScreen() throws IOException {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -183,11 +187,13 @@ public class MainApp extends Application implements IMainApp {
         }
     }
 
+    @Override
     public void hideLoadScreen() {
 
         this.loadStage.close();
     }
 
+    @Override
     public List<IVideoInfoFx> initVideoInfoList() throws Exception {
         List<IVideoInfo> iVideoInfoList = iVideoInfoService.getAllVideoInfos();
 
@@ -195,6 +201,7 @@ public class MainApp extends Application implements IMainApp {
                 convertVideoInfoToVideoInfoFx(iVideoInfoList);
     }
 
+    @Override
     public List<IVideoInfoFx> getiVideoInfoFxList() {
         return iVideoInfoFxList;
     }

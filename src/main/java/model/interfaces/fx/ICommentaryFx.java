@@ -5,6 +5,10 @@ import javafx.beans.property.*;
 public interface ICommentaryFx {
     LongProperty getLikes();
 
+    IntegerProperty getId();
+
+    void setId(IntegerProperty id);
+
     StringProperty getPublishAt();
 
     StringProperty getComment();

@@ -1,6 +1,7 @@
 package controller.interfaces;
 
 import javafx.stage.Stage;
+import model.interfaces.IReply;
 import model.interfaces.IVideoInfo;
 import model.interfaces.fx.IVideoInfoFx;
 import util.FileEnum;
@@ -26,5 +27,7 @@ public interface IMainApp {
     List<IVideoInfoFx> initVideoInfoList() throws Exception;
 
     List<IVideoInfoFx> getiVideoInfoFxList();
+
+    void showReplyLayout(List<IReply> iReply) throws Exception;
 
 }

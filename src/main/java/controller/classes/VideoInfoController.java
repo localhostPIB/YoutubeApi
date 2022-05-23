@@ -6,12 +6,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import model.classes.fx.CommentaryFx;
 import model.interfaces.*;
 import model.interfaces.fx.ICommentaryFx;
 import service.classes.CommentService;
+import service.classes.ReplyService;
 import service.inferfaces.ICommentService;
+import service.inferfaces.IReplyService;
 import util.constants.URLConstantUtils;
 import util.converter.CommentaryConverter;
+import util.converter.VideoInfoConverter;
 
 import java.awt.*;
 import java.io.IOException;
@@ -31,6 +35,8 @@ public class VideoInfoController {
 
     private final ObservableList<ICommentaryFx> iCommentData = FXCollections.observableArrayList();
 
+    private final IReplyService iReplyService;
+
     @FXML
     private WebView idWebView;
 
@@ -44,6 +50,7 @@ public class VideoInfoController {
     private TableView<ICommentaryFx> videoInfo;
 
     public VideoInfoController() {
+        this.iReplyService = new ReplyService();
     }
 
     @FXML
@@ -53,13 +60,13 @@ public class VideoInfoController {
 
     @FXML
     private void handleOpenLink() throws IOException, URISyntaxException {
-       final String url = URL + URLConstantUtils.YOUTUBEWATCH + this.iVideoInfo.getVideoId();
+        final String url = URL + URLConstantUtils.YOUTUBEWATCH + this.iVideoInfo.getVideoId();
         try {
             Desktop.getDesktop().browse(new URL(url).toURI());
         } catch (IOException ioException) {
             throw new IOException(ioException);
         } catch (URISyntaxException uriSyntaxException) {
-           throw new URISyntaxException("",uriSyntaxException.getMessage());
+            throw new URISyntaxException("", uriSyntaxException.getMessage());
         }
     }
 
@@ -83,6 +90,37 @@ public class VideoInfoController {
 
         iCommentData.addAll(iCommentaryFxList);
         videoInfo.setItems(iCommentData);
+    }
+
+    @FXML
+    private void handleRowSelect() {
+        ICommentaryFx iCommentaryFx = videoInfo.getSelectionModel().getSelectedItem();
+
+        videoInfo.setOnMouseClicked(click -> {
+            if (iCommentaryFx != null) {
+                if (click.getClickCount() == 2) {
+                    try {
+                        openReplies(iCommentaryFx);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
+    }
+
+    private void openReplies(ICommentaryFx iCommentaryFx) throws Exception {
+        try {
+            List<IReply> iReplyList = iReplyService.getRepliesById(iCommentaryFx.getId().get());
+            if (iReplyList.size() > 0) {
+                iMainApp.showReplyLayout(iReplyList);
+            }
+        } catch (IOException e) {
+            throw new IOException(e);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
     }
 
     private void initColumn() {

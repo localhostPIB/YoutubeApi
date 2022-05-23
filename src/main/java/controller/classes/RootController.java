@@ -106,7 +106,7 @@ public class RootController {
     }
 
     @FXML
-    private void handleRowSelect() throws IOException {
+    private void handleRowSelect() {
         ContextMenu contextMenu = new ContextMenu();
         IVideoInfoFx iVideoInfoFx = videoInfoTable.getSelectionModel().getSelectedItem();
         videoInfoTable.setOnMouseClicked(click -> {

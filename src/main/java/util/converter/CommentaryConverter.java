@@ -12,6 +12,7 @@ public class CommentaryConverter {
     public static ICommentaryFx convertCommentaryToCommentaryFx(final ICommentary iCommentary){
         ICommentaryFx iCommentaryFx = new CommentaryFx();
 
+        iCommentaryFx.setId(new SimpleIntegerProperty(iCommentary.getId()));
         iCommentaryFx.setComment(new SimpleStringProperty(iCommentary.getComment()));
         iCommentaryFx.setLikes(new SimpleLongProperty(iCommentary.getLikes()));
         iCommentaryFx.setPublishAt(new SimpleStringProperty(iCommentary.getPublishAt()));

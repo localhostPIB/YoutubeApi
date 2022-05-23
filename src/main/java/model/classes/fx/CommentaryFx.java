@@ -11,6 +11,8 @@ import model.interfaces.fx.*;
 public class CommentaryFx implements ICommentaryFx {
     private LongProperty likes;
 
+    private IntegerProperty id;
+
     private StringProperty publishAt;
 
     private StringProperty comment;

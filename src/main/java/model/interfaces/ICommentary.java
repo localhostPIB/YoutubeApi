@@ -5,6 +5,8 @@ import java.util.List;
 public interface ICommentary {
     String getComment();
 
+    int getId();
+
     void setComment(String comment);
 
     IYoutubeUser getIYoutubeUser();

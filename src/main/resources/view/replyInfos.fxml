@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.classes.ReplyController">
+<AnchorPane prefHeight="512.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.classes.ReplyController">
    <children>
-      <ImageView fitHeight="459.0" fitWidth="742.0">
+      <ImageView fitHeight="503.0" fitWidth="742.0" layoutY="-5.0">
          <image>
             <Image url="@../images/talk.png" />
          </image>
       </ImageView>
-      <TableView fx:id="replyTable" layoutX="238.0" layoutY="102.0" prefHeight="353.0" prefWidth="496.0">
+      <TableView fx:id="replyTable" layoutX="191.0" layoutY="6.0" prefHeight="493.0" prefWidth="541.0">
         <columns>
-          <TableColumn fx:id="userColumn" prefWidth="102.0" text="%col-user" />
-          <TableColumn fx:id="commentColumn" prefWidth="393.0" text="%col-comment" />
+          <TableColumn fx:id="userColumn" prefWidth="115.0" text="%col-user" />
+          <TableColumn fx:id="commentColumn" prefWidth="406.0" text="%col-comment" />
         </columns>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </TableView>
    </children>
 </AnchorPane>
