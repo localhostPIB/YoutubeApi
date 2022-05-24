@@ -7,17 +7,19 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="512.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.classes.ReplyController">
+<AnchorPane prefHeight="535.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.classes.ReplyController">
    <children>
-      <ImageView fitHeight="503.0" fitWidth="742.0" layoutY="-5.0">
+      <ImageView fitHeight="534.0" fitWidth="781.0" layoutY="-36.0">
          <image>
             <Image url="@../images/talk.png" />
          </image>
       </ImageView>
-      <TableView fx:id="replyTable" layoutX="191.0" layoutY="6.0" prefHeight="493.0" prefWidth="541.0">
+      <TableView fx:id="replyTable" layoutX="62.0" layoutY="6.0" prefHeight="522.0" prefWidth="670.0">
         <columns>
           <TableColumn fx:id="userColumn" prefWidth="115.0" text="%col-user" />
-          <TableColumn fx:id="commentColumn" prefWidth="406.0" text="%col-comment" />
+          <TableColumn fx:id="commentColumn" prefWidth="387.0" text="%col-comment" />
+            <TableColumn fx:id="likeColumn" prefWidth="69.0" text="%col-likes" />
+            <TableColumn fx:id="publishedAtColumn" prefWidth="98.0" text="%col-time" />
         </columns>
          <cursor>
             <Cursor fx:constant="DEFAULT" />

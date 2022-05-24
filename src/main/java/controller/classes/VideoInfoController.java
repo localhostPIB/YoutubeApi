@@ -44,6 +44,9 @@ public class VideoInfoController {
     private TableColumn<ICommentaryFx, String> userColumn;
 
     @FXML
+    private TableColumn<ICommentaryFx, String> publishedAtColumn;
+
+    @FXML
     private TableColumn<ICommentaryFx, String> commentColumn;
 
     @FXML
@@ -126,6 +129,7 @@ public class VideoInfoController {
     private void initColumn() {
         userColumn.setCellValueFactory(cellData -> cellData.getValue().getIYoutubeUserFx().getUserName());
         commentColumn.setCellValueFactory(cellData -> cellData.getValue().getComment());
+        publishedAtColumn.setCellValueFactory(cellData -> cellData.getValue().getPublishAt());
     }
 
 }

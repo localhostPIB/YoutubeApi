@@ -16,28 +16,27 @@
         <maven.compiler.source>14</maven.compiler.source>
         <java.version>17</java.version>
         <maven.compiler.target>14</maven.compiler.target>
-        <project.youtube.version>v3-rev182-1.22.0</project.youtube.version>
-        <project.youtube.analytics.version>v1-rev63-1.22.0</project.youtube.analytics.version>
-        <project.youtube.reporting.version>v1-rev10-1.22.0</project.youtube.reporting.version>
-        <project.http.version>1.20.0</project.http.version>
-        <project.oauth.version>1.20.0</project.oauth.version>
-        <project.Lombok.version>1.18.22</project.Lombok.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.youtube.version>v3-rev222-1.25.0</project.youtube.version>
+        <project.youtube.analytics.version>v2-rev272-1.25.0</project.youtube.analytics.version>
+        <project.youtube.reporting.version>v1-rev748-1.25.0</project.youtube.reporting.version>
+        <project.http.version>1.41.8</project.http.version>
+        <project.Lombok.version>1.18.24</project.Lombok.version>
         <project.Hibernate.version>5.6.5.Final</project.Hibernate.version>
         <project.SQLiteDialect.version>0.1.0</project.SQLiteDialect.version>
         <project.JDBC.version>3.36.0.3</project.JDBC.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.google.oauth.client.jetty>1.33.0</project.google.oauth.client.jetty>
-        <project.googleOAuthClient>1.33.0</project.googleOAuthClient>
-        <project.google.http.client>1.41.2</project.google.http.client>
+        <project.google.oauth.client.jetty>1.33.3</project.google.oauth.client.jetty>
+        <project.googleOAuthClient>1.33.3</project.googleOAuthClient>
+        <project.google.http.client>1.41.8</project.google.http.client>
         <project.google.collections>1.0</project.google.collections>
-        <project.org.codehaus.jackson>1.9.4</project.org.codehaus.jackson>
+        <project.org.codehaus.jackson>1.9.13</project.org.codehaus.jackson>
         <project.maven_deploy>2.8.2</project.maven_deploy>
         <project.maven_site>3.11.0</project.maven_site>
         <project.maven_report>3.2.1</project.maven_report>
         <project.maven_surfire>2.22.2</project.maven_surfire>
         <project.maven_compiler_plugins>3.10.0</project.maven_compiler_plugins>
         <project.csv>1.9.0</project.csv>
-        <project.googleAPI.Client>1.33.1</project.googleAPI.Client>
+        <project.googleAPI.Client>1.34.1</project.googleAPI.Client>
         <project.openjfx>0.0.8</project.openjfx>
         <project.openjfx.controls>18</project.openjfx.controls>
         <project.openjfx.fxml>18</project.openjfx.fxml>
@@ -114,8 +113,7 @@
                         </descriptorRefs>
                         <archive>
                             <manifest>
-                                <mainClass>StarterCLI</mainClass>
-                               <!-- <mainClass>controller.classes.Main</mainClass> Later ;-) -->
+                                <mainClass>controller.classes.Main</mainClass>
                             </manifest>
                             <manifestEntries>
                                 <Class-Path>./</Class-Path>
@@ -266,7 +264,6 @@
             <version>${project.google.collections}</version>
         </dependency>
 
-    <!-- This dependency is only used for the Topics API sample, which requires the Jackson JSON parser -->
     <dependency>
         <groupId>org.codehaus.jackson</groupId>
         <artifactId>jackson-mapper-asl</artifactId>

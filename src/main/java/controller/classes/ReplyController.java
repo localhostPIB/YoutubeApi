@@ -6,17 +6,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.web.WebView;
 import model.interfaces.*;
 import model.interfaces.fx.*;
-import util.converter.CommentaryConverter;
 import util.converter.ReplyConverter;
 
 import java.util.List;
 
 public class ReplyController {
-
-    private IVideoInfo iVideoInfo;
 
     private List<IReply> iReplyList;
 
@@ -31,6 +27,12 @@ public class ReplyController {
     private TableColumn<IReplyFx, String> commentColumn;
 
     @FXML
+    private TableColumn<IReplyFx, String> publishedAtColumn;
+
+    @FXML
+    private TableColumn<IReplyFx, Long> likeColumn;
+
+    @FXML
     private TableView<IReplyFx> replyTable;
 
     @FXML
@@ -40,7 +42,9 @@ public class ReplyController {
 
     private void initColumn(){
         userColumn.setCellValueFactory(cellData -> cellData.getValue().getIYoutubeUserFx().getUserName());
+        likeColumn.setCellValueFactory(cellData -> cellData.getValue().getLikes().asObject());
         commentColumn.setCellValueFactory(cellData -> cellData.getValue().getComment());
+        publishedAtColumn.setCellValueFactory(cellData -> cellData.getValue().getPublishAt());
     }
 
     public void setMainApp(IMainApp iMainApp){

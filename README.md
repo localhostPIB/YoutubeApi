@@ -1,10 +1,6 @@
 # Youtube Comment Collector
 
 ## Getting Started
-### CLI
-To use this program, you need a client secret. For more information, visit [Google Docs](https://developers.google.com/adwords/api/docs/guides/authentication).
-The Main method class Starter.java starts the application, as arguments the client secret and video-id (e.g. https://www.youtube.com/watch?v={video-id}) are needed.
-Command: `java -jar YoutubeApi-1.0-SNAPSHOT-jar-with-dependencies.jar videoId Client-Secret`
 
 ### JavaFX GUI
 In the IDE you have to pass the following arguments `--module-path "{/path/toDownloaded/javafx-sdk-17.0.1/lib}" --add-modules javafx.controls, javafx.web, javafx.fxml`.
@@ -12,6 +8,8 @@ In the IDE you have to pass the following arguments `--module-path "{/path/toDow
 ## Built With
 For this we use the build management tool Maven(v. 3.8.4) from the Apache Software Foundation.
 * [Maven](https://maven.apache.org/)
+
+With the command `mvn install` you can create a jar.
 
 ## Requirements
 To start the "project" the frameworks and libraries listed below are required, which are provided in the `pom.xml` and

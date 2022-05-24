@@ -22,7 +22,8 @@
       <TableView fx:id="videoInfo" layoutX="415.0" layoutY="14.0" onMousePressed="#handleRowSelect" prefHeight="666.0" prefWidth="658.0">
         <columns>
           <TableColumn fx:id="userColumn" prefWidth="126.0" text="%col-user" />
-          <TableColumn fx:id="commentColumn" prefWidth="531.0" text="%col-comment" />
+          <TableColumn fx:id="commentColumn" prefWidth="283.0" text="%col-comment" />
+            <TableColumn fx:id="publishedAtColumn" prefWidth="323.0" text="%col-time" />
         </columns>
          <cursor>
             <Cursor fx:constant="HAND" />
