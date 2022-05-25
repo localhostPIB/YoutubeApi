@@ -13,7 +13,7 @@ import model.interfaces.fx.IVideoInfoFx;
 import service.classes.*;
 import service.classes.api.videoInformations.classes.GetYTCommentaries;
 import service.classes.api.videoInformations.interfaces.IGetYTCommentaries;
-import service.inferfaces.*;
+import service.interfaces.*;
 import util.converter.VideoInfoConverter;
 import util.*;
 import util.gui.FXUtils;

@@ -3,7 +3,7 @@ package service.classes;
 import dao.classes.ReplyDaoHibernateImp;
 import dao.interfaces.IReplyDaoHibernate;
 import model.interfaces.IReply;
-import service.inferfaces.IReplyService;
+import service.interfaces.IReplyService;
 
 import java.util.List;
 

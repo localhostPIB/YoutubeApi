@@ -1,11 +1,9 @@
 package controller.classes;
 
 import controller.interfaces.IMainApp;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import model.interfaces.*;
 import model.interfaces.fx.*;
 import util.converter.ReplyConverter;
@@ -48,13 +46,14 @@ public class ReplyController {
     }
 
     public void setMainApp(IMainApp iMainApp){
-
-        List<IReplyFx> iReplyFxList = ReplyConverter.convertReliesToReplyFx(this.iReplyList);
-
-        iReplyData.addAll(iReplyFxList);
+        iReplyData.addAll(bootstrapReples());
         replyTable.setItems(iReplyData);
 
         this.iMainApp = iMainApp;
+    }
+
+    private List<IReplyFx> bootstrapReples(){
+        return ReplyConverter.convertReliesToReplyFx(this.iReplyList);
     }
 
     public void setReply(List<IReply> iReplyList){

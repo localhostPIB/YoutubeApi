@@ -6,16 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import model.classes.fx.CommentaryFx;
 import model.interfaces.*;
 import model.interfaces.fx.ICommentaryFx;
 import service.classes.CommentService;
 import service.classes.ReplyService;
-import service.inferfaces.ICommentService;
-import service.inferfaces.IReplyService;
+import service.interfaces.ICommentService;
+import service.interfaces.IReplyService;
 import util.constants.URLConstantUtils;
 import util.converter.CommentaryConverter;
-import util.converter.VideoInfoConverter;
 
 import java.awt.*;
 import java.io.IOException;
@@ -82,17 +80,30 @@ public class VideoInfoController {
     }
 
     public void setMainApp(MainApp mainApp) throws Exception {
+        try {
+            this.iMainApp = mainApp;
+
+            String url = URL + URLConstantUtils.YOUTUBEEMBED + this.iVideoInfo.getVideoId();
+            this.idWebView.getEngine().load(url);
+
+            iCommentData.addAll(bootstrapCommentList());
+            videoInfo.setItems(iCommentData);
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+    }
+
+    private List<ICommentaryFx> bootstrapCommentList() throws Exception {
         ICommentService iCommentService = new CommentService();
-        this.iMainApp = mainApp;
 
-        String url = URL + URLConstantUtils.YOUTUBEEMBED + this.iVideoInfo.getVideoId();
-        this.idWebView.getEngine().load(url);
+        try {
+            List<ICommentary> iCommentaryList = iCommentService.getAllYTVideoMessagesByVideoId(this.iVideoInfo.getVideoId());
+            List<ICommentaryFx> iCommentaryFxList = CommentaryConverter.convertCommentaryToCommentaryFx(iCommentaryList);
 
-        List<ICommentary> iCommentaryList = iCommentService.getAllYTVideoMessagesByVideoId(this.iVideoInfo.getVideoId());
-        List<ICommentaryFx> iCommentaryFxList = CommentaryConverter.convertCommentaryToCommentaryFx(iCommentaryList);
-
-        iCommentData.addAll(iCommentaryFxList);
-        videoInfo.setItems(iCommentData);
+            return iCommentaryFxList;
+        }catch (Exception e){
+            throw new Exception(e);
+        }
     }
 
     @FXML
@@ -117,7 +128,7 @@ public class VideoInfoController {
         try {
             List<IReply> iReplyList = iReplyService.getRepliesById(iCommentaryFx.getId().get());
             if (iReplyList.size() > 0) {
-                iMainApp.showReplyLayout(iReplyList);
+                iMainApp.showReplyLayout(iReplyList, iCommentaryFx.getComment().get());
             }
         } catch (IOException e) {
             throw new IOException(e);
@@ -131,5 +142,4 @@ public class VideoInfoController {
         commentColumn.setCellValueFactory(cellData -> cellData.getValue().getComment());
         publishedAtColumn.setCellValueFactory(cellData -> cellData.getValue().getPublishAt());
     }
-
 }

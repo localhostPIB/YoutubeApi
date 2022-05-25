@@ -4,7 +4,7 @@ import dao.classes.CommentaryDaoHibernateImp;
 import dao.interfaces.ICommentaryDaoHibernate;
 import model.interfaces.ICommentary;
 import service.classes.api.videoInformations.interfaces.IGetYTCommentaries;
-import service.inferfaces.ICommentService;
+import service.interfaces.ICommentService;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package service.inferfaces;
+package service.interfaces;
 
 import model.interfaces.ICommentary;
 import service.classes.api.videoInformations.interfaces.IGetYTCommentaries;

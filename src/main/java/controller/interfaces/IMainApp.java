@@ -28,6 +28,6 @@ public interface IMainApp {
 
     List<IVideoInfoFx> getiVideoInfoFxList();
 
-    void showReplyLayout(List<IReply> iReply) throws Exception;
+    void showReplyLayout(List<IReply> iReply, String name) throws Exception;
 
 }

@@ -10,7 +10,7 @@ import service.classes.html.classes.CreateHTMLFile;
 import service.classes.html.interfaces.ICreateHTMLFile;
 import service.classes.pdf.classes.CreatePDFFile;
 import service.classes.pdf.interfaces.ICreatePDFFile;
-import service.inferfaces.IVideoInfoService;
+import service.interfaces.IVideoInfoService;
 
 import java.io.*;
 import java.security.GeneralSecurityException;

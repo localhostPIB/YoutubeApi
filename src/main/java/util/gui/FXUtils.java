@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.*;
 import model.interfaces.fx.IVideoInfoFx;
-import service.inferfaces.IVideoInfoService;
+import service.interfaces.IVideoInfoService;
 import util.converter.VideoInfoConverter;
 
 import java.util.List;

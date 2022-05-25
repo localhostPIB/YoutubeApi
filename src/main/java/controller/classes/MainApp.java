@@ -10,7 +10,7 @@ import javafx.stage.*;
 import model.interfaces.*;
 import model.interfaces.fx.IVideoInfoFx;
 import service.classes.VideoInfoService;
-import service.inferfaces.IVideoInfoService;
+import service.interfaces.IVideoInfoService;
 import util.*;
 import util.converter.VideoInfoConverter;
 import util.gui.i18n.I18nUtil;
@@ -107,7 +107,7 @@ public class MainApp extends Application implements IMainApp {
     }
 
     @Override
-    public void showReplyLayout(List<IReply> iReply) throws Exception {
+    public void showReplyLayout(List<IReply> iReply, String name) throws Exception {
         try {
 
             FXMLLoader loader = new FXMLLoader();
@@ -117,7 +117,7 @@ public class MainApp extends Application implements IMainApp {
             Pane page = loader.load();
             dialogStage = new Stage();
             Scene scene = new Scene(page);
-            this.dialogStage.setTitle("");
+            this.dialogStage.setTitle(name);
             this.dialogStage.initModality(Modality.NONE);
             this.dialogStage.initOwner(primaryStage);
             this.dialogStage.setScene(scene);
