@@ -2,6 +2,7 @@ package controller.classes;
 
 import controller.interfaces.IMainApp;
 import dao.classes.*;
+import exceptions.StringIsEmptyException;
 import javafx.collections.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -193,7 +194,7 @@ public class RootController {
     }
 
     @FXML
-    private void handleStart() throws Exception {
+    private void handleStart() throws StringIsEmptyException, IOException {
         if (FXUtils.isInputValid(clientSecretField)) {
             if (FXUtils.isInputValid(videoIdField)) {
                 String clientSecret = clientSecretField.getText();
@@ -226,15 +227,17 @@ public class RootController {
                 };
 
                 task.setOnSucceeded(e -> hideLoadScreen());
-
+                task.setOnFailed(e -> hideLoadScreen());
                 new Thread(task).start();
                 loadScreen();
             } else {
                 FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutVideoid(), ButtonType.OK);
+                throw new StringIsEmptyException();
             }
 
         } else {
             FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutClientid(), ButtonType.OK);
+            throw new StringIsEmptyException();
         }
     }
 
