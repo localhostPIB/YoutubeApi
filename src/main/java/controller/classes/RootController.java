@@ -2,7 +2,7 @@ package controller.classes;
 
 import controller.interfaces.IMainApp;
 import dao.classes.*;
-import exceptions.StringIsEmptyException;
+import exceptions.*;
 import javafx.collections.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -227,18 +227,26 @@ public class RootController {
                 };
 
                 task.setOnSucceeded(e -> hideLoadScreen());
-                task.setOnFailed(e -> hideLoadScreen());
+                task.setOnFailed(e -> handleError());
+
                 new Thread(task).start();
                 loadScreen();
             } else {
-                FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutVideoid(), ButtonType.OK);
+                FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutVideoId(), ButtonType.OK);
                 throw new StringIsEmptyException();
             }
 
         } else {
-            FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutClientid(), ButtonType.OK);
+            FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorWithoutClientId(), ButtonType.OK);
             throw new StringIsEmptyException();
         }
+    }
+
+    private void handleError(){
+        hideLoadScreen();
+        FXUtils.showAlert(Alert.AlertType.ERROR, I18nMessagesUtil.getErrorInvalidVideoId(), ButtonType.OK);
+
+        throw new InvalidVideoIdException();
     }
 
     private void loadScreen() throws IOException {
