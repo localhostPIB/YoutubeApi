@@ -21,7 +21,7 @@ public class Commentary implements ICommentary {
 
     private String comment;
 
-    @OneToOne(targetEntity = VideoInfo.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = VideoInfo.class, fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private IVideoInfo iVideoInfo;
 
     @OneToOne(targetEntity = YoutubeUser.class, orphanRemoval = true, cascade=CascadeType.ALL, fetch = FetchType.EAGER)

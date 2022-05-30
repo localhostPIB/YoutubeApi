@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface ICommentService {
 
-   void saveAllYTVideoMessagesByVideoId(final String videoId, IGetYTCommentaries iGetYTCommentaries) throws Exception;
+   void saveAllYTVideoMessagesByVideoId(final String videoId, final IGetYTCommentaries iGetYTCommentaries) throws Exception;
 
    List<ICommentary> getAllYTVideoMessagesByVideoId(final String videoId) throws Exception;
+
+   void deleteAllYTVideoMessagesByVideoId(final String VideoId) throws Exception;
 }

@@ -1,7 +1,9 @@
 package dao.classes;
 
 import dao.interfaces.ICommentaryDaoHibernate;
+import model.classes.VideoInfo;
 import model.interfaces.ICommentary;
+import model.interfaces.IVideoInfo;
 import model.interfaces.IYoutubeUser;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -12,6 +14,7 @@ import java.util.List;
 
 public class CommentaryDaoHibernateImp implements ICommentaryDaoHibernate {
 
+    @Override
     public void saveCommentary(final ICommentary iCommentary) throws Exception {
         Session session = null;
 
@@ -28,6 +31,7 @@ public class CommentaryDaoHibernateImp implements ICommentaryDaoHibernate {
         }
     }
 
+    @Override
     public List<ICommentary> findAllYTCommentariesByVideoId(final String videoId) throws Exception{
         Session session = null;
         List<ICommentary> commentaryList;
@@ -51,6 +55,27 @@ public class CommentaryDaoHibernateImp implements ICommentaryDaoHibernate {
         }
 
         return commentaryList;
+    }
+
+    @Override
+    public void deleteCommentaryById(final String videoId) throws Exception {
+        Session session = null;
+        List<ICommentary> iCommentaryList = findAllYTCommentariesByVideoId(videoId);
+
+        try{
+            session = HibernateUtils.getSession();
+            session.beginTransaction();
+
+            for(ICommentary iCommentary : iCommentaryList){
+                session.delete(iCommentary);
+            }
+            session.flush();
+            session.getTransaction().commit();
+        }catch (Exception ex){
+            throw new Exception(ex);
+        }finally{
+            HibernateUtils.closeSession(session);
+        }
     }
 }
 

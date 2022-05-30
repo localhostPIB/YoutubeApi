@@ -84,16 +84,25 @@ public class RootController {
 
     private final IVideoInfoService iVideoInfoService;
 
+    private final ICommentService iCommentService;
+
 
     public void setMainApp(MainApp mainApp) {
         this.iMainApp = mainApp;
 
-        iVideoInfoData.addAll(this.iMainApp.getiVideoInfoFxList());
-        videoInfoTable.setItems(iVideoInfoData);
+        if(this.iMainApp.getiVideoInfoFxList().size() == 0){
+            buttonPDF.setDisable(true);
+            buttonCSV.setDisable(true);
+            buttonHTML.setDisable(true);
+        }else {
+            iVideoInfoData.addAll(this.iMainApp.getiVideoInfoFxList());
+            videoInfoTable.setItems(iVideoInfoData);
+        }
     }
 
     public RootController() {
         iVideoInfoService = new VideoInfoService();
+        iCommentService  = new CommentService();
     }
 
     @FXML
@@ -174,7 +183,9 @@ public class RootController {
     }
 
     private void deleteVideoInfo(IVideoInfoFx iVideoInfoFx) throws Exception {
-        this.iVideoInfoService.deleteVideoInfoById(iVideoInfoFx.getId().get());
+
+        this.iCommentService.deleteAllYTVideoMessagesByVideoId(iVideoInfoFx.getVideoId().get());
+        //this.iVideoInfoService.deleteVideoInfoById(iVideoInfoFx.getId().get());
         this.iVideoInfoData.remove(iVideoInfoFx);
     }
 
@@ -199,7 +210,7 @@ public class RootController {
             if (FXUtils.isInputValid(videoIdField)) {
                 String clientSecret = clientSecretField.getText();
                 String videoId = videoIdField.getText();
-                disableButtons();
+                disableButtonsAndTable();
 
                 Task<Void> task = new Task<Void>() {
                     @Override
@@ -220,7 +231,7 @@ public class RootController {
                         } catch (Exception e) {
                             throw new Exception(e);
                         } finally {
-                            enableButtons();
+                            enableButtonsAndTable();
                         }
                         return null;
                     }
@@ -257,7 +268,8 @@ public class RootController {
         iMainApp.hideLoadScreen();
     }
 
-    private void disableButtons() {
+    private void disableButtonsAndTable() {
+        videoInfoTable.setDisable(true);
         buttonStart.setDisable(true);
         buttonHTML.setDisable(true);
         buttonCSV.setDisable(true);
@@ -265,7 +277,8 @@ public class RootController {
         buttonPDF.setDisable(true);
     }
 
-    private void enableButtons() {
+    private void enableButtonsAndTable() {
+        videoInfoTable.setDisable(false);
         buttonStart.setDisable(false);
         buttonHTML.setDisable(false);
         buttonCSV.setDisable(false);

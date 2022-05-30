@@ -9,5 +9,5 @@ public interface ICommentaryDaoHibernate {
 
     List<ICommentary> findAllYTCommentariesByVideoId(final String videoId) throws Exception;
 
-
+    void deleteCommentaryById(final String videoId) throws Exception;
 }
