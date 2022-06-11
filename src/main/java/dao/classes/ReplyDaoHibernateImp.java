@@ -72,4 +72,26 @@ public class ReplyDaoHibernateImp implements IReplyDaoHibernate {
 
         return replyList;
     }
+
+    @Override
+    public void deleteRepliesById(final int videoId) throws Exception {
+        Session session = null;
+        List<IReply> iReplyList = findRepliesById(videoId);
+
+        try{
+            session = HibernateUtils.getSession();
+            session.beginTransaction();
+
+            for(IReply iReply : iReplyList){
+                session.delete(iReply);
+            }
+            session.flush();
+            session.getTransaction().commit();
+        }catch (Exception ex){
+            throw new Exception(ex);
+        }finally{
+            HibernateUtils.closeSession(session);
+        }
+    }
+    
 }

@@ -229,6 +229,7 @@ public class RootController {
                             ICommentService iCommentService = new CommentService();
                             iCommentService.saveAllYTVideoMessagesByVideoId(videoId, getYTCommentaries);
                         } catch (Exception e) {
+                            e.printStackTrace();
                             throw new Exception(e);
                         } finally {
                             enableButtonsAndTable();
@@ -238,7 +239,7 @@ public class RootController {
                 };
 
                 task.setOnSucceeded(e -> hideLoadScreen());
-                task.setOnFailed(e -> handleError());
+                //task.setOnFailed(e -> handleError());
 
                 new Thread(task).start();
                 loadScreen();

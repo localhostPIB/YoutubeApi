@@ -19,4 +19,9 @@ public class ReplyService implements IReplyService {
     public List<IReply> getRepliesById(final int id) throws Exception {
        return this.iReplyDaoHibernate.findRepliesById(id);
     }
+
+    @Override
+    public void deleteRepliesById(final int id) throws Exception{
+        this.iReplyDaoHibernate.deleteRepliesById(id);
+    }
 }
