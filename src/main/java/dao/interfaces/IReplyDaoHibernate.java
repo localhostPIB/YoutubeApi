@@ -11,5 +11,5 @@ public interface IReplyDaoHibernate {
 
     List<IReply> findRepliesById(final int id) throws Exception;
 
-    void deleteRepliesById(final int videoId) throws Exception;
+    void deleteRepliesById(final String videoId) throws Exception;
 }

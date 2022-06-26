@@ -1,6 +1,7 @@
 package service.classes.csv.classes;
 
 import dao.classes.*;
+import dao.interfaces.*;
 import service.classes.csv.interfaces.ICreateCSVFile;
 import util.*;
 import java.io.*;
@@ -18,7 +19,7 @@ public class CreateCSVFile implements ICreateCSVFile {
        dir = FileUtils.createDirectory("CSVFiles");
     }
 
-    private String cutAllInvalidSymbols(String fileName){
+    private String cutAllInvalidSymbols(final String fileName){
         return StringUtils.deleteInvalidSymbols(fileName);
     }
 
@@ -30,8 +31,8 @@ public class CreateCSVFile implements ICreateCSVFile {
         try (CSVPrinter printer = new CSVPrinter(fileWriter, csvFileFormat)) {
 
             printer.printRecord(FILE_HEADER_VIDEOINFO);
-            VideoInfoDaoHibernateImp videoDaoHibernateImp = new VideoInfoDaoHibernateImp();
-            videoDaoHibernateImp.findAllVideoInfos().forEach((iVideoInfo) -> {
+            IVideoInfoDaoHibernate iVideoDaoHibernateImp = new VideoInfoDaoHibernateImp();
+            iVideoDaoHibernateImp.findAllVideoInfos().forEach((iVideoInfo) -> {
                 try {
                     printer.printRecord(iVideoInfo.toString());
 
@@ -41,6 +42,7 @@ public class CreateCSVFile implements ICreateCSVFile {
             });
         }catch (IOException ioException){
             ioException.printStackTrace();
+            throw new IOException(ioException);
         } catch (Exception e) {
             throw new Exception(e);
         }
@@ -56,8 +58,8 @@ public class CreateCSVFile implements ICreateCSVFile {
         try (CSVPrinter printer = new CSVPrinter(fileWriter, csvFileFormat)) {
 
             printer.printRecord(FILE_HEADER_COMMENTARY);
-            CommentaryDaoHibernateImp commentaryDaoHibernateImp = new CommentaryDaoHibernateImp();
-            commentaryDaoHibernateImp.findAllYTCommentariesByVideoId(videoId).forEach((iCommentary) -> {
+            ICommentaryDaoHibernate iCommentaryDaoHibernateImp = new CommentaryDaoHibernateImp();
+            iCommentaryDaoHibernateImp.findAllYTCommentariesByVideoId(videoId).forEach((iCommentary) -> {
                 try {
                     printer.printRecord(iCommentary.toString());
 
@@ -67,6 +69,7 @@ public class CreateCSVFile implements ICreateCSVFile {
             });
         }catch (IOException ioException){
             ioException.printStackTrace();
+            throw new IOException(ioException);
         } catch (Exception e) {
             throw new Exception(e);
         }
@@ -80,8 +83,8 @@ public class CreateCSVFile implements ICreateCSVFile {
 
         try (CSVPrinter printer = new CSVPrinter(fileWriter, csvFileFormat)) {
             printer.printRecord(FILE_HEADER_USER);
-            YTUserDaoHibernateImp ytUserDaoHibernateImp = new YTUserDaoHibernateImp();
-            ytUserDaoHibernateImp.findAllYTUsersByVideoId(videoId).forEach((iYoutubeUser) -> {
+            IYTUserDaoHibernate iYtUserDaoHibernateImp = new YTUserDaoHibernateImp();
+            iYtUserDaoHibernateImp.findAllYTUsersByVideoId(videoId).forEach((iYoutubeUser) -> {
                 try {
                     printer.printRecord(iYoutubeUser.toString());
 

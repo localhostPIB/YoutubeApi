@@ -21,7 +21,7 @@ public class ReplyService implements IReplyService {
     }
 
     @Override
-    public void deleteRepliesById(final int id) throws Exception{
-        this.iReplyDaoHibernate.deleteRepliesById(id);
+    public void deleteRepliesById(final String videoId) throws Exception{
+        this.iReplyDaoHibernate.deleteRepliesById(videoId);
     }
 }

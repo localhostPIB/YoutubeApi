@@ -1,7 +1,6 @@
 package dao.classes;
 
 import dao.interfaces.IReplyDaoHibernate;
-import model.interfaces.ICommentary;
 import model.interfaces.IReply;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -48,6 +47,7 @@ public class ReplyDaoHibernateImp implements IReplyDaoHibernate {
         return replyList;
     }
 
+    @Override
     public List<IReply> findRepliesById(final int id) throws Exception{
         Session session = null;
         List<IReply> replyList;
@@ -58,7 +58,7 @@ public class ReplyDaoHibernateImp implements IReplyDaoHibernate {
 
             String queryString ="SELECT c.iReplyList " +
                     "FROM Commentary c " +
-                    "WHERE c.id =" +"'"+id+"'";
+                    "WHERE c.id=" +"'"+id+"'";
 
             Query query = session.createQuery(queryString);
             replyList = (List<IReply>) query.getResultList();
@@ -74,9 +74,9 @@ public class ReplyDaoHibernateImp implements IReplyDaoHibernate {
     }
 
     @Override
-    public void deleteRepliesById(final int videoId) throws Exception {
+    public void deleteRepliesById(final String videoId) throws Exception {
         Session session = null;
-        List<IReply> iReplyList = findRepliesById(videoId);
+        List<IReply> iReplyList = findRepliesByVideoId(videoId);
 
         try{
             session = HibernateUtils.getSession();
@@ -93,5 +93,29 @@ public class ReplyDaoHibernateImp implements IReplyDaoHibernate {
             HibernateUtils.closeSession(session);
         }
     }
-    
+
+    private List<IReply> findRepliesByVideoId(final String videoId) throws Exception{
+        Session session = null;
+        List<IReply> replyList;
+
+        try{
+            session = HibernateUtils.getSession();
+            session.beginTransaction();
+
+            String queryString ="SELECT c.iReplyList " +
+                    "FROM Commentary c " +
+                    "WHERE c.iVideoInfo.videoId=" +"'"+videoId+"'";
+
+            Query query = session.createQuery(queryString);
+            replyList = (List<IReply>) query.getResultList();
+            session.flush();
+            session.getTransaction().commit();
+        }catch (Exception ex){
+            throw new Exception(ex);
+        }finally{
+            HibernateUtils.closeSession(session);
+        }
+
+        return replyList;
+    }
 }

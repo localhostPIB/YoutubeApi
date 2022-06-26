@@ -86,6 +86,8 @@ public class RootController {
 
     private final ICommentService iCommentService;
 
+    private final IReplyService iReplyService;
+
 
     public void setMainApp(MainApp mainApp) {
         this.iMainApp = mainApp;
@@ -102,7 +104,8 @@ public class RootController {
 
     public RootController() {
         iVideoInfoService = new VideoInfoService();
-        iCommentService  = new CommentService();
+        iCommentService   = new CommentService();
+        iReplyService     = new ReplyService();
     }
 
     @FXML
@@ -183,9 +186,9 @@ public class RootController {
     }
 
     private void deleteVideoInfo(IVideoInfoFx iVideoInfoFx) throws Exception {
-
+        this.iReplyService.deleteRepliesById(iVideoInfoFx.getVideoId().get());
         this.iCommentService.deleteAllYTVideoMessagesByVideoId(iVideoInfoFx.getVideoId().get());
-        //this.iVideoInfoService.deleteVideoInfoById(iVideoInfoFx.getId().get());
+        this.iVideoInfoService.deleteVideoInfoById(iVideoInfoFx.getId().get());
         this.iVideoInfoData.remove(iVideoInfoFx);
     }
 
@@ -239,7 +242,7 @@ public class RootController {
                 };
 
                 task.setOnSucceeded(e -> hideLoadScreen());
-                //task.setOnFailed(e -> handleError());
+                task.setOnFailed(e -> handleError());
 
                 new Thread(task).start();
                 loadScreen();

@@ -127,6 +127,7 @@ public class VideoInfoController {
     private void openReplies(ICommentaryFx iCommentaryFx) throws Exception {
         try {
             List<IReply> iReplyList = iReplyService.getRepliesById(iCommentaryFx.getId().get());
+
             if (iReplyList.size() > 0) {
                 iMainApp.showReplyLayout(iReplyList, iCommentaryFx.getComment().get());
             }
