@@ -28,7 +28,7 @@ public class Commentary implements ICommentary {
     private IYoutubeUser iYoutubeUser;
 
     @OneToMany(targetEntity = Reply.class, fetch = FetchType.EAGER, cascade=CascadeType.MERGE)
-    @JoinColumn(name = "reply_id")
+    @JoinColumn(name = "commentary_id")
     private List<IReply> iReplyList = new ArrayList<>();
 
     public Commentary(long likes, String publishAt, String comment, IYoutubeUser iYoutubeUser, IVideoInfo iVideoInfo){
