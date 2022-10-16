@@ -1,15 +1,11 @@
 package dao.classes;
 
 import dao.interfaces.ICommentaryDaoHibernate;
-import model.classes.VideoInfo;
 import model.interfaces.ICommentary;
-import model.interfaces.IVideoInfo;
-import model.interfaces.IYoutubeUser;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CommentaryDaoHibernateImp implements ICommentaryDaoHibernate {

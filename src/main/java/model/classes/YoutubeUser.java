@@ -22,8 +22,8 @@ public class YoutubeUser implements IYoutubeUser {
     private String imageUrl;
 
     @OneToMany(targetEntity = VideoInfo.class, fetch = FetchType.EAGER)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @Column(name = "ytVideoList")
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    @Column(name = "ytVideoInfoList")
     private List<IVideoInfo> iVideoInfoList = new ArrayList<>();
 
     public YoutubeUser(String channelId, String userName, String channelUrl, String imageUrl){

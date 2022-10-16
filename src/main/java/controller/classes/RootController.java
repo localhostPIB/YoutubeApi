@@ -186,8 +186,8 @@ public class RootController {
     }
 
     private void deleteVideoInfo(IVideoInfoFx iVideoInfoFx) throws Exception {
-        this.iReplyService.deleteRepliesById(iVideoInfoFx.getVideoId().get());
         this.iCommentService.deleteAllYTVideoMessagesByVideoId(iVideoInfoFx.getVideoId().get());
+        this.iReplyService.deleteRepliesById(iVideoInfoFx.getVideoId().get());
         this.iVideoInfoService.deleteVideoInfoById(iVideoInfoFx.getId().get());
         this.iVideoInfoData.remove(iVideoInfoFx);
     }

@@ -85,6 +85,7 @@ public class ReplyDaoHibernateImp implements IReplyDaoHibernate {
             for(IReply iReply : iReplyList){
                 session.delete(iReply);
             }
+
             session.flush();
             session.getTransaction().commit();
         }catch (Exception ex){
